@@ -39,7 +39,7 @@ export default function MultiStepForm() {
             case 9: 
                 return <Step9 />;
             case 10: 
-                return <Step10 />        
+                return <Step10 />              
         }
     }
 
