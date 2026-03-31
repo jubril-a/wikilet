@@ -16,7 +16,7 @@ const Space = ({id, value}: SpaceProps) => {
 
 export default function Step1() {
   return (
-    <div className="grid gap-6">
+    <>
         <h1 className="mb-4 text-3xl md:text-4xl font-semibold">Property Details</h1>
         <FormInput name="property-name" type="text" label="Property Name" />
         <label htmlFor="property-category">
@@ -31,13 +31,13 @@ export default function Step1() {
         </label>
         <div>
             <span  className="block mb-2 text-gray-700">Type of Space</span>
-            <div className="flex gap-4">
+            <div className="grid sm:grid-cols-3 gap-4">
                 <Space id="entire" value="Entire Place" />
                 <Space id="private" value="Private Room" />
                 <Space id="shared" value="Shared Room" />
             </div>
         </div>
         <FormInput name="max-capacity" type="number" label="Maximum Capacity" />
-    </div>
+    </>
   )
 }

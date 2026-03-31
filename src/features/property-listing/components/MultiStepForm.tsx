@@ -12,6 +12,7 @@ import Step9 from "./steps/Step9"
 import Step10 from "./steps/Step10"
 import NextButton from "./NextButton"
 import { useState } from "react"
+import Form from "next/form"
 
 export default function MultiStepForm() {
 
@@ -43,11 +44,13 @@ export default function MultiStepForm() {
     }
 
   return (
-    <main className="max-w-300 mx-auto pt-36">
-        <form className="max-w-150">
-            {renderStep(currentStep)}
-            <NextButton onClick={() => setCurrentStep(currentStep + 1)}/>
-        </form>
+    <main className="max-w-300 mx-auto pt-36 px-4">
+        <Form action={""} className="max-w-150 mx-auto">
+            <div className="grid gap-6 w-full">
+                {renderStep(currentStep)}
+                <NextButton onClick={() => setCurrentStep(currentStep + 1)}/>
+            </div>
+        </Form>
     </main>
   )
 }

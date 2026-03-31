@@ -17,8 +17,8 @@ export default function Signup() {
           {emailSignup && <div>
             <FormInput name="password" type="password" label="Password" className="mb-6" />
             <label htmlFor="terms" className="block mb-6">
-              <input type="checkbox" name="terms" />
-              <span className="text-sm text-gray-700">    I agree to the Terms of Service & Privacy Policy</span>
+              <input id="terms" type="checkbox" name="terms" />
+              <span className="cursor-pointer text-sm text-gray-700">    I agree to the Terms of Service & Privacy Policy</span>
             </label>
             <Submit action="signup" />
           </div>}
@@ -26,9 +26,9 @@ export default function Signup() {
         {!emailSignup &&
         <div className="mb-4">
           
-          <button onClick={() => {activateEmailSignup(!emailSignup)}} className="mb-6 px-2 rounded-md text-white bg-primary-1 hover:bg-primary-2 hover:text-primary-1 focus:border focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Email</button>
+          <button onClick={() => {activateEmailSignup(!emailSignup)}} className="cursor-pointer mb-6 px-2 rounded-md text-white bg-primary-1 hover:bg-primary-2 hover:text-primary-1 focus:border focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Email</button>
 
-          <button className="px-2 rounded-md border border-gray-400 hover:border-primary-2 focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Google</button>
+          <button className="cursor-pointer px-2 rounded-md border border-gray-400 hover:border-primary-2 focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Google</button>
 
         </div>}
         <a href="/login" className="group text-gray-700 text-[14px]">Already have an account? <span className="text-primary-1 group-hover:text-primary-2" >Log in instead</span></a>
