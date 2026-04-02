@@ -18,7 +18,7 @@ export default function SearchBox() {
                     <SearchInput h2="When?" label="Add Dates" clickHandler={() => (setCurrentPopup("schedule"))} />
                     <SearchInput h2="Who?" label="Add Guests" clickHandler={() => (setCurrentPopup("guest"))} />
                     <div className="self-end">
-                        <input type="submit" value="Search Properties" className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-3 cursor-pointer w-full" />
+                        <button className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-3 cursor-pointer w-full">Search Properties</button>
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@ export default function SchedulePopup() {
         <>
             <ScheduleBox label="Arrival" description="When will you check in?" />
             <ScheduleBox label="Departure" description="When will you check out?" />
+            <button className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-3 cursor-pointer mt-2 w-full">Continue</button>
         </>
     )
 }
