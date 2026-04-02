@@ -1,0 +1,1 @@
+export type popupType = "location" | "schedule" | "guest" | "none"

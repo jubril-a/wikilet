@@ -23,10 +23,10 @@ export default function Step1() {
             <span className="block mb-2 text-gray-700">Property Category</span>
             <select name="property-category" className="px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full">
                 <option className="bg-gray-200" value="" disabled selected></option>
-                <option value="hotel">Hotel</option>
+                <option value="home">Home</option>
+                <option value="hotel">Hotel / Guest House</option>
                 <option value="apartment">Serviced Apartment</option>
                 <option value="rental">Short Stay / Vacation Rental</option>
-                <option value="gh">Guest House</option>
             </select>
         </label>
         <div>
