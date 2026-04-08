@@ -12,8 +12,8 @@ export default function SearchBox() {
     return (
         <>
             <PopupScreen popup={currentPopup} popupHandler={setCurrentPopup} />
-            <div className="max-w-900 bg-white p-8 rounded-md">
-                <div className="grid gap-4 grid-cols-4 max-w-900">
+            <div className="bg-white p-8 rounded-md">
+                <div className="grid gap-4 min-[900px]:grid-cols-4 max-w-900">
                     <SearchInput h2="Where?" label="Select Destination" clickHandler={() => (setCurrentPopup("location"))} />
                     <SearchInput h2="When?" label="Add Dates" clickHandler={() => (setCurrentPopup("schedule"))} />
                     <SearchInput h2="Who?" label="Add Guests" clickHandler={() => (setCurrentPopup("guest"))} />

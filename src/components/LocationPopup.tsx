@@ -22,6 +22,7 @@ export default function LocationPopup() {
                 <SuggestionBox label="Ikoyi, Lagos" decription="Find premium homes in Ikoyi" />
                 <SuggestionBox label="Abuja, Nigeria" decription="Browse stays in Nigeria&apos;s capital" />
             </div>
+            <button className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-3 cursor-pointer mt-6 w-full">Continue</button>
         </>
     )
 }

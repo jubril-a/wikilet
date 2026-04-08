@@ -1,15 +1,15 @@
-import { Kugile } from "../app/fontLoader"
 import SearchBox from "./SearchBox"
 
-
-export default function Hero() {
-    return (
-        <header className="grid place-content-center h-screen bg-[url('/images/background.png')] bg-cover bg-center relative">
-            <div className="p-8 z-99">
-                <h1 className={`${Kugile.className} text-center text-6xl leading-tight max-w-200 text-bold mb-6 text-white`} style={{"fontSize":"clamp(3rem, 2.4545rem + 2.7273vw, 4.5rem)"}}>Book Trusted Homes with <span className="text-[#8bd925]">Ease</span></h1>
-                <SearchBox />
-            </div>
-            <div className="absolute inset-0 bg-primary-1/50" />
-        </header>
-    )
+export default function Hero2() {
+  return (
+    <section className="min-h-160 flex items-center px-4 py-40 sm:px-16 lg:px-24 relative bg-[linear-gradient(1deg,#397dd6,#397dd6)] before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/geometric-bg.jpg')] before:opacity-2 before:mix-blend-color-burn before:z-[-1]">
+        <div className="w-full max-w-6xl mx-auto">
+            <main className="max-w-125 mb-10">
+                <h1 className="text-white text-4xl w-100 font-extrabold mt-2 mb-4">Book Trusted Homes with Ease</h1>
+                <p>Search through carefully verified homes, review details and pricing, and secure your booking in just a few clicks.</p>
+            </main>
+            <SearchBox />
+        </div>
+    </section>
+  );
 }

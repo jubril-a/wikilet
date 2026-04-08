@@ -11,8 +11,6 @@ type Props = {
 
 export default function PopupScreen({popup, popupHandler}: Props) {
 
-    const p = false
-
     function renderStep(popup: Props["popup"]) {
             switch (popup) {
                 case "location": 
@@ -26,8 +24,8 @@ export default function PopupScreen({popup, popupHandler}: Props) {
 
     return (
         popup != "none" &&
-            <div className="absolute inset-0 grid items-center justify-center">
-                <div className="w-150 bg-white p-8 rounded-md shadow-[0px_5px_15px_rgba(0,0,0,0.35)]">
+            <div className="absolute z-100 inset-0 w-screen h-screen max-[640px]:bg-white max-[640px]:py-5 min-[640px]:grid min-[640px]:items-center min-[640px]:justify-center">
+                <div className="w-150 max-w-full mx-auto bg-white p-8 rounded-md min-[640px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]">
                     <div className="flex justify-end">
                         <XMarkIcon className="size-6 mb-4 cursor-pointer" onClick={() => {popupHandler("none")}} />
                     </div>
