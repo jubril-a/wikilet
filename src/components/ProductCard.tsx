@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function ProductCard() {
     return (
-        <div className="w-70 rounded-m overflow-hidden shrink-0">
+        <div className="w-60 rounded-md overflow-hidden shrink-0">
             <div className="aspect-square">
                 <Image src="/images/product.jpg" width={280} height={280} alt="" />
             </div>

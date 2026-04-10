@@ -5,6 +5,7 @@ type Props = {
 }
 
 export default function SearchInput({h2, label, clickHandler} : Props) {
+
     return (
         <div onClick={clickHandler}>
             <h2 className="mb-2">{h2}</h2>

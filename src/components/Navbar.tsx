@@ -6,9 +6,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { useState } from "react"
 import { cn } from "../lib/utils"
 
-function NavLink({label, url}:{label:string, url:string}) {
+function NavLink({label, url, className}:{label:string, url:string, className?: string}) {
     return (
-        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 max-[760px]:hover:bg-gray-100 pl-4 max-[760px]:py-4 max-[760px]:border-b max-[760px]:border-gray-200" href={url}>{label}</Link>
+        <Link className={cn("text-sm font-medium text-primary-1 hover:text-primary-2 max-[760px]:hover:bg-gray-100 pl-4 max-[760px]:py-4 max-[760px]:border-b max-[760px]:border-gray-200", className)} href={url}>{label}</Link>
     )
 }
 
@@ -17,7 +17,7 @@ export default function Navbar() {
     const [isVisible, setVisibility] = useState(false)
 
     return (
-        <nav className="fixed z-10 bg-white w-full px-8 border-b border-b-[#c6c6c648]">
+        <nav className="fixed z-10 bg-white w-full px-4 border-b border-b-[#c6c6c648]">
             <div className="flex justify-between items-center max-w-280 py-4 mx-auto">
                 <Link href="/" className="font-bold text-2xl">
                     <Image src="/images/logo.png" width={128} height={44} alt="wikilet" />
@@ -31,14 +31,16 @@ export default function Navbar() {
                             <XMarkIcon className="size-7 ml-auto mb-8" />
                         </button>
                         <NavLink label="View Listings" url="#" />
-                        <NavLink label="Help" url="#" />
-                        <NavLink label="Sign In" url="#" />
-                        <NavLink label="View Listings" url="#" />
+                        <NavLink label="List your Property" url="#" className="hidden max-[420px]:block" />
+                        <NavLink label="Log In" url="#" />
+                        <NavLink label="Sign Up" url="#" />
+                        <NavLink label="Help" url="/list-property" />
+                        {/* no idea what these are */}
                         <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/help"></Link>
                         <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/login"></Link>
                         <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/signup"></Link>
                     </div>
-                    <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-4" href="/list-property">List your Property</Link>
+                    <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-4 max-[420px]:hidden" href="/list-property">List your Property</Link>
                      <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                         <Bars3Icon className="size-7 ml-4" />
                      </button>                                   

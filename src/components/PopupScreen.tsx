@@ -3,15 +3,13 @@ import GuestPopup from "./GuestPopup";
 import SchedulePopup from "./SchedulePopup";
 import { popupType } from "../app/types";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { usePopupStore } from "../stores/popupsStore"
 
-type Props = {
-    popup: popupType,
-    popupHandler: (action: "none") => void
-}
+export default function PopupScreen() {
 
-export default function PopupScreen({popup, popupHandler}: Props) {
+     const { seacrhPopup, setSeacrhPopup } = usePopupStore()
 
-    function renderStep(popup: Props["popup"]) {
+    function renderStep(popup: popupType) {
             switch (popup) {
                 case "location": 
                     return <LocationPopup />;
@@ -23,13 +21,13 @@ export default function PopupScreen({popup, popupHandler}: Props) {
         }
 
     return (
-        popup != "none" &&
+        seacrhPopup != "none" &&
             <div className="absolute z-100 inset-0 w-screen h-screen max-[640px]:bg-white max-[640px]:py-5 min-[640px]:grid min-[640px]:items-center min-[640px]:justify-center">
                 <div className="w-150 max-w-full mx-auto bg-white p-8 rounded-md min-[640px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]">
                     <div className="flex justify-end">
-                        <XMarkIcon className="size-6 mb-4 cursor-pointer" onClick={() => {popupHandler("none")}} />
+                        <XMarkIcon className="size-6 mb-4 cursor-pointer" onClick={() => {setSeacrhPopup("none")}} />
                     </div>
-                    {renderStep(popup)}
+                    {renderStep(seacrhPopup)}
                 </div>
             </div>
         
