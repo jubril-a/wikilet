@@ -17,7 +17,7 @@ function Card({type} : {type: string}) {
 
 export default function BrowseByType() {
     return (
-        <Section className="bg-[#f2f4fd] py-20">
+        <Section className="bg-gray-100 py-20">
             <div className="mb-8 max-w-160">
                 <h2 className="text-3xl md:text-4xl font-black text-gray-950 mb-2">Browse by property type</h2>
                 <p className="text-gray-800 max-w-160">Choose from a variety of property types available near you.</p>
@@ -31,3 +31,5 @@ export default function BrowseByType() {
         </Section>
     )
 }
+
+// bg-[#f2f4fd]

@@ -9,3 +9,14 @@ export const Kugile = localFont({
     },
   ],
 })
+
+export const PF = localFont({
+  src: [
+    {
+      path: '../../public/fonts/perfectly-nineties.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+})
+

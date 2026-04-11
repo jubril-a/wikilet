@@ -8,7 +8,7 @@ import { cn } from "../lib/utils"
 
 function NavLink({label, url, className}:{label:string, url:string, className?: string}) {
     return (
-        <Link className={cn("text-sm font-medium text-primary-1 hover:text-primary-2 max-[760px]:hover:bg-gray-100 pl-4 max-[760px]:py-4 max-[760px]:border-b max-[760px]:border-gray-200", className)} href={url}>{label}</Link>
+        <Link className={cn("text-sm tracking-[-0.24px] font-medium text-primary-1 hover:text-primary-2 max-[760px]:hover:bg-gray-100 pl-4 max-[760px]:py-4 max-[760px]:border-b max-[760px]:border-gray-200", className)} href={url}>{label}</Link>
     )
 }
 
@@ -17,7 +17,7 @@ export default function Navbar() {
     const [isVisible, setVisibility] = useState(false)
 
     return (
-        <nav className="fixed z-10 bg-white w-full px-4 border-b border-b-[#c6c6c648]">
+        <nav className="fixed z-99 bg-white w-full px-4 min-[760px]:px-8 border-b border-b-[#c6c6c648]">
             <div className="flex justify-between items-center max-w-280 py-4 mx-auto">
                 <Link href="/" className="font-bold text-2xl">
                     <Image src="/images/logo.png" width={128} height={44} alt="wikilet" />

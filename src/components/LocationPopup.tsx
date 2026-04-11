@@ -13,7 +13,7 @@ export default function LocationPopup() {
         e.preventDefault()
         const input = e.currentTarget.elements.namedItem("destination") as HTMLInputElement
 
-        if (input) {
+        if (input.value) {
             setDestination(input.value)
             setSeacrhPopup("none")
         }   
@@ -22,7 +22,7 @@ export default function LocationPopup() {
     return (
         <>
             <form onSubmit={(e) => {handleSubmit(e)}} className="flex gap-2">
-                <input type="text" name="destination" id="" placeholder="Search Destinations" className="h-15 w-full bg-gray-200 hover:bg-gray-100 rounded-md p-3" />
+                <input type="text" name="destination" id="" placeholder="Search Destinations" className="h-15 w-full bg-gray-200 hover:bg-gray-100 rounded-md p-3" required />
                 <button className="bg-[#8bd925] rounded-md p-4 h-15 cursor-pointer"><ChevronRightIcon className="text-white size-8" /></button>
             </form>
             <div className="flex gap-4 items-center p-4 mt-4 bg-gray-100 hover:bg-gray-200 mb-2 cursor-pointer rounded-md">
