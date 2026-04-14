@@ -20,7 +20,7 @@ export default function Navbar() {
         <nav className="fixed z-99 bg-white w-full px-4 min-[760px]:px-8 border-b border-b-[#c6c6c648]">
             <div className="flex justify-between items-center max-w-280 py-4 mx-auto">
                 <Link href="/" className="font-bold text-2xl">
-                    <Image src="/images/logo.png" width={128} height={44} alt="wikilet" />
+                    <Image src="/images/logo.png" width={128} height={44} alt="wikilet" loading="eager" />
                 </Link>
                 <ul className="flex items-center">
                     {/* mobile navigation */}
@@ -30,17 +30,17 @@ export default function Navbar() {
                         <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                             <XMarkIcon className="size-7 ml-auto mb-8" />
                         </button>
-                        <NavLink label="View Listings" url="#" />
+                        <NavLink label="View Listings" url="/listings" />
                         <NavLink label="List your Property" url="#" className="hidden max-[420px]:block" />
-                        <NavLink label="Log In" url="#" />
-                        <NavLink label="Sign Up" url="#" />
-                        <NavLink label="Help" url="/list-property" />
+                        <NavLink label="Log In" url="/login" />
+                        <NavLink label="Sign Up" url="signup" />
+                        <NavLink label="Help" url="#" />
                         {/* no idea what these are */}
-                        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/help"></Link>
+                        {/* <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/help"></Link>
                         <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/login"></Link>
-                        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/signup"></Link>
+                        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/signup"></Link> */}
                     </div>
-                    <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-4 max-[420px]:hidden" href="/list-property">List your Property</Link>
+                    <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-8 max-[420px]:hidden" href="/list-property">List your Property</Link>
                      <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                         <Bars3Icon className="size-7 ml-4" />
                      </button>                                   
