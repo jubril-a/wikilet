@@ -24,10 +24,10 @@ const properties: Property[] = [
   },
   {
     id: 2,
-    city: "Maitama",
-    state: "Abuja",
+    city: "Abuja",
+    state: "Nigeria",
     image:
-      "/images/lagos.jpg",
+      "/images/abuja.jpg",
   },
   {
     id: 3,
