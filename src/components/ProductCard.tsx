@@ -2,9 +2,9 @@ import Image from "next/image"
 
 export default function ProductCard() {
     return (
-        <div className="w-60 rounded-md overflow-hidden shrink-0">
-            <div className="aspect-square">
-                <Image src="/images/product.jpg" width={280} height={280} alt="" />
+        <a href="#" className="group hover:bg-gray-100 w-60 rounded-md shrink-0 p-2">
+            <div className="aspect-square rounded-md overflow-hidden">
+                <Image className="transition-transform duration-500 group-hover:scale-115" src="/images/product.jpg" width={280} height={280} alt="" />
             </div>
             <div className="p-2">
                 <p className="text-sm text-gray-700 mb-1">Vacation Rental</p>
@@ -14,6 +14,6 @@ export default function ProductCard() {
 
                 <p className="text-gray-700 text-sm"><span className="text-[#1050a3] font-black text-xl">$450</span>/night</p>
             </div>
-        </div>
+        </a>
     )
 }

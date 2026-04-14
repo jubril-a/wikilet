@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 type Property = {
   id: number;
@@ -18,7 +19,7 @@ const properties: Property[] = [
     state: "Lagos",
     count: 124,
     image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
+      "/images/lagos2.jpg",
     featured: true
   },
   {
@@ -26,32 +27,32 @@ const properties: Property[] = [
     city: "Maitama",
     state: "Abuja",
     image:
-      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+      "/images/lagos.jpg",
   },
   {
     id: 3,
     city: "Ikoyi",
     state: "Lagos",
     image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+      "/images/lagos3.png",
   },
   {
     id: 4,
     city: "VI",
     state: "Lagos",
     image:
-      "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?w=600&q=80",
+      "/images/lagos.jpg",
   },
 ];
 
 function FeaturedCard({ property }: { property: Property }) {
 
   return (
-    <div className="w-full h-full relative max-[720px]:aspect-video min-[720px]:min-h-140 rounded-2xl overflow-hidden">
-      <img
+    <a href="" className="group w-full h-full relative max-[720px]:aspect-video min-[720px]:min-h-140 rounded-2xl overflow-hidden">
+      <Image
         src={property.image}
         alt={`${property.city}, ${property.state}`}
-        className="w-full h-full object-cover"
+        className="transition-transform duration-500 group-hover:scale-115 w-full h-full object-cover" fill
       />
 
       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
@@ -69,18 +70,18 @@ function FeaturedCard({ property }: { property: Property }) {
           <span className="font-light">{property.state}</span>
         </h2>
       </div>
-    </div>
+    </a>
   );
 }
 
 function PropertyCard({ property }: { property: Property }) {
 
   return (
-    <div className="relative w-full h-full max-[720px]:aspect-video rounded-2xl overflow-hidden">
-      <img
+    <a href="" className="block group relative w-full h-full max-[720px]:aspect-video rounded-2xl overflow-hidden">
+      <Image
         src={property.image}
         alt={`${property.city}, ${property.state}`}
-        className="w-full h-full object-cover object-center"
+        className="transition-transform duration-500 group-hover:scale-115 w-full h-full object-cover object-center" fill
       />
 
       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
@@ -91,7 +92,7 @@ function PropertyCard({ property }: { property: Property }) {
           <span className="font-light">{property.state}</span>
         </p>
       </div>
-    </div>
+    </a>
   );
 }
 

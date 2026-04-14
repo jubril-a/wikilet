@@ -1,7 +1,7 @@
-import Hero from "@/src/components/Hero";
-import TopDestinations from "@/src/components/TopDestinations";
-import BrowseByType from "@/src/components/BrowseByType";
-import BrowseByLocation from "@/src/components/BrowseByLocation";
+import Hero from "./Sections/Hero";
+import TopDestinations from "./Sections/TopDestinations";
+import BrowseByType from "./Sections/BrowseByType";
+import BrowseByLocation from "./Sections/BrowseByLocation";
 
 export default function Home() {
   return (

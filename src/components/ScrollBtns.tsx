@@ -17,10 +17,10 @@ const ScrollBtns = ({scroller} : {scroller: RefObject<HTMLDivElement | null>}) =
 
   return (
     <div className="max-[660px]:hidden min-w-fit">
-        <button onClick={() => scroll("backward")} className="bg-[#F5F5F5] hover:bg-btn-1 cursor-pointer rounded-full p-2.5 md:p-3.5 mr-4">
+        <button onClick={() => scroll("backward")} className="bg-[#F5F5F5] hover:bg-primary-2 cursor-pointer rounded-full p-2.5 md:p-3.5 mr-4">
             <ArrowLeftIcon className="size-6" />
         </button>
-        <button onClick={() => scroll("forward")} className="bg-[#F5F5F5] hover:bg-btn-1 cursor-pointer rounded-full p-2.5 md:p-3.5">
+        <button onClick={() => scroll("forward")} className="bg-[#F5F5F5] hover:bg-primary-2 cursor-pointer rounded-full p-2.5 md:p-3.5">
             <ArrowRightIcon className="size-6" />
         </button>
     </div>
