@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
+import { useSearchStore } from "../stores/searchStore";
 
 type CounterProps = {
+  type: "Adults" | "Children" | "Rooms";
   min?: number;
   max?: number;
   defaultValue?: number;
-}
+};
 
-export default function Counter({ min = 0, max = 10, defaultValue = 0 }: CounterProps) {
+export default function Counter({ type, min = 0, max = 10, defaultValue = 0 }: CounterProps) {
   const [count, setCount] = useState(defaultValue);
+  const { setAdults, setChildren, setRooms } = useSearchStore();
+
+  function handleChange(newCount: number) {
+    setCount(newCount);
+
+    if (type === "Adults") setAdults(newCount);
+    else if (type === "Children") setChildren(newCount);
+    else if (type === "Rooms") setRooms(newCount);
+  }
 
   return (
     <div className="flex items-center rounded-md border border-neutral-700 bg-primary-1 overflow-hidden">
       <button
-        onClick={() => setCount((c) => Math.max(min, c - 1))}
+        onClick={() => handleChange(Math.max(min, count - 1))}
         disabled={count <= min}
         className="w-12 h-12 flex items-center justify-center text-neutral-300
           hover:bg-white/10 active:scale-95
@@ -31,7 +42,7 @@ export default function Counter({ min = 0, max = 10, defaultValue = 0 }: Counter
       <div className="w-px h-7 bg-neutral-700" />
 
       <button
-        onClick={() => setCount((c) => Math.min(max, c + 1))}
+        onClick={() => handleChange(Math.min(max, count + 1))}
         disabled={count >= max}
         className="w-12 h-12 flex items-center justify-center text-neutral-300
           hover:bg-white/10 active:scale-95

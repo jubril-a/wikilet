@@ -2,20 +2,11 @@
 import Counter from "./Counter"
 
 type Props = {
-    label: string,
+    label: "Adults" | "Children" | "Rooms",
     description: string
 }
 
 export default function GuestCounter({label, description} : Props) {
-
-    //  const {
-    //     destination,
-    //     setDestination,
-    //     adults,
-    //     children,
-    //     setGuests,
-    // } = useSearchStore();
-
 
     return (
         <div className="flex items-center justify-between py-4 px-6 bg-gray-100 hover:bg-gray-200 mb-2 rounded-md">
@@ -23,7 +14,7 @@ export default function GuestCounter({label, description} : Props) {
                 <p className="text-sm font-medium">{label}</p>
                 <p className="text-sm text-gray-700">{description}</p>
             </div>
-            <Counter />
+            <Counter type={label} />
         </div>
     )
 }

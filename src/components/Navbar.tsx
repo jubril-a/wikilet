@@ -35,10 +35,6 @@ export default function Navbar() {
                         <NavLink label="Log In" url="/login" />
                         <NavLink label="Sign Up" url="signup" />
                         <NavLink label="Help" url="#" />
-                        {/* no idea what these are */}
-                        {/* <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/help"></Link>
-                        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/login"></Link>
-                        <Link className="text-sm font-medium text-primary-1 hover:text-primary-2 pl-4" href="/signup"></Link> */}
                     </div>
                     <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-8 max-[420px]:hidden" href="/list-property">List your Property</Link>
                      <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
