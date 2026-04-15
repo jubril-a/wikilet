@@ -5,7 +5,7 @@ import Submit from "@/src/components/Submit";
 export default function Recover() {
 
   return (
-    <HalfBox>
+    <HalfBox background="lagos.jpg">
         <main className="w-90 max-w-full m-auto">
         <h1 className="mb-10 text-3xl md:text-4xl font-semibold">Reset Password</h1>
         <form>

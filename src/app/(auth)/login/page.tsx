@@ -11,7 +11,7 @@ export default function Login() {
   const [ emailLogin, activateEmailLogin ] = useState(false)
 
   return (
-    <HalfBox>
+    <HalfBox background="lagos3.png">
       <main className="w-90 max-w-full m-auto">
         <h1 className="mb-10 text-3xl md:text-4xl font-semibold">Sign in</h1>
         <form>

@@ -11,7 +11,7 @@ export default function Signup() {
   const [ emailSignup, activateEmailSignup ] = useState(false)
 
   return (
-    <HalfBox>
+    <HalfBox background="lagos2.jpg">
         <main className="w-90 max-w-full m-auto">
         <h1 className="mb-10 text-3xl md:text-4xl font-semibold">Sign up</h1>
         <form>
