@@ -28,7 +28,7 @@ export default function Signup() {
         {!emailSignup &&
         <div className="mb-4">
           
-          <button onClick={() => {activateEmailSignup(!emailSignup)}} className="cursor-pointer mb-6 px-2 rounded-md text-white bg-primary-1 hover:bg-primary-2 hover:text-primary-1 focus:border focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Email</button>
+          <button onClick={() => {activateEmailSignup(!emailSignup)}} className="cursor-pointer px-2 rounded-md text-white bg-primary-1 hover:bg-primary-2 hover:text-primary-1 focus:border focus:border-gray-300 focus:outline-0 h-11 w-full">Continue with Email</button>
           <GoogleAuth />
 
         </div>}

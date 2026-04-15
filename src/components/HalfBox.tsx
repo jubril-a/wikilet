@@ -6,7 +6,7 @@ export default function HalfBox({children}: {children: React.ReactNode}) {
             <div className="grid place-items-center">
                 {children}
             </div>
-            <div className="bg-primary-1 min-[820px]:-order-1"></div>
+            <div className="bg-[url('/images/lagos3.png')] bg-cover bg-center min-[820px]:-order-1"></div>
         </section>
     )
 }
