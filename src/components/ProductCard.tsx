@@ -9,10 +9,10 @@ export default function ProductCard() {
             <div className="p-2">
                 <p className="text-sm text-gray-700 mb-1">Vacation Rental</p>
 
-                <h3 className="font-bold text-primary-1">Azure Horizon Villa</h3>
+                <h3 className="font-bold text-primary-1 group-hover:text-blue-600">Azure Horizon Villa</h3>
                 <p className="text-sm text-gray-700 mb-1">Amalfi Coast, Italy</p>
 
-                <p className="text-gray-700 text-sm"><span className="text-[#1050a3] font-black text-xl">$450</span>/night</p>
+                <p className="text-gray-700 text-sm"><span className="text-gray-800 font-extrabold tracking-tight text-lg">₦45,000</span>/night</p>
             </div>
         </a>
     )
