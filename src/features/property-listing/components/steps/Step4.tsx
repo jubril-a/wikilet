@@ -20,7 +20,7 @@ const amenities = [
 export default function Step4() {
   return (
     <>
-        <h1 className="mb-4 text-3xl md:text-4xl font-semibold">Amenities & Facilities</h1>
+        <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Amenities & Facilities</h1>
         <label>
           <span className="block mb-2 text-gray-700">Select all amenities available at your property</span>
           <Select isMulti options={amenities} />

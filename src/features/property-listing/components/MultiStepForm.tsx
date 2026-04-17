@@ -3,14 +3,14 @@
 import Step1 from "./steps/Step1"
 import Step2 from "./steps/Step2"
 import Step3 from "./steps/Step3"
-import Step4 from "./steps/Step4"
-import Step5 from "./steps/Step5"
-import Step6 from "./steps/Step6"
-import Step7 from "./steps/Step7"
-import Step8 from "./steps/Step8"
-import Step9 from "./steps/Step9"
-import Step10 from "./steps/Step10"
-import NextButton from "./NextButton"
+import Step4 from "./steps/Step3"
+import Step5 from "./steps/Step4"
+import Step6 from "./steps/Step5"
+import Step7 from "./steps/Step6"
+import Step8 from "./steps/Step7"
+import Step9 from "./steps/Step8"
+import Step10 from "./steps/Step9"
+
 import { useState } from "react"
 import Form from "next/form"
 
@@ -39,7 +39,7 @@ export default function MultiStepForm() {
             case 9: 
                 return <Step9 />;
             case 10: 
-                return <Step10 />              
+                return <Step10 />             
         }
     }
 
@@ -48,7 +48,10 @@ export default function MultiStepForm() {
         <Form action={""} className="max-w-150 mx-auto">
             <div className="grid gap-6 w-full">
                 {renderStep(currentStep)}
-                <NextButton onClick={() => setCurrentStep(currentStep + 1)}/>
+                <div className="flex justify-between gap-4">
+                    <button onClick={() => setCurrentStep(currentStep - 1)} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Prev Step</button>
+                    <button onClick={() => setCurrentStep(currentStep + 1)} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>
+                </div>
             </div>
         </Form>
     </main>
