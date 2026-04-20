@@ -1,57 +1,33 @@
 'use client'
 
-import Step1 from "./steps/Step1"
-import Step2 from "./steps/Step2"
-import Step3 from "./steps/Step3"
-import Step4 from "./steps/Step3"
-import Step5 from "./steps/Step4"
-import Step6 from "./steps/Step5"
-import Step7 from "./steps/Step6"
-import Step8 from "./steps/Step7"
-import Step9 from "./steps/Step8"
-import Step10 from "./steps/Step9"
+import PropertyDetails from "./steps/PropertyDetails"
+import LocationInfo from "./steps/LocationInfo"
+import Media from "./steps/Media"
+import Facilities from "./steps/Facilities"
+import Pricing from "./steps/Pricing"
+import Rules from "./steps/Rules"
+import PartnerInfo from "./steps/PartnerInfo"
+import PayoutDetails from "./steps/PayoutDetails"
+import Terms from "./steps/Terms"
 
-import { useState } from "react"
 import Form from "next/form"
+import useMultiStepForm from "@/src/hooks/useMultiStepForm"
+
+const forms = [
+    PropertyDetails, LocationInfo, Media, Facilities, Pricing, Rules, PartnerInfo, PayoutDetails, Terms
+]
 
 export default function MultiStepForm() {
 
-    const [currentStep, setCurrentStep] = useState(1)
-
-    function renderStep(step: number) {
-        switch (step) {
-            case 1: 
-                return <Step1 />;
-            case 2: 
-                return <Step2 />;
-            case 3: 
-                return <Step3 />;
-            case 4: 
-                return <Step4 />  
-             case 5: 
-                return <Step5 />;
-            case 6: 
-                return <Step6 />;
-            case 7: 
-                return <Step7 />;
-            case 8: 
-                return <Step8 />
-            case 9: 
-                return <Step9 />;
-            case 10: 
-                return <Step10 />             
-        }
-    }
+    const {step, next, prev} = useMultiStepForm(forms)
 
   return (
-    <main className="max-w-300 mx-auto pt-36 px-4">
+    <main className="max-w-300 mx-auto px-4">
         <Form action={""} className="max-w-150 mx-auto">
-            <div className="grid gap-6 w-full">
-                {renderStep(currentStep)}
-                <div className="flex justify-between gap-4">
-                    <button onClick={() => setCurrentStep(currentStep - 1)} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Prev Step</button>
-                    <button onClick={() => setCurrentStep(currentStep + 1)} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>
-                </div>
+            {step()}
+            <div className="flex justify-between gap-4">
+                <button type="button" onClick={() => prev()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Prev Step</button>
+                <button type="button" onClick={() => next()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>
             </div>
         </Form>
     </main>

@@ -1,4 +1,5 @@
 import Select from "react-select";
+import StepWrapper from "../StepWrapper";
 
 const amenities = [
   { value: 'wifi', label: 'Wi-Fi' },
@@ -17,10 +18,9 @@ const amenities = [
   { value: 'workspace', label: 'Work desk / workspace' },
 ]
 
-export default function Step4() {
+export default function Facilities() {
   return (
-    <>
-        <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Amenities & Facilities</h1>
+    <StepWrapper heading="4. Amenities & Facilities">
         <label>
           <span className="block mb-2 text-gray-700">Select all amenities available at your property</span>
           <Select isMulti options={amenities} />
@@ -35,6 +35,6 @@ export default function Step4() {
             <option value="grid-only">Public grid only</option>
           </select>
         </label>
-    </>
+    </StepWrapper>
   )
 }

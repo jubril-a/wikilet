@@ -1,10 +1,10 @@
 import PhotoInput from "@/src/components/PhotoInput"
 import FormInput from "@/src/components/FormInput"
+import StepWrapper from "../StepWrapper";
 
-export default function Step7() {
+export default function PartnerInfo() {
   return (
-    <>
-      <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Partner information</h1>
+    <StepWrapper heading="Partner information">
       <label htmlFor="">
           <span className="block mb-2 text-gray-700">Your role</span>
           <select name="role" id="" className="px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full">
@@ -22,6 +22,6 @@ export default function Step7() {
           <span className="block mb-2 text-gray-700">Upload a valid identification document</span>
           <PhotoInput />
         </div>
-    </>
+    </StepWrapper>
   )
 }

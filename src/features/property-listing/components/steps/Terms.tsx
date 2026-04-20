@@ -1,7 +1,8 @@
-export default function Step9() {
+import StepWrapper from "../StepWrapper";
+
+export default function Terms() {
   return (
-    <>
-      <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Legal & Safety Confirmation</h1>
+    <StepWrapper heading="Legal & Safety Confirmation">
       <div>
         <span className="text-lg font-semibold block mb-2 text-gray-700">Property authorization</span>
         <label htmlFor="authorized">
@@ -16,6 +17,6 @@ export default function Step9() {
           <span className="ml-2 mb-2 text-gray-700">I agree to the platform&apos;s partner terms, policies, and commission structure.</span>
         </label>
       </div>
-    </>
+    </StepWrapper>
   )
 }

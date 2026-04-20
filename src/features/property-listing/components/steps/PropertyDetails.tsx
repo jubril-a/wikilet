@@ -1,3 +1,4 @@
+import StepWrapper from "../StepWrapper";
 import FormInput from "@/src/components/FormInput"
 import Image from "next/image"
 import { cn } from "@/src/lib/utils"
@@ -28,10 +29,9 @@ function Category({category, className}: {category: string; className: string}) 
     )
 }
 
-export default function Step1() {
+export default function PropertyDetails() {
   return (
-    <>
-        <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Property Details</h1>
+    <StepWrapper heading="Property Details">
         <FormInput name="property-name" type="text" label="Property Name" />
         <div>
             <span className="block mb-3 text-gray-700">Property Category</span>
@@ -51,6 +51,7 @@ export default function Step1() {
             </div>
         </div>
         <FormInput name="max-capacity" type="number" label="Maximum Capacity" />
-    </>
+    </StepWrapper>
   )
 }
+

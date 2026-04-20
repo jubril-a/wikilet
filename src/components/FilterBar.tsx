@@ -5,6 +5,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid"
 import { cn } from "../lib/utils";
 import FilterGroup from "./FilterGroup";
 import { FilterKey } from "../app/types";
+import PriceRangeFilter from "./PriceRangeFilter";
 
 const filters = {
   "Property rating": [
@@ -12,6 +13,11 @@ const filters = {
     "3 Stars",
     "4 Stars",
     "5 Stars",
+  ],
+  "Locations": [
+    "Lagos",
+    "Abuja",
+    "Ibadan",
   ],
   "Property type": [
     "Apartments",
@@ -52,6 +58,7 @@ export default function FilterBar({state}: {state:[boolean, Dispatch<SetStateAct
         {(Object.entries(filters) as [FilterKey, string[]][]).map(([key, value]) => (
           <FilterGroup key={key} heading={key} value={value} />
         ))}
+        <PriceRangeFilter />
     </div>
   );
 }

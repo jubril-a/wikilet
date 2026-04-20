@@ -1,9 +1,9 @@
 import FormInput from "@/src/components/FormInput"
+import StepWrapper from "../StepWrapper";
 
-export default function Step8() {
+export default function PayoutDetails() {
   return (
-    <>
-      <h1 className="mb-4 text-3xl md:text-4xl font-semibold tracking-tight">Payout Details</h1>
+    <StepWrapper heading="Payout Details">
       <FormInput name="bank" type="text" label="Bank name" />
       <FormInput name="account-name" type="text" label="Account holder name" />
       <FormInput name="account-number" type="text" label="Account number" />
@@ -16,6 +16,6 @@ export default function Step8() {
             <option value="monthly">Monthly</option>
           </select>
         </label>
-    </>
+    </StepWrapper>
   )
 }
