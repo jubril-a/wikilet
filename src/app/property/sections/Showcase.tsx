@@ -22,7 +22,7 @@ export default function Showcase() {
                     <ImageBox />
                     <ImageBox />
                     <ImageBox>
-                        <button className="absolute bottom-2 right-2 bg-white text-black text-sm rounded-md p-3 cursor-pointer hover:bg-primary-2">Show More Images</button>
+                        <button className="absolute bottom-2 right-2 bg-white text-black text-sm rounded-md p-3 cursor-pointer hover:bg-primary-2">View on Map</button>
                     </ImageBox>
                 </div>
             </div>

@@ -14,7 +14,7 @@ export default function DetailedProductCard() {
             <span onClick={() => {SetIsSaved(!isSaved)}} className="absolute z-5 top-2 right-2 p-2 rounded-full cursor-pointer bg-white">
                 {isSaved ? <HeartIcon className="size-6 text-red-600" /> : <HeartIconOutline className="size-6" />}
             </span>
-            <a href="#" className="group mb-2">
+            <a href="/property" className="group mb-2">
                 <div className="relative aspect-4/3 overflow-hidden rounded-md">
                     <Image className="w-full object-cover object-center" src="/images/product.jpg" width={280} height={280} alt="" />
                 </div>
