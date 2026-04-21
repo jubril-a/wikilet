@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import PopupScreen from "../components/PopupScreen";
+
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +27,7 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <body>
+        <PopupScreen />
         <Navbar />
         {children}
       </body>

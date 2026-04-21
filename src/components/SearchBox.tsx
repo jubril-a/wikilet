@@ -1,27 +1,9 @@
 'use client'
 
-import PopupScreen from "./PopupScreen"
 import SearchInput from "./SearchInput"
 import { useSearchStore } from "../stores/searchStore"
 import { usePopupStore } from "../stores/popupsStore"
-
-function formatDateRange(checkIn: Date, checkOut: Date): string {
-  const fmt = (d: Date) =>
-    d.toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" });
-
-  return `${fmt(checkIn)} - ${fmt(checkOut)}`;
-}
-
-function formatGuests(adults: number, children: number, rooms: number, pets: boolean): string {
-  const guests = adults + children;
-  const parts = [
-    guests > 0 && `${guests} Guest${guests > 1 ? "s" : ""}`,
-    rooms > 0 && `${rooms} Room${rooms > 1 ? "s" : ""}`,
-    pets && "Pets",
-  ].filter(Boolean);
-
-  return parts.length > 0 ? parts.join(", ") : "Add Guests";
-}
+import { formatDateRange, formatGuests } from "../lib/utils"
 
 export default function SearchBox() {
 
@@ -30,7 +12,6 @@ export default function SearchBox() {
 
     return (
         <>
-            <PopupScreen />
             <div className="bg-white p-8 relative z-5 rounded-md">
                 <div className="grid gap-2 min-[900px]:grid-cols-4 max-w-900">
                     <SearchInput h2="Where?" label={destination} clickHandler={() => (setSeacrhPopup("location"))} />
