@@ -33,7 +33,7 @@ export default function Navbar() {
                         <NavLink label="View Listings" url="/listings" />
                         <NavLink label="List your Property" url="#" className="hidden max-[420px]:block" />
                         <NavLink label="Log In" url="/login" />
-                        <NavLink label="Sign Up" url="signup" />
+                        <NavLink label="Sign Up" url="/signup" />
                         <NavLink label="Help" url="#" />
                     </div>
                     <Link className="text-sm font-medium text-white bg-[#8bd925] hover:text-primary-1 hover:bg-primary-2 px-4 py-3 rounded-md ml-8 max-[420px]:hidden" href="/list-property">List your Property</Link>
