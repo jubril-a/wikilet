@@ -1,5 +1,7 @@
 'use client'
 
+import { useActionState } from "react"
+import { login } from "../../actions/auth";
 import HalfBox from "@/src/components/HalfBox";
 import FormInput from "@/src/components/FormInput";
 import Submit from "@/src/components/Submit";
@@ -9,18 +11,21 @@ import { useState } from "react";
 export default function Login() {
 
   const [ emailLogin, activateEmailLogin ] = useState(false)
+  const [state, action] = useActionState(login, null)
 
   return (
     <HalfBox background="lagos3.png">
-      <main className="w-90 max-w-full m-auto">
         <h1 className="mb-10 text-3xl md:text-4xl font-semibold">Sign in</h1>
-        <form>
+        <form action={action}>
+          {state?.error && (
+              <p className="text-red-500 text-sm mb-4">{state.error}</p>
+            )}
           <FormInput name="email" type="email" label="Email Address" className="mb-6" />
           {emailLogin &&
           <div>
             <FormInput name="password" type="password" label="Password" className="mb-6" />
             
-            <Submit action="signup" />
+            <Submit action="login" />
           </div>}
         </form>
         {!emailLogin &&
@@ -30,7 +35,6 @@ export default function Login() {
         </div>}
         <a href="/signup" className="block group text-gray-700 text-[14px]">Don&apos;t have an account? <span className="text-primary-1 group-hover:text-primary-2" >Sign up instead</span></a>
         <a href="/recover-pass" className="group text-gray-700 text-[14px]">Forgot Password? <span className="text-primary-1 group-hover:text-primary-2" >Recover here</span></a>
-      </main>
     </HalfBox>
   );
 }
