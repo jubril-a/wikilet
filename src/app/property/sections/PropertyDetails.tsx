@@ -91,7 +91,7 @@ export default function PropertyDetails() {
 
             <SubsectionWrapper> {/*btnLabel="See All Facilities"*/}
                 <h3 className="text-xl md:text-2xl font-bold tracking-tight text-gray-950 mb-4">What this place offers</h3>
-                <div className="grid grid-cols-2 max-w-180 gap-4 my-6">
+                <div className="grid min-[480px]:grid-cols-2 max-w-180 gap-4 my-6">
                     {(Object.keys(Amenities) as AmenitiesType[]).map((item) => <Amenity key={item} item={item} />)}
                 </div>
             </SubsectionWrapper>     

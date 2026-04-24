@@ -50,7 +50,8 @@ export default function FilterBar({state}: {state:[boolean, Dispatch<SetStateAct
   const [isOpen, setIsOpen] = state
 
   return (
-    <div className={cn("min-w-70 max-w-full bg-gray-200 p-4 h-fit", isOpen ? "max-[860px]:block absolute top-0 right-0 w-80 pt-40 z-5" : "max-[860px]:hidden")}>
+    <div className={cn("min-w-70 max-w-full bg-gray-200 p-4", isOpen ? "max-[860px]:block absolute top-0  right-0 h-screen overflow-y-scroll w-80 pt-40 z-6" : "max-[860px]:hidden")}>
+      <div>
         <div className="flex items-center justify-between mb-3">
             <p className="text-primary-1 font-semibold text-lg">Filters</p>
             <XMarkIcon onClick={() => {setIsOpen(!isOpen)}} className="size-6 min-[860px]:hidden" />
@@ -59,6 +60,7 @@ export default function FilterBar({state}: {state:[boolean, Dispatch<SetStateAct
           <FilterGroup key={key} heading={key} value={value} />
         ))}
         <PriceRangeFilter />
+      </div>
     </div>
   );
 }

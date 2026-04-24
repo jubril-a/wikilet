@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { useState } from "react"
 import { cn } from "../lib/utils"
+import { logout } from "../app/actions/auth"
 
 type NavLinkProp = {
     label:string,
@@ -63,9 +64,9 @@ export default function Navbar({user}: {user: User}) {
                             <span className="bg-primary-1 text-primary-2 p-2 rounded-md">{initials}</span>
                             <span className="tracking-tighter font-medium">{`${user?.firstName} ${user?.lastName}`}</span>
                         </div>
-                        <div className="p-2 grid">
-                            <a href="">Manage account</a>
-                            <a>Logout</a>
+                        <div className="py-2 grid">
+                            <a href="" className="px-2 py-1.5 rounded-md hover:bg-gray-100">Manage account</a>
+                            <a onClick={logout} className="px-2 py-1.5 rounded-md hover:bg-gray-100">Logout</a>
                         </div>
                     </div>}
 
