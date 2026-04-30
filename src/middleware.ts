@@ -6,6 +6,9 @@ const PROTECTED = ["/hello"]
 // Routes that require agent role only
 const AGENT_ONLY = ["/list-property"]
 
+// Authorization Routes
+const UNAUTHORIZED_ONLY = ["/login", "/signup", "/recover-password"]
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const token = req.cookies.get("accessToken")?.value
@@ -13,6 +16,12 @@ export function middleware(req: NextRequest) {
 
   const isProtected = PROTECTED.some((r) => pathname.startsWith(r))
   const isAgentOnly = AGENT_ONLY.some((r) => pathname.startsWith(r))
+  const isUnauthorizedOnly = UNAUTHORIZED_ONLY.some((r) => pathname.startsWith(r))
+
+  // Logged in user trying to access auth pages → redirect to home
+  if (isUnauthorizedOnly && token) {
+    return NextResponse.redirect(new URL("/", req.url))
+  }
 
   // Not logged in → redirect to login, preserving the intended destination
   if ((isProtected || isAgentOnly) && !token) {

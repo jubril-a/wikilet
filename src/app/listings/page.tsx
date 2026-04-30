@@ -1,10 +1,10 @@
-import ListingHero from "@/src/components/ListingHero";
+import SubHero from "@/src/components/SubHero";
 import ListingBody from "@/src/components/ListingBody";
 
 export default function page() {
   return (
     <>
-      <ListingHero />
+      <SubHero heading="Find a Perfect Apartment" />
       <ListingBody />
       <div className="pb-50"></div>
     </>
