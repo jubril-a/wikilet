@@ -21,27 +21,26 @@ export default function Signup() {
            {state?.error && (
               <p className="text-red-500 text-sm mb-4">{state.error}</p>
             )}
-          <FormInput name="email" type="email" label="Email Address" className="mb-6" />
+          <FormInput name="email" type="email" label="Email Address" className="mb-6" required />
           {emailSignup && <div>
-            <FormInput name="password" type="password" label="Password" className="mb-6" />
-            <FormInput name="firstName" type="text" label="First Name" className="mb-6" />
-            <FormInput name="lastName" type="text" label="Last Name" className="mb-6" />
+            <FormInput name="password" type="password" label="Password" className="mb-6" required />
+            <FormInput name="firstName" type="text" label="First Name" className="mb-6" required />
+            <FormInput name="lastName" type="text" label="Last Name" className="mb-6" required />
             <div className="block mb-6">
               <span className="block mb-2 text-gray-700">Sign up as</span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 bg-gray-200 rounded-md">
                   <label>
-                    <input type="radio" name="role" value="user" className="hidden peer" />
+                    <input type="radio" name="role" value="user" className="hidden peer" defaultChecked />
                     <div className="bg-gray-200 p-4 cursor-pointer text-center rounded-md text-primary-1 text-sm peer-checked:bg-primary-2">A Guest</div>
                   </label>
                   <label>
                     <input type="radio" name="role" value="agent" className="hidden peer" />
                     <div className="bg-gray-200 p-4 cursor-pointer text-center rounded-md text-primary-1 text-sm peer-checked:bg-primary-2">An Agent</div>
                   </label>
-
               </div>
             </div>
             <label htmlFor="terms" className="block mb-6">
-              <input id="terms" type="checkbox" name="terms" />
+              <input id="terms" type="checkbox" name="terms" required />
               <span className="cursor-pointer text-sm text-gray-700">    I agree to the Terms of Service & Privacy Policy</span>
             </label>
             <Submit action="signup" />

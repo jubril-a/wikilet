@@ -10,18 +10,18 @@ type SpaceProps = {
 
 const Space = ({id, value}: SpaceProps) => {
     return (
-        <div className="border border-gray-200 p-5 flex-1 bg-gray-200 rounded-lg">
-            <input id={id} name="type" type="radio" value={value} className="mr-3"/>
-            <label htmlFor={id}>{value}</label>
-        </div>
+        <label className="border border-gray-200 p-5 flex-1 bg-gray-200 rounded-lg cursor-pointer">
+            <input id={id} name="type" type="radio" value={value} className="mr-3" required />
+            <span>{value}</span>
+        </label>
     )
 }
 
 function Category({category, className}: {category: string; className: string}) {
     return (
-        <label className={cn("group rounded-lg w-30 aspect-square flex justify-center items-center grow cursor-pointer relative", className)}>
-            <input type="radio" name="property-category" value={category} className="peer absolute top-3 left-3" />
-            <div className="transition-transform duration-500 group-hover:scale-115 peer-checked:scale-115">
+        <label className={cn("group rounded-lg w-30 aspect-square flex justify-center items-center grow cursor-pointer has-checked:border-3 border-blue-600", className)}>
+            <input type="radio" name="property-category" value={category} className="peer hidden" required />
+            <div>
                 <Image src={`/images/icon-${category}.png`} alt="" className="h-10 w-auto mx-auto" width={60} height={80} />
                 <p className="capitalize text-center text-sm mt-2">{category}</p>
             </div>
@@ -32,7 +32,7 @@ function Category({category, className}: {category: string; className: string}) 
 export default function PropertyDetails() {
   return (
     <StepWrapper heading="Property Details">
-        <FormInput name="property-name" type="text" label="Property Name" />
+        <FormInput name="property-name" type="text" label="Property Name" required />
         <div>
             <span className="block mb-3 text-gray-700">Property Category</span>
             <div className="flex gap-4">
@@ -50,7 +50,7 @@ export default function PropertyDetails() {
                 <Space id="shared" value="Shared Room" />
             </div>
         </div>
-        <FormInput name="max-capacity" type="number" label="Maximum Capacity" />
+        <FormInput name="max-capacity" type="number" label="Maximum Capacity" required />
     </StepWrapper>
   )
 }

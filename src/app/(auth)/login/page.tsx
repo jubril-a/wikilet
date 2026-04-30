@@ -20,10 +20,10 @@ export default function Login() {
           {state?.error && (
               <p className="text-red-500 text-sm mb-4">{state.error}</p>
             )}
-          <FormInput name="email" type="email" label="Email Address" className="mb-6" />
+          <FormInput name="email" type="email" label="Email Address" className="mb-6" required />
           {emailLogin &&
           <div>
-            <FormInput name="password" type="password" label="Password" className="mb-6" />
+            <FormInput name="password" type="password" label="Password" className="mb-6" required />
             
             <Submit action="login" />
           </div>}
