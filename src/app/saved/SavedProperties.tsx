@@ -4,17 +4,7 @@
 import { useState } from "react"
 import Section from "@/src/components/Section"
 import PropertyCard from "./components/PropertyCard"
-
-interface Property {
-  id: number
-  type: string
-  name: string
-  location: string
-  price: string
-  rating: number
-  reviews: number
-  image: string
-}
+import { Property } from "@/src/types/property"
 
 const MOCK_PROPERTIES: Property[] = [
   { id: 1, type: "Vacation rental", name: "Azure Horizon Villa", location: "Amalfi Coast, Italy", price: "N45,000", rating: 4.8, reviews: 86, image: "" },
@@ -22,10 +12,6 @@ const MOCK_PROPERTIES: Property[] = [
   { id: 3, type: "Hotel suite", name: "The Monarch Retreat", location: "Abuja, FCT", price: "N60,000", rating: 5.0, reviews: 112, image: "" },
   { id: 4, type: "Home", name: "Garden Cottage Escape", location: "Ibadan, Oyo", price: "N15,000", rating: 4.2, reviews: 19, image: "" },
 ]
-
-
-
-
 
 export default function SavedProperties() {
   const [properties, setProperties] = useState<Property[]>(MOCK_PROPERTIES)

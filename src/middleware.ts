@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 // Routes that require login (any role)
-const PROTECTED = ["/hello"]
+const PROTECTED = ["/saved", "/bookings"]
 
 // Routes that require agent role only
 const AGENT_ONLY = ["/list-property"]

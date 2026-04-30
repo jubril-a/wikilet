@@ -1,17 +1,9 @@
 import { MapPin } from "lucide-react"
 import Image from "next/image"
 import StarRating from "./StarRating"
+import { Property } from "@/src/types/property";
 
-interface Property {
-  id: number
-  type: string
-  name: string
-  location: string
-  price: string
-  rating: number
-  reviews: number
-  image: string
-}
+
 
 export default function PropertyCard({ property, onRemove }: { property: Property; onRemove: (id: number) => void }) {
   return (
