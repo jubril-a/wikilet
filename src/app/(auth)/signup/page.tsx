@@ -26,6 +26,20 @@ export default function Signup() {
             <FormInput name="password" type="password" label="Password" className="mb-6" />
             <FormInput name="firstName" type="text" label="First Name" className="mb-6" />
             <FormInput name="lastName" type="text" label="Last Name" className="mb-6" />
+            <div className="block mb-6">
+              <span className="block mb-2 text-gray-700">Sign up as</span>
+              <div className="grid grid-cols-2 gap-2">
+                  <label>
+                    <input type="radio" name="role" value="user" className="hidden peer" />
+                    <div className="bg-gray-200 p-4 cursor-pointer text-center rounded-md text-primary-1 text-sm peer-checked:bg-primary-2">A Guest</div>
+                  </label>
+                  <label>
+                    <input type="radio" name="role" value="agent" className="hidden peer" />
+                    <div className="bg-gray-200 p-4 cursor-pointer text-center rounded-md text-primary-1 text-sm peer-checked:bg-primary-2">An Agent</div>
+                  </label>
+
+              </div>
+            </div>
             <label htmlFor="terms" className="block mb-6">
               <input id="terms" type="checkbox" name="terms" />
               <span className="cursor-pointer text-sm text-gray-700">    I agree to the Terms of Service & Privacy Policy</span>

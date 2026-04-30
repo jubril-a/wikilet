@@ -11,7 +11,7 @@ export async function signup(prevState: unknown, formData: FormData) {
     lastName: formData.get("lastName"),
     email: formData.get("email"),
     password: formData.get("password"),
-    role: "user",
+    role: formData.get("role"),
   }
 
   const res = await fetch(`${apiUrl}/auth/register`, {
