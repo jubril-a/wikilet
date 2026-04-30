@@ -36,6 +36,11 @@ export default function Navbar({user}: {user: User}) {
     ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase()
     : null
 
+    function SignOut() {
+        setUserOptionsVisible(false)
+        logout()
+    }
+
     return (
         <nav className="fixed z-99 bg-white w-full px-4 min-[760px]:px-8 border-b border-b-[#c6c6c648]">
             <div className="flex justify-between items-center max-w-280 py-3.5 mx-auto">
@@ -65,8 +70,14 @@ export default function Navbar({user}: {user: User}) {
                             <span className="tracking-tighter font-medium">{`${user?.firstName} ${user?.lastName}`}</span>
                         </div>
                         <div className="py-2 grid">
-                            <a href="" className="px-2 py-1.5 rounded-md hover:bg-gray-100">Manage account</a>
-                            <a onClick={logout} className="px-2 py-1.5 rounded-md hover:bg-gray-100">Logout</a>
+                            <div className="border-b border-b-gray-200 pb-2 mb-2">
+                                <a href="/bookings" className="px-2 py-1 rounded-md hover:bg-gray-100 block">My Bookings</a>
+                                <a href="/saved" className="px-2 py-1 rounded-md hover:bg-gray-100 block">Saved Properties</a>
+                            </div>
+                            <div>
+                                <a href="" className="px-2 py-1 rounded-md hover:bg-gray-100 block">Manage account</a>
+                                <button onClick={() => SignOut()} className="px-2 py-1 rounded-md hover:bg-gray-100 text-left cursor-pointer w-full">Sign out</button>
+                            </div>
                         </div>
                     </div>}
 

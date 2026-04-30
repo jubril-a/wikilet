@@ -4,8 +4,8 @@ import { usePopupStore } from "../stores/popupsStore"
 
 function ScheduleBox({label, description} : {label: "Arrival" | "Departure", description: string}) {
     return (
-        <div className="flex items-center justify-between py-4 px-6 bg-gray-100 hover:bg-gray-200 mb-2 rounded-md">
-            <div>
+        <div className="min-[460px]:flex items-center justify-between gap-2 py-6 px-6 bg-gray-100 hover:bg-gray-200 mb-2 rounded-md">
+            <div className="max-[460px]:mb-3">
                 <p className="text-sm font-medium">{label}</p>
                 <p className="text-sm text-gray-700">{description}</p>
             </div>

@@ -36,6 +36,19 @@ export async function signup(prevState: unknown, formData: FormData) {
     maxAge: 60 * 60 * 24 * 7,
   })
 
+  // Fetch role and store it so middleware doesn't need to re-fetch
+  const meRes = await fetch(`${apiUrl}/users/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  })
+  if (meRes.ok) {
+    const { data: meData } = await meRes.json()
+    cookieStore.set("userRole", meData.user.role, {
+      httpOnly: true, secure: true, sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    })
+  }
+
   redirect("/confirm-email")
 }
 
@@ -74,6 +87,19 @@ export async function login(prevState: unknown, formData: FormData) {
     maxAge: 60 * 60 * 24 * 7,
   })
 
+  // Fetch role and store it so middleware doesn't need to re-fetch
+  const meRes = await fetch(`${apiUrl}/users/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  })
+  if (meRes.ok) {
+    const { data: meData } = await meRes.json()
+    cookieStore.set("userRole", meData.user.role, {
+      httpOnly: true, secure: true, sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    })
+  }
+
   redirect("/")
 }
 
@@ -99,6 +125,7 @@ export async function logout() {
   // }
 
   cookieStore.delete("accessToken")
+  cookieStore.delete("userRole")
   cookieStore.delete("refreshToken")
 
   redirect("/")

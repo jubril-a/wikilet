@@ -22,7 +22,7 @@ export default function Counter({ type, min = 0, max = 10, defaultValue = 0 }: C
   }
 
   return (
-    <div className="flex items-center rounded-md border border-neutral-700 bg-primary-1 overflow-hidden">
+    <div className="flex items-center justify-between rounded-md border border-neutral-700 bg-primary-1 overflow-hidden">
       <button
         onClick={() => handleChange(Math.max(min, count - 1))}
         disabled={count <= min}
