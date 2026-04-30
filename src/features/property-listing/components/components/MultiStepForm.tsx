@@ -14,9 +14,7 @@ import StepTrack from "./StepTrack"
 import { listProperty } from "@/src/app/actions/listProperty"
 import { useActionState, useState } from "react"
 
-const forms = [
-    PropertyDetails, LocationInfo, Media, Facilities, Pricing, Rules, Terms
-]
+
 
 const steps = [
     "Property Details",
@@ -30,11 +28,29 @@ const steps = [
 
 export default function MultiStepForm() {
 
+    const [selectedAmenities, setSelectedAmenities] = useState<string[]>([])
+    const [selectedRules, setSelectedRules] = useState<string[]>([])
+
+    const forms = [
+    <PropertyDetails key="1" />,
+    <LocationInfo key="2" />,
+    <Media key="3" />,
+    <Facilities key="4"
+    selectedAmenities={selectedAmenities}
+    setSelectedAmenities={setSelectedAmenities}
+    />,
+    <Pricing key="5" />,
+    <Rules key="6"
+        selectedRules={selectedRules}
+        setSelectedRules={setSelectedRules}
+    />,
+    <Terms key="7" />
+]
+
     const formRef = useRef<HTMLFormElement>(null)
     const { CurrentStep, next, prev, currentStepIndex } = useMultiStepForm(forms)
     const [state, action] = useActionState(listProperty, null)
-    const [selectedAmenities, setSelectedAmenities] = useState<string[]>([])
-    const [selectedRules, setSelectedRules] = useState<string[]>([])
+    
 
     function Next() {
         if (currentStepIndex + 1 != steps.length){
@@ -65,12 +81,7 @@ export default function MultiStepForm() {
                         {state?.error && (
                             <p className="text-red-500 text-sm mb-4">{state.error}</p>
                         )}
-                        <CurrentStep
-                            selectedAmenities={selectedAmenities}
-                            setSelectedAmenities={setSelectedAmenities}
-                            selectedRules={selectedRules}
-                            setSelectedRules={setSelectedRules}
-                        />
+                        {CurrentStep}
                         <div className="flex justify-between gap-4">
                             <button type="button" onClick={() => prev()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Prev Step</button>
                             <button type="button" onClick={Next} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>

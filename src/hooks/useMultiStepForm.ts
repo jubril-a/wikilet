@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, ComponentType } from "react";
+import { useState, ReactElement } from "react";
 
-export default function useMultiStepForm(steps: ComponentType<Record<string, unknown>>[]) {
+export default function useMultiStepForm(steps: ReactElement[]) {
 
     const [currentStep, setCurrentStep] = useState(0)
 
