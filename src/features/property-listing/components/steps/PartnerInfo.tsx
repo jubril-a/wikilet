@@ -1,6 +1,6 @@
 import PhotoInput from "@/src/components/PhotoInput"
 import FormInput from "@/src/components/FormInput"
-import StepWrapper from "../StepWrapper";
+import StepWrapper from "../components/StepWrapper";
 
 export default function PartnerInfo() {
   return (
@@ -8,7 +8,7 @@ export default function PartnerInfo() {
       <label htmlFor="">
           <span className="block mb-2 text-gray-700">Your role</span>
           <select name="role" id="" className="px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full">
-            <option className="bg-gray-200" value="" disabled selected></option>
+            <option className="bg-gray-200" value="" disabled></option>
             <option value="owner">Property owner</option>
             <option value="hotel-operator">Hotel operator</option>
             <option value="property-manager">Property manager</option>

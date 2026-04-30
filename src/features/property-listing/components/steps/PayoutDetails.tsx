@@ -1,5 +1,5 @@
 import FormInput from "@/src/components/FormInput"
-import StepWrapper from "../StepWrapper";
+import StepWrapper from "../components/StepWrapper";
 
 export default function PayoutDetails() {
   return (
@@ -10,7 +10,7 @@ export default function PayoutDetails() {
       <label htmlFor="">
           <span className="block mb-2 text-gray-700">Preferred payout schedule</span>
           <select name="role" id="" className="px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full">
-            <option className="bg-gray-200" value="" disabled selected></option>
+            <option className="bg-gray-200" value="" disabled></option>
             <option value="after-booking">After each booking</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>

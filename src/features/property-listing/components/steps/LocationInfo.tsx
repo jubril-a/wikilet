@@ -1,6 +1,6 @@
 // import CountrySelect from "@/src/components/CountrySelect"
 import FormInput from "@/src/components/FormInput"
-import StepWrapper from "../StepWrapper";
+import StepWrapper from "../components/StepWrapper";
 
 export default function LocationInfo() {
   return (

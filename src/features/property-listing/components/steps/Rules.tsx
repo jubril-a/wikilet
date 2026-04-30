@@ -1,5 +1,4 @@
-import StepWrapper from "../StepWrapper";
-import FormInput from "@/src/components/FormInput"
+import StepWrapper from "../components/StepWrapper";
 import Select from "react-select";
 
 const activities = [
@@ -8,15 +7,18 @@ const activities = [
   { value: 'tv', label: 'Pets' },
 ]
 
+type RulesProps = {
+  selectedRules: string[]
+  setSelectedRules: (items: string[]) => void
+}
 
-export default function Rules() {
+export default function Rules({ selectedRules, setSelectedRules }: RulesProps) {
   return (
     <StepWrapper heading="House Rules">
-      <FormInput name="check-in" type="text" label="Check-in time" />
-      <FormInput name="check-out" type="text" label="Check-out time" />
       <label htmlFor="">
         <span className="block mb-2 text-gray-700">Allow...</span>
-        <Select isMulti options={activities} />
+        <Select isMulti options={activities} onChange={(selected) => setSelectedRules(selected.map(i => i.label))} />
+        <input type="hidden" name="rules" value={JSON.stringify(selectedRules)} />
       </label>
     </StepWrapper>
   )

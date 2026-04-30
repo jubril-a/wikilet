@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, JSX } from "react";
+import { useState, ComponentType } from "react";
 
-export default function useMultiStepForm(steps: (() => JSX.Element)[]) {
+export default function useMultiStepForm(steps: ComponentType<Record<string, unknown>>[]) {
 
     const [currentStep, setCurrentStep] = useState(0)
 
     function prev() {
         setCurrentStep(i => {
             if (i <= 0) return i
-            return i -1
+            return i - 1
         }) 
     }
 
@@ -22,13 +22,14 @@ export default function useMultiStepForm(steps: (() => JSX.Element)[]) {
 
     function goTo(i: number) {
         setCurrentStep(i)
-    }
+    } 
 
     return {
         steps,
-        step: steps[currentStep],
+        CurrentStep: steps[currentStep],
         prev,
         next,
-        goTo
+        goTo,
+        currentStepIndex: currentStep
     }
 }

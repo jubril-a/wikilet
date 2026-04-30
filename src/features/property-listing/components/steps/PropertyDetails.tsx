@@ -1,4 +1,4 @@
-import StepWrapper from "../StepWrapper";
+import StepWrapper from "../components/StepWrapper";
 import FormInput from "@/src/components/FormInput"
 import Image from "next/image"
 import { cn } from "@/src/lib/utils"
@@ -20,7 +20,7 @@ const Space = ({id, value}: SpaceProps) => {
 function Category({category, className}: {category: string; className: string}) {
     return (
         <label className={cn("group rounded-lg w-30 aspect-square flex justify-center items-center grow cursor-pointer has-checked:border-3 border-blue-600", className)}>
-            <input type="radio" name="property-category" value={category} className="peer hidden" required />
+            <input type="radio" name="category" value={category} className="peer hidden" required />
             <div>
                 <Image src={`/images/icon-${category}.png`} alt="" className="h-10 w-auto mx-auto" width={60} height={80} />
                 <p className="capitalize text-center text-sm mt-2">{category}</p>
@@ -32,7 +32,7 @@ function Category({category, className}: {category: string; className: string}) 
 export default function PropertyDetails() {
   return (
     <StepWrapper heading="Property Details">
-        <FormInput name="property-name" type="text" label="Property Name" required />
+        <FormInput name="name" type="text" label="Property Name" required />
         <div>
             <span className="block mb-3 text-gray-700">Property Category</span>
             <div className="flex gap-4">
@@ -50,7 +50,7 @@ export default function PropertyDetails() {
                 <Space id="shared" value="Shared Room" />
             </div>
         </div>
-        <FormInput name="max-capacity" type="number" label="Maximum Capacity" required />
+        <FormInput name="capacity" type="number" label="Maximum Capacity" required />
     </StepWrapper>
   )
 }
