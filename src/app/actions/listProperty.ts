@@ -4,6 +4,27 @@ import { redirect } from "next/navigation"
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
+// interface PropertyType {
+//     title: string,
+//     category: "home" | "hotel" | "apartment" | "vacation",
+//     spaceType: "entire" | "private" | "shared",
+//     maxCapacity: number,
+//     location: {
+//         state: string,
+//         area: string,
+//         address: string,
+//         landmark: string,
+//     },
+//     images: File[], // array of four images
+//     amenities: string[],
+//     power: "24hr" | "gen" | "grid" | "inverter",
+//     nightlyRate: number,
+//     cleaningFee?: number,
+//     minStay: number,
+//     maxStay: number,
+//     allow: string[]
+// }
+
 export async function listProperty(prevState: unknown, formData: FormData) {
   const payload = {
     title: formData.get("name"),

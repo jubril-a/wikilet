@@ -8,9 +8,7 @@ export default function OrderBox() {
     const { setSeacrhPopup } = usePopupStore()
 
     return (
-        <div className="max-w-160 bg-white mx-auto min-[440px]:px-8 min-[440px]:py-10 rounded-2xl">
-            <h1 className="text-xl md:text-2xl font-extrabold text-gray-950 mb-4 tracking-tight">Booking Details</h1>
-
+        <>
             <div className="min-[440px]:flex min-[440px]:gap-4 min-[440px]:items-center bg-gray-200 p-3 min-[440px]:p-4 rounded-xl">
                 <div className="w-24 max-[440px]:w-full bg-gray-300 rounded-md min-[440px]:aspect-square overflow-hidden max-[440px]:mb-3">
                     <Image className="object-cover object-center h-full" width={7203} height={4807} src="/images/apartment-1.jpg" alt=""/>
@@ -47,6 +45,6 @@ export default function OrderBox() {
             </div>
 
             <button className="block mx-auto mt-6 text-sm bg-primary-1 px-8 py-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1">Proceed to Payment</button>
-        </div>
+        </>
     )
 }
