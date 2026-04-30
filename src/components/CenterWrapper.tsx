@@ -7,6 +7,7 @@ export default function CenterWrapper({children, heading}: {children: ReactNode,
                 <h1 className="text-xl md:text-2xl font-extrabold text-gray-950 mb-4 tracking-tight">{heading}</h1>
                 {children}
             </div>
+            <div className="pb-50"></div>
         </div>
     )
 }
