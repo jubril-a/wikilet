@@ -25,7 +25,7 @@ export default function StepTrack({ index, label, currentStep }: StepTrackProps)
                     index + 1
                 )}
             </div>
-            <p className={`text-sm font-medium line-clamp-1 ${isActive ? "text-primary-" : isCompleted ? "text-gray-700" : "text-gray-400"}`}>
+            <p className={`max-[960px]:hidden text-sm font-medium line-clamp-1 ${isActive ? "text-primary-" : isCompleted ? "text-gray-700" : "text-gray-400"}`}>
                 {label}
             </p>
         </div>

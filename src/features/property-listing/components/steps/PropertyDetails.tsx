@@ -19,10 +19,10 @@ const Space = ({id, value}: SpaceProps) => {
 
 function Category({category, className}: {category: string; className: string}) {
     return (
-        <label className={cn("group rounded-lg w-30 aspect-square flex justify-center items-center grow cursor-pointer has-checked:border-3 border-blue-600", className)}>
+        <label className={cn("group rounded-lg min-w-12 min-[960px]:w-30 min-[480px]:aspect-square p-4 flex justify-center items-center grow cursor-pointer has-checked:border-3 border-blue-600", className)}>
             <input type="radio" name="category" value={category} className="peer hidden" required />
             <div>
-                <Image src={`/images/icon-${category}.png`} alt="" className="h-10 w-auto mx-auto" width={60} height={80} />
+                <Image src={`/images/icon-${category}.png`} alt="" className="h-8 min-[960px]:h-10 w-auto mx-auto" width={60} height={80} />
                 <p className="capitalize text-center text-sm mt-2">{category}</p>
             </div>
         </label>
@@ -35,7 +35,7 @@ export default function PropertyDetails() {
         <FormInput name="name" type="text" label="Property Name" required />
         <div>
             <span className="block mb-3 text-gray-700">Property Category</span>
-            <div className="flex gap-4">
+            <div className="grid min-[480px]:grid-cols-4 gap-4">
                 <Category category="home" className="bg-[#632B30] text-white" />
                 <Category category="hotel" className="bg-[#BEE3DB]" />
                 <Category category="apartment" className="bg-[#2274A5] text-white" />

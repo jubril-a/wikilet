@@ -1,6 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { cookies } from "next/headers"
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
@@ -26,6 +27,8 @@ const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 // }
 
 export async function listProperty(prevState: unknown, formData: FormData) {
+  const token = (await cookies()).get("accessToken")?.value
+
   const payload = {
     title: formData.get("name"),
     category: formData.get("category"),
@@ -42,19 +45,19 @@ export async function listProperty(prevState: unknown, formData: FormData) {
     power: formData.get("power"),
     nightlyRate: formData.get("nightly-rate"),
     cleaningFee: formData.get("cleaning-fee"),
-    deposit: formData.get("deposit"),
     minStay: formData.get("min-stay"),
     maxStay: formData.get("max-stay"),
-    checkIn: formData.get("check-in"),
-    checkOut: formData.get("check-out"),
     allow: formData.get("allow"),
-    authorize: formData.get("authorized"),
-    accept: formData.get("accept-terms"),
   }
+
+  console.log(payload)
 
   const res = await fetch(`${apiUrl}/properties`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
     body: JSON.stringify(payload),
   })
 
