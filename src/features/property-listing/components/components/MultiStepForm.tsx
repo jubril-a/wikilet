@@ -66,7 +66,7 @@ export default function MultiStepForm() {
                 <h1 className="text-2xl md:text-3xl font-semibold tracking-tighter">Add a New Listing</h1>
             </div>
             <main className="flex gap-4 max-w-300 mx-auto px-4">
-                <div className="w-68 h-fit bg-white rounded-md border border-gray-300 p-6">
+                <div className="w-68 h-fit bg-white rounded-md border border-gray-300 p-6 max-[960px]:hidden">
                     {steps.map((label, index) => (
                         <StepTrack
                             key={index}

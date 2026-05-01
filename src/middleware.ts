@@ -18,10 +18,10 @@ export function middleware(req: NextRequest) {
   const isAgentOnly = AGENT_ONLY.some((r) => pathname.startsWith(r))
   const isUnauthorizedOnly = UNAUTHORIZED_ONLY.some((r) => pathname.startsWith(r))
 
-  // Logged in user trying to access auth pages → redirect to home
-  if (isUnauthorizedOnly && token) {
-    return NextResponse.redirect(new URL("/", req.url))
-  }
+  // // Logged in user trying to access auth pages → redirect to home
+  // if (isUnauthorizedOnly && token) {
+  //   return NextResponse.redirect(new URL("/", req.url))
+  // }
 
   // Not logged in → redirect to login, preserving the intended destination
   if ((isProtected || isAgentOnly) && !token) {
@@ -33,6 +33,13 @@ export function middleware(req: NextRequest) {
   // Logged in but not an agent → redirect to unauthorized
   if (isAgentOnly && role !== "agent") {
     return NextResponse.redirect(new URL("/unauthorized", req.url))
+  }
+
+  // Logged in user on auth-only pages → redirect to home,
+  // UNLESS they were sent here intentionally via a redirect param
+  const hasRedirect = req.nextUrl.searchParams.has("redirect")
+  if (isUnauthorizedOnly && token && !hasRedirect) {
+    return NextResponse.redirect(new URL("/", req.url))
   }
 
   return NextResponse.next()
