@@ -18,10 +18,10 @@ export default function PartnerInfo() {
         <FormInput name="name" type="text" label="Full legal name" />
         <FormInput name="phone" type="text" label="Phone number" />
         <FormInput name="email" type="text" label="Email address" />
-        <div>
+        {/* <div>
           <span className="block mb-2 text-gray-700">Upload a valid identification document</span>
           <PhotoInput />
-        </div>
+        </div> */}
     </StepWrapper>
   )
 }
