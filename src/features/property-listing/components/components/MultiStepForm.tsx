@@ -1,6 +1,7 @@
 'use client'
 
 import PropertyDetails from "../steps/PropertyDetails"
+import Description from "../steps/Description"
 import LocationInfo from "../steps/LocationInfo"
 import Media from "../steps/Media"
 import Facilities from "../steps/Facilities"
@@ -16,13 +17,14 @@ import Submit from "@/src/components/Submit"
 
 
 
-const steps = [
+const stepsLabel = [
     "Property Details",
     "Location Information",
     "Photos",
     "Amenities & Facilities",
     "Pricing",
     "House Rules",
+    "Property Description",
     "Legal & Safety Confirmation",
 ]
 
@@ -44,10 +46,11 @@ export default function MultiStepForm() {
         selectedRules={selectedRules}
         setSelectedRules={setSelectedRules}
     />,
-    <Terms key="7" />
+    <Description key="7" />,
+    <Terms key="8" />
 ]
 
-    const { CurrentStep, next, prev, currentStepIndex } = useMultiStepForm(forms)
+    const {next, prev, currentStepIndex } = useMultiStepForm(forms)
     const [state, action] = useActionState(listProperty, null)
 
     return (
@@ -57,7 +60,7 @@ export default function MultiStepForm() {
             </div>
             <main className="min-[760px]:flex min-[760px]:gap-4 max-w-300 mx-auto px-4">
                 <div className="min-[960px]:w-68 h-fit bg-white rounded-md border border-gray-300 p-4 min-[960px]:p-6 max-[760px]:flex max-[760px]:mb-4 max-[760px]:justify-between max-[540px]:hidden">
-                    {steps.map((label, index) => (
+                    {stepsLabel.map((label, index) => (
                         <StepTrack
                             key={index}
                             index={index}
@@ -67,16 +70,19 @@ export default function MultiStepForm() {
                     ))}
                 </div>
                 <Form action={action} className="bg-white rounded-md border border-gray-300 p-4 min-[480px]:p-8 grow">
-                    <div className="max-w-150 py-8 min-[540px]:py-16 mx-auto">
-                        {state?.error && (
+                     {state?.error && (
                             <p className="text-red-500 text-sm mb-4">{state.error}</p>
                         )}
-                        {CurrentStep}
-                        <div className="flex justify-between items-center gap-4">
-                            {currentStepIndex != 0 && <button type="button" onClick={() => prev()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Prev Step</button>}
-                            {currentStepIndex != forms.length - 1 && <button type="button" onClick={() => next()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>}
-                            {currentStepIndex == forms.length - 1 && <button type="button" onClick={() => next()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 my-6 py-3 cursor-pointer w-full">Next Step</button>}
-                            {/* {currentStepIndex == forms.length - 1 && <Submit action="listProperty" />} */}
+                        <div className="max-w-150 py-8 min-[540px]:py-16 mx-auto">
+                            {forms.map((step, index) => (
+                            <div key={index} className={index === currentStepIndex ? "block" : "hidden"}>
+                                {step}
+                            </div>
+                        ))}
+                        <div className="flex justify-between items-center gap-4 mt-10">
+                            {currentStepIndex != 0 && <button type="button" onClick={() => prev()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Prev Step</button>}
+                            {currentStepIndex != forms.length - 1 && <button type="button" onClick={() => next()} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Next Step</button>}
+                            {currentStepIndex == forms.length - 1 && <Submit action="listProperty" />}
                         </div>
                     </div>
                 </Form>

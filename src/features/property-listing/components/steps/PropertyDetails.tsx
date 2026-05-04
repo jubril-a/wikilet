@@ -11,7 +11,7 @@ type SpaceProps = {
 const Space = ({id, value}: SpaceProps) => {
     return (
         <label className="border border-gray-200 p-5 flex-1 bg-gray-200 rounded-lg cursor-pointer">
-            <input id={id} name="type" type="radio" value={value} className="mr-3" required />
+            <input id={id} name="space-type" type="radio" value={value} className="mr-3" required />
             <span>{value}</span>
         </label>
     )
@@ -32,7 +32,7 @@ function Category({category, className}: {category: string; className: string}) 
 export default function PropertyDetails() {
   return (
     <StepWrapper heading="Property Details">
-        <FormInput name="name" type="text" label="Property Name" required />
+        <FormInput name="title" type="text" label="Property Name" required />
         <div>
             <span className="block mb-3 text-gray-700">Property Category</span>
             <div className="grid min-[480px]:grid-cols-4 gap-4">

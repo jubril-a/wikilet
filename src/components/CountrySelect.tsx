@@ -9,5 +9,5 @@ const options = countries.map((c) => ({
 }));
 
 export default function CountrySelect() {
-  return <Select options={options} placeholder="Select a country" />;
+  return <Select name="country" options={options} placeholder="Select a country" />;
 }
