@@ -5,30 +5,6 @@ import { cookies } from "next/headers"
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
-// interface PropertyType {
-//     title: string,
-//     description: string,
-//     propertyType: "home" | "hotel" | "apartment" | "vacation",
-//     price: number,
-//     currency: string,
-//     city: string,
-//     country: string,
-//     location: {
-//         area: string,
-//         address: string,
-//         landmark: string,
-//     },
-//     images: String[],
-//     amenities: string[],
-//     maxCapacity: number, //add
-//     spaceType: "entire" | "private" | "shared", // add
-//     power: "24hr" | "gen" | "grid" | "inverter", // add
-//     cleaningFee?: number, // add
-//     minStay: number, // add
-//     maxStay: number, // add
-//     allow: string[] // add
-// }
-
 export async function listProperty(prevState: unknown, formData: FormData) {
   const token = (await cookies()).get("accessToken")?.value
 
@@ -82,3 +58,4 @@ export async function listProperty(prevState: unknown, formData: FormData) {
 
   // redirect("/confirm-email")
 }
+

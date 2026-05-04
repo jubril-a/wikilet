@@ -3,6 +3,7 @@
 
 import { ArrowRight, MapPin } from "lucide-react"
 import { Booking, BookingStatus } from "@/src/types/booking"
+import { usePopupStore } from "@/src/stores/popupsStore" 
 import Image from "next/image"
 
 const STATUS_STYLES: Record<BookingStatus, string> = {
@@ -28,14 +29,9 @@ interface BookingCardProps {
   onViewReceipt: (id: string) => void
 }
 
-export default function BookingCard({
-  booking,
-  onCancel,
-  onReview,
-  onRebook,
-  onViewReceipt,
-}: BookingCardProps) {
+export default function BookingCard({ booking, onCancel, onReview, onRebook, onViewReceipt }: BookingCardProps) {
   const { status } = booking
+  const { setSeacrhPopup } = usePopupStore()
 
   return (
     <div className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 transition-colors">
@@ -125,7 +121,7 @@ export default function BookingCard({
 
         {status === "completed" && (
           <button
-            onClick={() => onReview(booking.id)}
+            onClick={() => {setSeacrhPopup("review"); onReview(booking.id)}}
             className="text-[12px] border border-gray-200 rounded-lg px-2.5 py-1.5 text-gray-500 hover:border-gray-300 hover:text-gray-800 transition-colors whitespace-nowrap bg-white"
           >
             Leave a review

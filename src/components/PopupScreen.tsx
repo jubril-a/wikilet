@@ -3,6 +3,7 @@
 import LocationPopup from "./LocationPopup";
 import GuestPopup from "./GuestPopup";
 import SchedulePopup from "./SchedulePopup";
+import AddReview from "../app/bookings/components/AddReview";
 import { popupType } from "../app/types";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { usePopupStore } from "../stores/popupsStore"
@@ -32,7 +33,9 @@ export default function PopupScreen() {
                 case "schedule": 
                     return <SchedulePopup />;
                 case "guest": 
-                    return <GuestPopup />;           
+                    return <GuestPopup />;   
+                case "review":
+                    return <AddReview />       
             }
         }
 

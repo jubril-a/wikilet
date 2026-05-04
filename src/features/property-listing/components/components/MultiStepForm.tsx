@@ -11,7 +11,7 @@ import Terms from "../steps/Terms"
 import Form from "next/form"
 import useMultiStepForm from "@/src/hooks/useMultiStepForm"
 import StepTrack from "./StepTrack"
-import { listProperty } from "@/src/app/actions/listProperty"
+import { listProperty } from "@/src/app/actions/property"
 import { useActionState, useState } from "react"
 import Submit from "@/src/components/Submit"
 

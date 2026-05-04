@@ -3,21 +3,23 @@
 import { useFormStatus } from "react-dom"
 
 type Props = {
-  action: "login" | "signup" | "recover" | "listProperty"
+  action: "login" | "signup" | "recover" | "listProperty" | "addReview"
 }
 
 const labels = {
   login: "Log In",
   signup: "Register",
   recover: "Reset Password",
-  listProperty: "Submit"
+  listProperty: "Submit",
+  addReview: "Add Review"
 }
 
 const pendingLabels = {
   login: "Logging in...",
   signup: "Registering...",
   recover: "Sending...",
-  listProperty: "Submitting"
+  listProperty: "Submitting",
+  addReview: "Submitting Review"
 }
 
 const Submit = ({action}: Props) => {
