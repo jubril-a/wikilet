@@ -3,7 +3,6 @@ import { cn } from "@/src/lib/utils"
 import { ReactNode } from "react"
 
 type Props = {
-    // icon: string,
     label: string,
     active?: boolean,
     children: ReactNode
@@ -15,7 +14,7 @@ export default function NavLink({ label, active, children }: Props) {
             <div className={cn("aspect-square bg-white p-2 rounded-xl", active ? "bg-primary-2 text-white" : "border border-gray-200")}>
                 {children}
             </div>
-            <span className={cn("text-sm text-gray-500", active && "text-primary-1")}>{label}</span>
+            <span className={cn("text-sm text-gray-500", active ? "text-primary-1" : "hover:text-primary-2")}>{label}</span>
         </Link>
     )
 }

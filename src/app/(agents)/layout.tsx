@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Sidebar from "./agent/components/layout/Sidebar";
+import TopbarWrapper from "./agent/components/layout/TopbarWrapper";
 import "../globals.css";
 
 
@@ -26,11 +27,14 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <body>
-        <div className="flex">
+        <div className="flex flex-col h-screen">
+          <TopbarWrapper />
+          <div className="flex grow">
             <Sidebar />
-            <div className="bg-black grow">
+            <div className="h-screen p-4">
               {children}
             </div>
+          </div>
         </div>
       </body>
     </html>
