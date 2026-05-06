@@ -11,7 +11,7 @@ export async function listProperty(prevState: unknown, formData: FormData) {
   const payload = {
     title: formData.get("title"),
     description: formData.get("description"),
-    propertyType: formData.get("type"),
+    propertyType: formData.get("category"),
     spaceType: formData.get("space-type"),
     price: Number(formData.get("price")),
     currency: "naira",
@@ -34,7 +34,7 @@ export async function listProperty(prevState: unknown, formData: FormData) {
     cleaningFee: formData.get("cleaning-fee"),
     minStay: formData.get("min-stay"),
     maxStay: formData.get("max-stay"),
-    allow: formData.get("allow"),
+    allow: JSON.parse(formData.get("allow") as string),
   }
 
   console.log(payload)

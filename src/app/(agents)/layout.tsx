@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import NavbarWrapper from "../components/NavbarWrapper";
-import PopupScreen from "../components/PopupScreen";
+import Sidebar from "./agent/components/layout/Sidebar";
+import "../globals.css";
 
 
 export const inter = Inter({
@@ -27,9 +26,12 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <body>
-        <PopupScreen />
-        <NavbarWrapper />
-        {children}
+        <div className="flex">
+            <Sidebar />
+            <div className="bg-black grow">
+              {children}
+            </div>
+        </div>
       </body>
     </html>
   );

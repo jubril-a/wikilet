@@ -3,7 +3,7 @@
 import { useRef, useState, useTransition } from "react"
 import { Upload } from "lucide-react"
 import Image from "next/image"
-import { updateAccount } from "../actions/account"
+import { updateAccount } from "../../actions/account"
 
 type Role = "user" | "agent"
 

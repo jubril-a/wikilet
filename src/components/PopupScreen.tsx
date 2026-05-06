@@ -3,7 +3,7 @@
 import LocationPopup from "./LocationPopup";
 import GuestPopup from "./GuestPopup";
 import SchedulePopup from "./SchedulePopup";
-import AddReview from "../app/bookings/components/AddReview";
+import AddReview from "../app/(general)/bookings/components/AddReview";
 import { popupType } from "../app/types";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { usePopupStore } from "../stores/popupsStore"

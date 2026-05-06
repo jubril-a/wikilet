@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState } from "react"
-import { login } from "../../actions/auth";
+import { login } from "../../../actions/auth";
 import HalfBox from "@/src/components/HalfBox";
 import FormInput from "@/src/components/FormInput";
 import Submit from "@/src/components/Submit";

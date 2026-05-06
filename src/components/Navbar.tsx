@@ -44,7 +44,7 @@ export default function Navbar({user}: {user: User}) {
     return (
         <nav className="fixed z-99 bg-white w-full px-4 min-[760px]:px-8 border-b border-b-[#c6c6c648]">
             <div className="flex justify-between items-center max-w-280 py-3.5 mx-auto">
-                <Link href="/" className="font-bold text-2xl">
+                <Link href="/">
                     <Image src="/images/logo.png" width={128} height={44} alt="wikilet" loading="eager" />
                 </Link>
                 <div className="flex items-center">

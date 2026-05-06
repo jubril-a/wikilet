@@ -7,7 +7,7 @@ export type propertyType = {
     description: string,
     propertyType: "home" | "hotel" | "apartment" | "vacation",
     price: number,
-    currency: string,
+    currency: "naira" | "dollar",
     city: string,
     country: string,
     location: {
@@ -24,7 +24,7 @@ export type propertyType = {
     cleaningFee?: number,
     minStay: number,
     maxStay: number,
-    allow: string[]
+    allow: "smoking" | "ac" | "pets"
 }
 
 export type QueryType = {

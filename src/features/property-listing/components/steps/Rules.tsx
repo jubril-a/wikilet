@@ -2,9 +2,9 @@ import StepWrapper from "../components/StepWrapper";
 import Select from "react-select";
 
 const activities = [
-  { value: 'wifi', label: 'Smoking' },
+  { value: 'smoking', label: 'Smoking' },
   { value: 'ac', label: 'Events or parties' },
-  { value: 'tv', label: 'Pets' },
+  { value: 'pets', label: 'Pets' },
 ]
 
 type RulesProps = {
@@ -18,7 +18,7 @@ export default function Rules({ selectedRules, setSelectedRules }: RulesProps) {
       <label htmlFor="">
         <span className="block mb-2 text-gray-700">Allow...</span>
         <Select isMulti options={activities} onChange={(selected) => setSelectedRules(selected.map(i => i.label))} />
-        <input type="hidden" name="rules" value={JSON.stringify(selectedRules)} />
+        <input type="hidden" name="allow" value={JSON.stringify(selectedRules)} />
       </label>
     </StepWrapper>
   )

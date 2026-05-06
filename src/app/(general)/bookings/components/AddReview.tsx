@@ -1,7 +1,7 @@
 import Submit from "@/src/components/Submit"
 import Form from "next/form"
 import { useActionState } from "react"
-import { addReview } from "../../actions/review"
+import { addReview } from "../../../actions/review"
 import StarRating from "./StarRating"
 
 export default function AddReview() {
