@@ -3,3 +3,4 @@ export default function page() {
         <h1 className="">Bookings</h1>
     )
 }
+

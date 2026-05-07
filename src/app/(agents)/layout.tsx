@@ -31,9 +31,9 @@ export default function RootLayout({
           <TopbarWrapper />
           <div className="flex grow">
             <Sidebar />
-            <div className="h-screen p-4">
+            <main className="p-4 sm:px-8 sm:py-12 grow">
               {children}
-            </div>
+            </main>
           </div>
         </div>
       </body>

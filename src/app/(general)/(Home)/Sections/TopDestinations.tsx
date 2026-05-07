@@ -18,7 +18,7 @@ export default function TopDestinations() {
                 </div>
                 <ScrollBtns scroller={scrollerRef} />
             </div>
-            <div ref={scrollerRef} className="flex gap-2 overflow-scroll no-scrollbar">
+            <div ref={scrollerRef} className="flex overflow-scroll no-scrollbar">
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />

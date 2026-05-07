@@ -31,21 +31,17 @@ export default function Sidebar() {
             <div className="p-4 fixed w-64">
                 <div>
                     {mainLinks.map(({ label, icon: Icon }) => {
-                        const active = pathname.endsWith(label.toLowerCase())
+                        const active = pathname.split("/")[2] == label.toLowerCase()
                         return (
-                            <NavLink key={label} label={label} active={active}>
-                                <Icon className={`size-5 ${active ? "text-primary-1" : "text-gray-600"}`} />
-                            </NavLink>
+                            <NavLink key={label} label={label} active={active} Icon={Icon} />
                         )
                     })}
                 </div>
                 <div className="pt-5 mt-5 border-t border-t-gray-200">
                     {bottomLinks.map(({ label, icon: Icon }) => {
-                        const active = pathname.endsWith(label.toLowerCase())
+                        const active = pathname.split("/")[2] == label.toLowerCase()
                         return (
-                            <NavLink key={label} label={label} active={active}>
-                                <Icon className={`size-5 ${active ? "text-primary-1" : "text-gray-600"}`} />
-                            </NavLink>
+                            <NavLink key={label} label={label} active={active} Icon={Icon} />
                         )
                     })}
                 </div>
