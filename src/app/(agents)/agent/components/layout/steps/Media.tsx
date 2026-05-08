@@ -1,20 +1,30 @@
 import PhotoInput from "@/src/components/PhotoInput"
 import StepWrapper from "../StepWrapper";
+import { useListingStore } from "@/src/stores/listingStore";
 
-export default function Media() {
+const photoNames = ["main-image", "image-1", "image-2", "image-3", "image-4"] as const
+
+export default function Media({page}: {page?: "edit" | "create"}) {
+  const isCreate = page === "create"
+
+  const { images, setImage } = useListingStore()
+
   return (
-    <StepWrapper heading="Photo & Media">
-        <div className="">
-          <span className="block mb-2 text-gray-700">Upload 4 Property Photos</span>
-          <PhotoInput name="main-image" />
-          <PhotoInput name="image-1" />
-          <PhotoInput name="image-2" />
-          <PhotoInput name="image-3" />
+    <StepWrapper heading="Photo & Media" page={page}>
+      <div>
+        <div className="mb-2">
+          <p className="font-semibold text-gray-700 mb-1">Upload 5 Property Photos</p>
+          <span className="text-sm text-gray-500 block mb-2">The first image will be used as the banner</span>
         </div>
-        {/* <div>
-          <span className="block mb-2 text-gray-700">Add a short Video (optional)</span>
-          <VideoInput />
-        </div> */}
+        {photoNames.map((name, index) => (
+          <PhotoInput
+            key={name}
+            name={name}
+            value={isCreate ? images[index] : undefined}
+            onChange={isCreate ? (base64) => setImage(index, base64) : undefined}
+          />
+        ))}
+      </div>
     </StepWrapper>
   )
 }

@@ -5,8 +5,8 @@ type Props = {
   required?: boolean;
   value?: string;
   className?: string;
-  onBlur?: () => void
-  onChange?: () => void
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const FormInput = ({name, value, type, label, className, required=false, onBlur, onChange}: Props) => {

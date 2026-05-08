@@ -50,7 +50,7 @@ export default function PropertyCard() {
                     <h2 className="font-semibold text-xl mb-.5">Azure Horizon Villa</h2>
                     <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>Downtown, Manhattan</span></p>
                 </div>
-                <IconButton label="Edit Property Details" url="" />
+                <IconButton label="Edit Property Details" url="properties/edit" />
                 <div className="grid grid-cols-3 gap-2">
                     {Actions.map(({label, icon: Icon}) => (
                         <ActionButton key={label} label={label} Icon={Icon} />

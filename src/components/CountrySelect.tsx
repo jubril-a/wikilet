@@ -8,6 +8,23 @@ const options = countries.map((c) => ({
   label: c.name.common,
 }));
 
-export default function CountrySelect() {
-  return <Select name="country" options={options} placeholder="Select a country" />;
+type Option = { value: string; label: string }
+
+type Props = {
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+export default function CountrySelect({ value, onChange }: Props) {
+  const selected = options.find((o) => o.value === value) ?? null
+
+  return (
+    <Select
+      name="country"
+      options={options}
+      placeholder="Select a country"
+      value={selected}
+      onChange={(option) => onChange?.((option as Option).value)}
+    />
+  );
 }

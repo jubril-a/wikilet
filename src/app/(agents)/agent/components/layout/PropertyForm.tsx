@@ -9,6 +9,7 @@ import Pricing from "./steps/Pricing"
 import Rules from "./steps/Rules"
 import Terms from "./steps/Terms"
 import { Dispatch, SetStateAction } from "react"
+import { useListingStore } from "@/src/stores/listingStore"
 
 export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: { currentStepIndex: number, setCurrentStepIndex: Dispatch<SetStateAction<number>>}) {
 
@@ -34,7 +35,8 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
     }
 
     function submit() {
-        
+        const state = useListingStore.getState()
+        //TODO: Submit
     }
 
 
@@ -42,7 +44,7 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
         <form className="border-l border-l-gray-300 p-4 min-[480px]:px-8 min-[480px]:py-12  grow">
             <div className="max-w-150">
                 {
-                    <CurrentStep />
+                    <CurrentStep page="create" />
                 }
             </div>
             <div className="flex justify-between items-center gap-4 mt-10 max-w-150">

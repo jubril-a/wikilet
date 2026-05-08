@@ -12,6 +12,8 @@ interface Location {
   landmark: string;
 }
 
+type Images = [string, string, string, string, string]
+
 interface ListingState {
   title: string;
   description: string;
@@ -21,7 +23,7 @@ interface ListingState {
   city: string;
   country: string;
   location: Location;
-  images: string[];
+  images: Images;
   amenities: string[];
   maxCapacity: number;
   spaceType: SpaceType | null;
@@ -35,9 +37,10 @@ interface ListingState {
 interface ListingActions {
   setField: <K extends keyof ListingState>(key: K, value: ListingState[K]) => void;
   setLocation: (location: Partial<Location>) => void;
-  addImage: (url: string) => void;
-  removeImage: (url: string) => void;
+  setImage: (index: number, url: string) => void;
+  clearImage: (index: number) => void;
   toggleAmenity: (amenity: string) => void;
+  setAmenities: (amenities: string[]) => void;
   toggleAllow: (rule: Allow) => void;
   reset: () => void;
 }
@@ -55,7 +58,7 @@ const initialState: ListingState = {
     address: "",
     landmark: "",
   },
-  images: [],
+  images: ["", "", "", "", ""],
   amenities: [],
   maxCapacity: 1,
   spaceType: null,
@@ -69,24 +72,26 @@ const initialState: ListingState = {
 export const useListingStore = create<ListingState & ListingActions>((set) => ({
   ...initialState,
 
-  // Generic setter for simple fields
   setField: (key, value) => set({ [key]: value } as Pick<ListingState, typeof key>),
 
-  // Merge partial location updates
   setLocation: (partial) =>
     set((state) => ({
       location: { ...state.location, ...partial },
     })),
 
-  addImage: (url) =>
-    set((state) => ({
-      images: state.images.includes(url) ? state.images : [...state.images, url],
-    })),
+  setImage: (index, url) =>
+    set((state) => {
+      const images = [...state.images] as Images
+      images[index] = url
+      return { images }
+    }),
 
-  removeImage: (url) =>
-    set((state) => ({
-      images: state.images.filter((img) => img !== url),
-    })),
+  clearImage: (index) =>
+    set((state) => {
+      const images = [...state.images] as Images
+      images[index] = ""
+      return { images }
+    }),
 
   toggleAmenity: (amenity) =>
     set((state) => ({
@@ -94,6 +99,8 @@ export const useListingStore = create<ListingState & ListingActions>((set) => ({
         ? state.amenities.filter((a) => a !== amenity)
         : [...state.amenities, amenity],
     })),
+
+  setAmenities: (amenities) => set({ amenities }),
 
   toggleAllow: (rule) =>
     set((state) => ({
