@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { MapPinIcon, AdjustmentsHorizontalIcon, PauseCircleIcon, TrashIcon, StarIcon, WalletIcon, ArrowPathIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
+import { MapPinIcon, AdjustmentsHorizontalIcon, PauseCircleIcon, TrashIcon, StarIcon, WalletIcon, ArrowPathIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/outline"
 import IconButton from "./IconButton"
 import React from "react"
 
@@ -41,7 +41,7 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
 
 export default function PropertyCard() {
     return (
-        <div className="w-100 rounded-2xl overflow-hidden border border-gray-200">
+        <div className="w-100 rounded-2xl overflow-hidden border border-gray-200 bg-white">
             <div className="w-full aspect-video overflow-hidden">
                 <Image src="/images/product.jpg" width={280} height={280} className="w-full object-cover object-bottom" alt="" />
             </div>
@@ -50,7 +50,7 @@ export default function PropertyCard() {
                     <h2 className="font-semibold text-xl mb-.5">Azure Horizon Villa</h2>
                     <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>Downtown, Manhattan</span></p>
                 </div>
-                <IconButton label="Edit Property Details" url="properties/edit" />
+                <IconButton label="Edit Property Details" url="properties/edit" Icon={PlusIcon} />
                 <div className="grid grid-cols-3 gap-2">
                     {Actions.map(({label, icon: Icon}) => (
                         <ActionButton key={label} label={label} Icon={Icon} />
