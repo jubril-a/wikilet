@@ -31,13 +31,13 @@ export default function CreateProperty() {
                 <h1 className="text-2xl font-bold text-primary-1 mb-1">Create a new property</h1>
                 <p className="text-gray-500 text-sm">Manage your listings, availability, and financial performance</p>
             </div>
-            <div className="flex">
+            <div className="flex bg-white">
                 <nav className="grid gap-1 w-fit h-fit p-4 min-[480px]:px-8 min-[480px]:py-12">
                     {stepsLabel.map((label, index) => (
                         <Step key={label} label={label} active={index == currentStep} goTo={() => setCurrentStep(index)} />
                     ))}   
                 </nav>
-                <PropertyForm stepState={[currentStep, setCurrentStep]} />
+                <PropertyForm currentStepIndex={currentStep} setCurrentStepIndex={setCurrentStep} />
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ type Props = {
 
 export default function NavLink({ label, active, Icon }: Props) {
     return (
-        <Link href={label.toLowerCase()} className={cn("flex gap-3 items-center px-5 mb-4", active && "bg-white py-3 rounded-xl")}>
+        <Link href={label.toLowerCase()} className={cn("flex gap-3 items-center px-5 mb-4", active && "bg-gray-200 py-3 rounded-xl")}>
             <div className={cn("aspect-square bg-white p-2 rounded-xl", active ? "bg-primary-2 text-white" : "border border-gray-200")}>
                 <Icon className={`size-5 ${active ? "text-primary-1" : "text-gray-600"}`} />
             </div>

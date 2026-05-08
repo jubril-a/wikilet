@@ -27,7 +27,7 @@ export default function Sidebar() {
     const pathname = usePathname()
 
     return (
-        <nav className="border-r border-r-gray-200 w-64 bg-[#F8F9FA] relative">
+        <nav className="border-r border-r-gray-200 w-64 bg-white relative">
             <div className="p-4 fixed w-64">
                 <div>
                     {mainLinks.map(({ label, icon: Icon }) => {

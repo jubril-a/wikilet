@@ -31,7 +31,7 @@ export default function RootLayout({
           <TopbarWrapper />
           <div className="flex grow">
             <Sidebar />
-            <main className="p-4 sm:px-8 sm:py-12 grow">
+            <main className="bg-[#F8F9FA] p-4 sm:px-8 sm:py-12 grow">
               {children}
             </main>
           </div>

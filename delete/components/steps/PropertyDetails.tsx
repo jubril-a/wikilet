@@ -2,7 +2,7 @@ import StepWrapper from "../components/StepWrapper";
 import FormInput from "@/src/components/FormInput"
 import Image from "next/image"
 import { cn } from "@/src/lib/utils"
-import { useListingStore } from "../../store";
+import { useListingStore } from "../../../src/stores/listingStore";
 
 type SpaceProps = {
     name: string,
