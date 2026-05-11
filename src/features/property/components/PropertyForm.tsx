@@ -41,10 +41,10 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
 
 
     return (
-        <form className="border-l border-l-gray-300 p-4 min-[480px]:px-8 min-[480px]:py-12  grow">
+        <form className="min-[440px]:border-l min-[440px]:border-l-gray-300 min-[440px]:p-4 min-[480px]:px-8 min-[480px]:py-12  grow">
             <div className="max-w-150">
                 {
-                    <CurrentStep page="create" />
+                    <CurrentStep page="create" index={currentStepIndex + 1} />
                 }
             </div>
             <div className="flex justify-between items-center gap-4 mt-10 max-w-150">

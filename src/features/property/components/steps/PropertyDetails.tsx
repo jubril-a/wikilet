@@ -55,7 +55,7 @@ function Category({category, className, checked, onChange}: {
     )
 }
 
-export default function PropertyDetails({page} : {page ?: "edit" | "create"}) {
+export default function PropertyDetails({page, index} : {page ?: "edit" | "create", index: number}) {
     const isCreate = page === "create"
 
     const { title, propertyType, spaceType, maxCapacity, setField } = useListingStore()
@@ -110,7 +110,7 @@ export default function PropertyDetails({page} : {page ?: "edit" | "create"}) {
             </div>
             <div>
                 <span className="block mb-2 text-gray-700">Type of Space</span>
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid min-[480px]:grid-cols-3 gap-4">
                     {([
                         { value: "entire", name: "Entire Place" },
                         { value: "private", name: "Private Room" },

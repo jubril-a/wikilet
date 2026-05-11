@@ -27,7 +27,7 @@ function Step({heading, Form} : {heading: string, Form: React.ElementType}) {
     
     return (
         <div className="w-full border-b border-b-gray-200">
-            <div className="group cursor-pointer px-6 py-4" onClick={() => setExpanded(!expanded)}>
+            <div className="group cursor-pointer min-[440px]:px-6 py-4" onClick={() => setExpanded(!expanded)}>
                 <div className="flex gap-4 items-center">
                     <div className="size-8 bg-red-500"></div>
                     <div>
@@ -37,7 +37,7 @@ function Step({heading, Form} : {heading: string, Form: React.ElementType}) {
                     <ChevronRightIcon className="text-gray-400 size-6 ml-auto" />
                 </div>
             </div>
-            {expanded && <div className="px-6 py-4 max-w-150">
+            {expanded && <div className="min-[440px]:px-6 min-[440px]:py-4 max-w-150">
               {<Form page="edit" /> }
             </div>}
         </div>
@@ -54,7 +54,7 @@ export default function EditProperty() {
                 <h1 className="text-2xl font-bold text-primary-1 mb-1">Edit property</h1>
                 <p className="text-gray-500 text-sm">Manage your listings, availability, and financial performance</p>
             </div>
-            <div className="bg-white">
+            <div className="min-[440px]:bg-white">
                 {
                     stepsLabel.map(({title, form}) => (
                         <Step key={title} heading={title} Form={form} />    
