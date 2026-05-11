@@ -53,7 +53,7 @@ export default function Navbar({user}: {user: User}) {
                     <Link className="text-sm font-medium hover:text-primary-1 hover:bg-primary-2 text-white bg-primary-1 px-4 py-3 rounded-md ml-8 max-[420px]:hidden" href="/host/properties/edit">List your Property</Link>
                     <UserBox user={user} />
                     <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
-                    <Bars3Icon className="size-7 ml-4" />
+                        <Bars3Icon className="size-7 ml-4" />
                     </button>
                                                      
                 </div>

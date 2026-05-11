@@ -5,16 +5,16 @@ import IconButton from "./IconButton"
 import React from "react"
 
 const Actions = [
-    { label: "EDIT ROOMS", icon: AdjustmentsHorizontalIcon },
+    { label: "ROOMS", icon: AdjustmentsHorizontalIcon },
     { label: "PAUSE",  icon: PauseCircleIcon },
     { label: "DELETE",  icon: TrashIcon },
 ]
 
 function ActionButton({label, Icon}: {label: string, Icon: React.ElementType}) {
     return (
-        <div className="text-xs text-gray-700 flex gap-2 flex-col items-center border border-gray-400 p-3 rounded-md cursor-pointer">
-            <Icon className="size-6" />
-            <span>{label}</span>
+        <div className="text-xs text-gray-700 flex gap-2 flex-col items-center border border-gray-400 p-2 rounded-md cursor-pointer">
+            <Icon className="size-5" />
+            <span className="text-xs">{label}</span>
         </div>
     )
 }
@@ -41,8 +41,8 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
 
 export default function PropertyCard() {
     return (
-        <div className="w-100 rounded-2xl overflow-hidden border border-gray-200 bg-white">
-            <div className="w-full aspect-video overflow-hidden">
+        <div className="w-80 grow rounded-2xl overflow-hidden border border-gray-200 bg-white">
+            <div className="w-full min-[730px]:aspect-video overflow-hidden max-[730px]:h-60">
                 <Image src="/images/product.jpg" width={280} height={280} className="w-full object-cover object-bottom" alt="" />
             </div>
             <div className="p-4 grid gap-4">

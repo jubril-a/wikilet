@@ -2,6 +2,8 @@
 
 import NavLink from "../ui/Navlink"
 import { usePathname } from "next/navigation"
+import { useSidebar } from "../../context/SidebarContext"
+import { cn } from "@/src/lib/utils"
 import { 
     HomeIcon, 
     BookmarkIcon, 
@@ -25,10 +27,11 @@ const bottomLinks = [
 
 export default function Sidebar() {
     const pathname = usePathname()
+    const { isOpen } = useSidebar()
 
     return (
-        <nav className="border-r border-r-gray-200 w-64 bg-white relative">
-            <div className="p-4 fixed w-64">
+        <nav className={cn("sticky h-screen max-[840px]:fixed max-[840px]:hidden bg-white border-r border-r-gray-200", isOpen && "max-[840px]:block")}>
+            <div className="p-4 max-[840px]:w-64 min-[1024px]:w-64">
                 <div>
                     {mainLinks.map(({ label, icon: Icon }) => {
                         const active = pathname.split("/")[2] == label.toLowerCase()
