@@ -38,19 +38,19 @@ export default function Navbar({user}: {user: User}) {
                     <Image src="/images/logo.png" width={128} height={44} alt="wikilet" loading="eager" />
                 </Link>
                 <div className="flex items-center">
-                    <div className={cn(isVisible ? "absolute inset-0 bg-white h-fit grid p-8 pb-20 max-[760px]:border-b max-[760px]:border-gray-200 max-[760px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]" : "max-[760px]:hidden")}>
+                    <div className={cn(isVisible ? "absolute z-5 inset-0 bg-white h-fit grid p-8 pb-20 max-[760px]:border-b max-[760px]:border-gray-200 max-[760px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]" : "max-[760px]:hidden")}>
                         <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                             <XMarkIcon className="size-7 ml-auto mb-8" />
                         </button>
                         <NavLink label="View Listings" url="/listings" handleClick={closeMobileNav} />
-                        <NavLink label="List your Property" url="#" className="hidden max-[420px]:block" handleClick={closeMobileNav} />
+                        <NavLink label="List your Property" url="/host/properties/edit" className="hidden max-[480px]:block" handleClick={closeMobileNav} />
                         {!user && <>
                             <NavLink label="Log In" url="/login" handleClick={closeMobileNav} />
                             <NavLink label="Sign Up" url="/signup" handleClick={closeMobileNav} />
                         </>}
                         <NavLink label="Help" url="/" handleClick={closeMobileNav} />
                     </div>
-                    <Link className="text-sm font-medium hover:text-primary-1 hover:bg-primary-2 text-white bg-primary-1 px-4 py-3 rounded-md ml-8 max-[420px]:hidden" href="/host/properties/edit">List your Property</Link>
+                    <Link className="text-sm font-medium hover:text-primary-1 hover:bg-primary-2 text-white bg-primary-1 px-4 py-3 rounded-md ml-8 max-[480px]:hidden" href="/host/properties/edit">List your Property</Link>
                     <UserBox user={user} />
                     <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                         <Bars3Icon className="size-7 ml-4" />

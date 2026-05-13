@@ -18,7 +18,7 @@ export default function SearchBox() {
 
     return (
         <>
-            <div className="bg-white p-8 relative z-5 rounded-md">
+            <div className="bg-[#efede8] p-8 relative z-5 rounded-md">
                 <div className="grid gap-2 min-[900px]:grid-cols-4 max-w-900">
                     <SearchInput h2="Where?" label={destination} clickHandler={() => (setSeacrhPopup("location"))} />
                     <SearchInput h2="When?" label={checkInDate && checkOutDate ? formatDateRange(checkInDate, checkOutDate) : "Add Dates"} clickHandler={() => (setSeacrhPopup("schedule"))} />
