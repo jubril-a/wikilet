@@ -9,9 +9,8 @@ import {
     BookmarkIcon, 
     HomeModernIcon, 
     BellAlertIcon, 
-    Cog8ToothIcon, 
-    ChatBubbleOvalLeftEllipsisIcon as ChatIcon 
-} from "@heroicons/react/24/solid"
+    UserIcon, 
+    ChatBubbleOvalLeftEllipsisIcon as ChatIcon } from "@heroicons/react/24/solid"
 
 const mainLinks = [
     { label: "Dashboard", icon: HomeIcon },
@@ -21,7 +20,7 @@ const mainLinks = [
 ]
 
 const bottomLinks = [
-    { label: "Settings", icon: Cog8ToothIcon },
+    { label: "Account", icon: UserIcon },
     { label: "Support",  icon: ChatIcon },
 ]
 

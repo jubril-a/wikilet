@@ -11,17 +11,27 @@ import Facilities from "../../../../features/property/components/steps/Facilitie
 import Pricing from "../../../../features/property/components/steps/Pricing"
 import Rules from "../../../../features/property/components/steps/Rules"
 
+import {
+    HomeIcon,
+    MapPinIcon,
+    PhotoIcon,
+    CurrencyDollarIcon,
+    ClipboardDocumentListIcon,
+    DocumentTextIcon,
+    Cog6ToothIcon} from "@heroicons/react/24/solid"
+
+
 const stepsLabel = [
-    {title: "Property Details", form: PropertyDetails},
-    {title: "Location Information", form: LocationInfo},
-    {title: "Photos", form: Media},
-    {title: "Amenities & Facilities", form: Facilities},
-    {title: "Pricing", form: Pricing},
-    {title: "House Rules", form: Rules},
-    {title: "Property Description", form: Description},
+    {title: "Property Details", form: PropertyDetails, Icon: HomeIcon},
+    {title: "Location Information", form: LocationInfo, Icon: MapPinIcon},
+    {title: "Photos", form: Media, Icon: PhotoIcon},
+    {title: "Amenities & Facilities", form: Facilities, Icon: Cog6ToothIcon},
+    {title: "Pricing", form: Pricing, Icon: CurrencyDollarIcon},
+    {title: "House Rules", form: Rules, Icon: ClipboardDocumentListIcon},
+    {title: "Property Description", form: Description, Icon: DocumentTextIcon},
 ]
 
-function Step({heading, Form} : {heading: string, Form: React.ElementType}) {
+function Step({heading, Form, Icon} : {heading: string, Form: React.ElementType, Icon: React.ElementType}) {
 
     const [expanded, setExpanded] = useState(false)
     
@@ -29,7 +39,9 @@ function Step({heading, Form} : {heading: string, Form: React.ElementType}) {
         <div className="w-full border-b border-b-gray-200">
             <div className="group cursor-pointer min-[440px]:px-6 py-4" onClick={() => setExpanded(!expanded)}>
                 <div className="flex gap-4 items-center">
-                    <div className="size-8 bg-red-500"></div>
+                    <div className="size-10 rounded-md bg-gray-200 grid place-content-center">
+                        <Icon className="size-6 text-gray-700" />
+                    </div>
                     <div>
                         <h2 className={cn("group-hover:text-primary-2 font-semibold", expanded && "text-primary-2")}>{heading}</h2>
                         <p className="text-gray-400 text-sm">Click to edit</p>
@@ -56,8 +68,8 @@ export default function EditProperty() {
             </div>
             <div className="min-[440px]:bg-white">
                 {
-                    stepsLabel.map(({title, form}) => (
-                        <Step key={title} heading={title} Form={form} />    
+                    stepsLabel.map(({title, form, Icon}) => (
+                        <Step key={title} heading={title} Form={form} Icon={Icon} />    
                     ))
                 }
             </div>
