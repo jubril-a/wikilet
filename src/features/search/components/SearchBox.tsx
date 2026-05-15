@@ -24,7 +24,7 @@ export default function SearchBox() {
                     <SearchInput h2="When?" label={checkInDate && checkOutDate ? formatDateRange(checkInDate, checkOutDate) : "Add Dates"} clickHandler={() => (setSeacrhPopup("schedule"))} />
                     <SearchInput h2="Who?" label={formatGuests(adults, children, rooms, pets)} clickHandler={() => (setSeacrhPopup("guest"))} />
                     <div className="self-end">
-                        <button onClick={goToListings} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-3 cursor-pointer w-full">Search Properties</button>
+                        <button onClick={goToListings} className="text-sm bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-4 h-12 cursor-pointer w-full">Search Properties</button>
                     </div>
                 </div>
             </div>

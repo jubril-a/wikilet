@@ -153,7 +153,7 @@ export default function ManageAccount({ initialData }: ManageAccountProps) {
             className="px-2 rounded-md bg-gray-200 border border-transparent h-11 w-full text-gray-400 cursor-not-allowed"
             disabled
           >
-            <option className="bg-gray-200 text-gray-700" value="user">Regular user</option>
+            <option className="bg-gray-200 text-gray-700" value="user">{form.role}</option>
           </select>
         </label>
 

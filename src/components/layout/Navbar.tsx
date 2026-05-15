@@ -3,9 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { cn } from "@/src/lib/utils"
 import UserBox from "../../features/account/components/UserBox"
+import useClickOutside from "@/src/hooks/useClickOutside"
 
 type NavLinkProp = {
     label:string,
@@ -17,6 +18,7 @@ type NavLinkProp = {
 type User = {
   firstName: string
   lastName: string
+  role: "agent"
 } | null
 
 
@@ -29,6 +31,8 @@ function NavLink({label, url, className, handleClick}:NavLinkProp) {
 export default function Navbar({user}: {user: User}) {
 
     const [isVisible, setVisibility] = useState(false)
+    const ref = useRef<HTMLDivElement>(null);
+    useClickOutside(ref, () => setVisibility(false));
     const closeMobileNav = () => {setVisibility(false)}
 
     return (
@@ -38,7 +42,7 @@ export default function Navbar({user}: {user: User}) {
                     <Image src="/images/logo.png" width={128} height={44} alt="wikilet" loading="eager" />
                 </Link>
                 <div className="flex items-center">
-                    <div className={cn(isVisible ? "absolute z-5 inset-0 bg-white h-fit grid p-8 pb-20 max-[760px]:border-b max-[760px]:border-gray-200 max-[760px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]" : "max-[760px]:hidden")}>
+                    <div ref={ref} className={cn(isVisible ? "absolute z-5 inset-0 bg-white h-fit grid p-8 pb-20 max-[760px]:border-b max-[760px]:border-gray-200 max-[760px]:shadow-[0px_5px_15px_rgba(0,0,0,0.35)]" : "max-[760px]:hidden")}>
                         <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                             <XMarkIcon className="size-7 ml-auto mb-8" />
                         </button>
@@ -54,8 +58,7 @@ export default function Navbar({user}: {user: User}) {
                     <UserBox user={user} />
                     <button className="min-[760px]:hidden cursor-pointer" onClick={() => {setVisibility(!isVisible)}}>
                         <Bars3Icon className="size-7 ml-4" />
-                    </button>
-                                                     
+                    </button>                           
                 </div>
             </div>
         </nav>

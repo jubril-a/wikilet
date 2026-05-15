@@ -2,6 +2,7 @@ import Hero from "./sections/Hero"
 import Showcase from "./sections/Showcase"
 import PropertyDetails from "./sections/PropertyDetails"
 import CheckAvailability from "./sections/CheckAvailability"
+import GuestReviews from "./sections/GuestReviews"
 
 export default function page() {
     return (
@@ -10,6 +11,7 @@ export default function page() {
             <Showcase />
             <PropertyDetails />
             <CheckAvailability />
+            <GuestReviews />
             <div className="pb-50"></div>
         </>
     )

@@ -11,7 +11,7 @@ export default function Hero2() {
                 </div>
                 <SearchBox />
             </div>
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 bg-black/50" />
         </header>
     )
 }
