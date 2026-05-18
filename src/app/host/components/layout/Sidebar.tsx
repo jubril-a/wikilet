@@ -10,7 +10,7 @@ import {
     BookmarkIcon, 
     HomeModernIcon, 
     BellAlertIcon, 
-    Cog8ToothIcon, 
+    UserIcon, 
     ChatBubbleOvalLeftEllipsisIcon as ChatIcon } from "@heroicons/react/24/solid"
 
 const mainLinks = [
@@ -21,7 +21,7 @@ const mainLinks = [
 ]
 
 const bottomLinks = [
-    { label: "Settings", icon: Cog8ToothIcon },
+    { label: "Account", icon: UserIcon },
     { label: "Support",  icon: ChatIcon },
 ]
 
@@ -31,7 +31,7 @@ export default function Sidebar() {
     const [accountDropdown, setAccountDropdown] = useState(false)
 
     return (
-        <nav className={cn("sticky h-screen max-[840px]:fixed max-[840px]:hidden bg-white border-r border-r-gray-200", isOpen && "max-[840px]:block")}>
+        <nav className={cn("sticky z-50 h-screen max-[840px]:fixed max-[840px]:hidden bg-white border-r border-r-gray-200", isOpen && "max-[840px]:block")}>
             <div className="p-4 max-[840px]:w-64 min-[1024px]:w-64">
                 <div>
                     {mainLinks.map(({ label, icon: Icon }) => {
