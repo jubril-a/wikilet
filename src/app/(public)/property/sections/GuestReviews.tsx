@@ -174,15 +174,15 @@ export default function GuestReviews() {
   const displayed = showAll ? REVIEWS : REVIEWS.slice(0, 3);
 
   return (
-    <section className="bg-[#fafaf8] py-20 px-4">
+    <section className="bg-[#fafaf8] py-20 px-4 border-t border-t-gray-200 mt-7">
       <div className="max-w-5xl mx-auto">
 
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-3">
+          <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight mb-3">
             What our guests say
           </h2>
-          <p className="text-stone-400 text-base max-w-md mx-auto leading-relaxed">
+          <p className="text-stone-600 text-base max-w-md mx-auto leading-relaxed">
             Authentic stories from families and travelers who made Azure Horizon
             Villa their home away from home.
           </p>

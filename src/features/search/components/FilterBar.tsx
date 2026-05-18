@@ -9,7 +9,7 @@ import PriceRangeFilter from "./PriceRangeFilter";
 import useClickOutside from "@/src/hooks/useClickOutside";
 
 const filters = {
-  "Property rating": [
+  "Guests ratings": [
     "2 Stars",
     "3 Stars",
     "4 Stars",

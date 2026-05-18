@@ -1,5 +1,5 @@
 export default function AccountPage() {
     return (
-        <h1 className="">Settings</h1>
+        <h1 className="">Payout Account Details</h1>
     )
 }

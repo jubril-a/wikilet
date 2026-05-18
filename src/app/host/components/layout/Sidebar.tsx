@@ -1,6 +1,7 @@
 'use client'
 
 import NavLink from "../ui/Navlink"
+import { useState } from "react"
 import { usePathname } from "next/navigation"
 import { useSidebar } from "../../context/SidebarContext"
 import { cn } from "@/src/lib/utils"
@@ -9,7 +10,7 @@ import {
     BookmarkIcon, 
     HomeModernIcon, 
     BellAlertIcon, 
-    UserIcon, 
+    Cog8ToothIcon, 
     ChatBubbleOvalLeftEllipsisIcon as ChatIcon } from "@heroicons/react/24/solid"
 
 const mainLinks = [
@@ -20,13 +21,14 @@ const mainLinks = [
 ]
 
 const bottomLinks = [
-    { label: "Account", icon: UserIcon },
+    { label: "Settings", icon: Cog8ToothIcon },
     { label: "Support",  icon: ChatIcon },
 ]
 
 export default function Sidebar() {
     const pathname = usePathname()
     const { isOpen } = useSidebar()
+    const [accountDropdown, setAccountDropdown] = useState(false)
 
     return (
         <nav className={cn("sticky h-screen max-[840px]:fixed max-[840px]:hidden bg-white border-r border-r-gray-200", isOpen && "max-[840px]:block")}>
@@ -43,7 +45,7 @@ export default function Sidebar() {
                     {bottomLinks.map(({ label, icon: Icon }) => {
                         const active = pathname.split("/")[2] == label.toLowerCase()
                         return (
-                            <NavLink key={label} label={label} active={active} Icon={Icon} />
+                            <NavLink key={label} label={label} active={active} Icon={Icon}  />
                         )
                     })}
                 </div>
