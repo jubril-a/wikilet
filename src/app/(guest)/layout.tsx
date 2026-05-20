@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import NavbarWrapper from "../../components/layout/NavbarWrapper";
+import Footer from "@/src/components/layout/footer";
 import PopupScreen from "../../components/layout/PopupScreen";
 
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <PopupScreen />
         <NavbarWrapper />
         {children}
+        {/* <Footer /> */}
       </body>
     </html>
   );

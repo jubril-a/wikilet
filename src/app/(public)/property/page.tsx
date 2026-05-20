@@ -12,7 +12,6 @@ export default function page() {
             <PropertyDetails />
             <CheckAvailability />
             <GuestReviews />
-            <div className="pb-50"></div>
         </>
     )
 }

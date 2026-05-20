@@ -12,7 +12,6 @@ export default function Home() {
       <TopDestinations />
       <BrowseByType />
       <BrowseByLocation />
-      <div className="pb-50"></div>
     </>
   );
 }

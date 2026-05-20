@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import NavbarWrapper from "../../components/layout/NavbarWrapper";
 import PopupScreen from "../../components/layout/PopupScreen";
+import Footer from "@/src/components/layout/footer";
 
 
 export const inter = Inter({
@@ -30,6 +31,7 @@ export default function RootLayout({
         <PopupScreen />
         <NavbarWrapper />
         {children}
+        <Footer />
       </body>
     </html>
   );

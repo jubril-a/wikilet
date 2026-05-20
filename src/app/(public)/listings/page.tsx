@@ -34,7 +34,6 @@ export default async function page({ searchParams }: { searchParams: { [key: str
     <>
       <SubHero heading="Find a Perfect Apartment" />
       <ListingBody />
-      <div className="pb-50"></div>
     </>
   );
 }
