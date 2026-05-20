@@ -10,6 +10,7 @@ import Rules from "./steps/Rules"
 import Terms from "./steps/Terms"
 import { Dispatch, SetStateAction } from "react"
 import { useListingStore } from "@/src/stores/listingStore"
+import { createProperty } from "../actions"
 
 export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: { currentStepIndex: number, setCurrentStepIndex: Dispatch<SetStateAction<number>>}) {
 
@@ -34,9 +35,17 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
         setCurrentStepIndex(i => Math.min(forms.length - 1, i + 1))
     }
 
-    function submit() {
-        const state = useListingStore.getState()
-        //TODO: Submit
+    const handleSubmit = async () => {
+        const formData = useListingStore.getState()
+
+        try {
+            const data = await createProperty(formData)
+            console.log('Success:', data)
+        } catch (err) {
+            if (err instanceof Error) {
+            console.error('Error:', err.message)
+            }
+        }
     }
 
 
@@ -50,7 +59,7 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
             <div className="flex justify-between items-center gap-4 mt-10 max-w-150">
                 {currentStepIndex !== 0 && <button type="button" onClick={prev} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Prev Step</button>}
                 {currentStepIndex !== forms.length - 1 && <button type="button" onClick={next} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Next Step</button>}
-                {currentStepIndex == forms.length - 1 && <button type="button" onClick={submit} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Submit</button>}
+                {currentStepIndex == forms.length - 1 && <button type="button" onClick={handleSubmit} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Submit</button>}
             </div>
         </form>
     )

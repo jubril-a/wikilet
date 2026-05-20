@@ -3,7 +3,7 @@
 import { useRef, useState, useTransition } from "react"
 import { Upload } from "lucide-react"
 import Image from "next/image"
-// import { updateAccount } from "../../../features/account/actions"
+import { updateProfile } from "@/src/features/account/actions"
 
 type Role = "user" | "agent"
 
@@ -108,24 +108,25 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
 
   const handleSave = async () => {
     setError(null)
-
-    const formData = new FormData()
-    formData.set("firstName", form.firstName)
-    formData.set("lastName", form.lastName)
-    formData.set("agencyName", form.agencyName)
-    formData.set("licenceNumber", form.licenceNumber)
-    formData.set("phoneNumber", form.phoneNumber)
-    formData.set("yearsOfExperience", form.yearsOfExperience)
-    formData.set("bio", form.bio)
-    formData.set("specializations", JSON.stringify(form.specializations))
-    formData.set("officeAddress", form.officeAddress)
-    formData.set("city", form.city)
-    formData.set("country", form.country)
-    if (form.avatar) formData.set("avatar", form.avatar)
+    
+    const formData = {
+      firstName: form.firstName,
+      lastName:  form.lastName,
+      profileImage: form.avatar,
+      agencyName: form.agencyName,
+      licenseNumber: form.licenceNumber,
+      phone: form.phoneNumber,
+      bio: form.bio,
+      yearsExperience: form.yearsOfExperience,
+      specializations: form.specializations,
+      officeAddress: form.officeAddress,
+      city: form.country,
+      country: form.country
+    }
 
     startTransition(async () => {
       try {
-        // await updateAccount(formData)
+        await updateProfile(formData)
         setSaved(form)
         setToastVisible(true)
         setTimeout(() => setToastVisible(false), 2500)
