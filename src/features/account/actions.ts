@@ -1,23 +1,9 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { profileDataType } from "@/src/types/account";
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
-
-type profileDataType = {
-  firstName: string,
-  lastName:  string,
-  profileImage: string | null,
-  agencyName: string,
-  licenseNumber: string,
-  phone: string,
-  bio: string,
-  yearsExperience: string,
-  specializations: string[],
-  officeAddress: string,
-  city: string,
-  country: string
-}
 
 export async function updateAccount(formData: FormData) {
   const token = (await cookies()).get("accessToken")?.value

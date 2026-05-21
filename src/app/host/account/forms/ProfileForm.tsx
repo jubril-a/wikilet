@@ -4,42 +4,24 @@ import { useRef, useState, useTransition } from "react"
 import { Upload } from "lucide-react"
 import Image from "next/image"
 import { updateProfile } from "@/src/features/account/actions"
-
-type Role = "user" | "agent"
-
-interface AgentProfileForm {
-  firstName: string
-  lastName: string
-  email: string
-  role: Role
-  avatar: string | null
-  // Agent-specific fields
-  agencyName: string
-  licenceNumber: string
-  phoneNumber: string
-  yearsOfExperience: string
-  bio: string
-  specializations: string[]
-  officeAddress: string
-  city: string
-  country: string
-}
+import { Role } from "@/src/types/account"
+import { profileDataType } from "@/src/types/account"
 
 interface AgentProfileProps {
-  initialData?: AgentProfileForm
-  // onSave: (data: Omit<AgentProfileForm, "email" | "role">) => Promise<void>
+  initialData?: profileDataType
+  // onSave: (data: Omit<profileDataType, "email" | "role">) => Promise<void>
 }
 
-const DEFAULT_FORM: AgentProfileForm = {
+const DEFAULT_FORM: profileDataType = {
   firstName: "",
   lastName: "",
   email: "",
   role: "agent",
-  avatar: null,
+  profileImage: null,
   agencyName: "",
-  licenceNumber: "",
-  phoneNumber: "",
-  yearsOfExperience: "",
+  licenseNumber: "",
+  phone: "",
+  yearsExperience: "",
   bio: "",
   specializations: [],
   officeAddress: "",
@@ -61,8 +43,8 @@ const textareaClass =
   "px-2 py-2.5 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 w-full resize-none"
 
 export default function ProfileForm({ initialData }: AgentProfileProps) {
-  const [form, setForm] = useState<AgentProfileForm>(initialData ?? DEFAULT_FORM)
-  const [saved, setSaved] = useState<AgentProfileForm>(initialData ?? DEFAULT_FORM)
+  const [form, setForm] = useState<profileDataType>(initialData ?? DEFAULT_FORM)
+  const [saved, setSaved] = useState<profileDataType>(initialData ?? DEFAULT_FORM)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
@@ -72,11 +54,11 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
   const isDirty =
     form.firstName !== saved.firstName ||
     form.lastName !== saved.lastName ||
-    form.avatar !== saved.avatar ||
+    form.profileImage !== saved.profileImage ||
     form.agencyName !== saved.agencyName ||
-    form.licenceNumber !== saved.licenceNumber ||
-    form.phoneNumber !== saved.phoneNumber ||
-    form.yearsOfExperience !== saved.yearsOfExperience ||
+    form.licenseNumber !== saved.licenseNumber ||
+    form.phone !== saved.phone ||
+    form.yearsExperience !== saved.yearsExperience ||
     form.bio !== saved.bio ||
     JSON.stringify(form.specializations) !== JSON.stringify(saved.specializations) ||
     form.officeAddress !== saved.officeAddress ||
@@ -93,7 +75,7 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
     if (!file) return
     const reader = new FileReader()
     reader.onload = (ev) =>
-      setForm((f) => ({ ...f, avatar: ev.target?.result as string }))
+      setForm((f) => ({ ...f, profileImage: ev.target?.result as string }))
     reader.readAsDataURL(file)
   }
 
@@ -112,12 +94,14 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
     const formData = {
       firstName: form.firstName,
       lastName:  form.lastName,
-      profileImage: form.avatar,
+      email: "",
+      role: "agent" as Role,
+      profileImage: form.profileImage,
       agencyName: form.agencyName,
-      licenseNumber: form.licenceNumber,
-      phone: form.phoneNumber,
+      licenseNumber: form.licenseNumber,
+      phone: form.phone,
       bio: form.bio,
-      yearsExperience: form.yearsOfExperience,
+      yearsExperience: form.yearsExperience,
       specializations: form.specializations,
       officeAddress: form.officeAddress,
       city: form.country,
@@ -147,11 +131,11 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
             className="relative w-14 h-14 rounded-full bg-amber-700 text-white flex items-center justify-center text-base font-medium shrink-0 overflow-hidden group focus:outline-none"
             aria-label="Change profile photo"
           >
-            {form.avatar ? (
+            {form.profileImage ? (
               <Image
                 width={56}
                 height={56}
-                src={form.avatar}
+                src={form.profileImage}
                 alt="Avatar"
                 className="w-full h-full object-cover"
               />
@@ -231,7 +215,7 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
           <span className="block mb-2 text-gray-700">Phone number</span>
           <input
             type="tel"
-            value={form.phoneNumber}
+            value={form.phone}
             onChange={(e) => setForm((f) => ({ ...f, phoneNumber: e.target.value }))}
             className={inputClass}
           />
@@ -264,7 +248,7 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
           <span className="block mb-2 text-gray-700">Licence number</span>
           <input
             type="text"
-            value={form.licenceNumber}
+            value={form.licenseNumber}
             onChange={(e) => setForm((f) => ({ ...f, licenceNumber: e.target.value }))}
             className={inputClass}
           />
@@ -277,7 +261,7 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
             type="number"
             min={0}
             max={60}
-            value={form.yearsOfExperience}
+            value={form.yearsExperience}
             onChange={(e) => setForm((f) => ({ ...f, yearsOfExperience: e.target.value }))}
             className={inputClass}
           />

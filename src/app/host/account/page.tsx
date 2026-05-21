@@ -1,58 +1,45 @@
-"use client"
+import AccountSettings from "./AccountSettings"
+import { getProfile } from "@/src/features/account/actions"
+import { getMe } from "@/src/lib/auth"
+import { profileDataType } from "@/src/types/account"
 
-import { useState } from "react"
-import ProfileForm from "./forms/ProfileForm"
-import AccountForm from "./forms/AccountForm"
+export default async function AgentSettingsPage() {
+  const profile = await getProfile()
+  const user = await getMe()
 
-type Tab = "profile" | "account"
-
-const TABS: { id: Tab; label: string; title: string; description: string }[] = [
-  {
-    id: "profile",
-    label: "Profile Details",
-    title: "Agent Profile",
-    description: "Manage your professional profile and how clients see you.",
-  },
-  {
-    id: "account",
-    label: "Account Details",
-    title: "Payout Account Details",
-    description: "Manage the bank account where your earnings will be sent.",
-  },
-]
-
-export default function AgentSettingsPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("profile")
-
-  const current = TABS.find((t) => t.id === activeTab)!
+  const profileData: profileDataType = profile ? {
+    firstName: user.firstName ?? '',
+    lastName: user.lastName ?? '',
+    email: user.email ?? '',
+    role: 'agent',
+    agencyName: profile.agencyName ?? '',
+    licenseNumber: profile.licenseNumber ?? '',
+    phone: profile.phone ?? '',
+    bio: profile.bio ?? '',
+    profileImage: user.profileImage ?? null,
+    yearsExperience: profile.yearsExperience ?? '',
+    specializations: profile.specializations ?? [],
+    officeAddress: profile.officeAddress ?? '',
+    city: profile.city ?? '',
+    country: profile.country ?? '',
+  } : {
+    firstName: user.firstName ?? '',
+    lastName: user.lastName ?? '',
+    email: user.email ?? '',
+    role: 'agent',
+    agencyName: '',
+    licenseNumber: '',
+    phone: '',
+    bio: '',
+    profileImage: null,
+    yearsExperience: '',
+    specializations: [],
+    officeAddress: '',
+    city: '',
+    country: '',
+  }
 
   return (
-    <div className="">
-        <div className="pb-8 border-b border-b-gray-200 flex justify-between">
-            <div>
-                <h1 className="text-2xl font-bold text-primary-1 mb-1">{current.title}</h1>
-                <p className="text-gray-500 text-sm">{current.description}</p>
-            </div>
-            <div className="flex border border-gray-200 rounded-md overflow-hidden shrink-0">
-                {TABS.map((tab) => (
-                    <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`px-4 py-2 text-sm font-medium transition-colors first:border-r first:border-gray-200 ${
-                        activeTab === tab.id
-                        ? "bg-white text-gray-900"
-                        : "bg-gray-100 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                    }`}
-                    >
-                    {tab.label}
-                    </button>
-                ))}
-            </div>
-        </div>
-        <div className="flex min-[440px]:bg-white">
-            {activeTab === "profile" && <ProfileForm />}
-            {activeTab === "account" && <AccountForm />}
-        </div>
-    </div>
-  )
+    <AccountSettings profileData={profileData} />
+    )
 }
