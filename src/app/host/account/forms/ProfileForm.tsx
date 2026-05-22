@@ -3,26 +3,34 @@
 import { useRef, useState, useTransition } from "react"
 import { Upload } from "lucide-react"
 import Image from "next/image"
-import { updateProfile } from "@/src/features/account/actions"
-import { Role } from "@/src/types/account"
+import { updateProfile, updateAccount } from "@/src/features/account/actions"
 import { profileDataType } from "@/src/types/account"
 
-interface AgentProfileProps {
-  initialData?: profileDataType
-  // onSave: (data: Omit<profileDataType, "email" | "role">) => Promise<void>
+interface PersonalData {
+  firstName: string
+  lastName: string
+  email: string
+  profileImage: string | null
 }
 
-const DEFAULT_FORM: profileDataType = {
+interface AgentProfileProps {
+  initialData?: PersonalData & profileDataType,
+  hasProfile: boolean
+}
+
+const DEFAULT_PERSONAL: PersonalData = {
   firstName: "",
   lastName: "",
   email: "",
-  role: "agent",
   profileImage: null,
+}
+
+const DEFAULT_PROFILE: profileDataType = {
   agencyName: "",
   licenseNumber: "",
   phone: "",
-  yearsExperience: "",
   bio: "",
+  yearsExperience: "",
   specializations: [],
   officeAddress: "",
   city: "",
@@ -37,85 +45,113 @@ const SPECIALIZATIONS = [
 ]
 
 const inputClass =
-  "px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full"
+  "px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent text-gray-700 focus:text-gray-900 focus:border-gray-300 focus:outline-0 h-11 w-full"
 
 const textareaClass =
-  "px-2 py-2.5 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 w-full resize-none"
+  "px-2 py-2.5 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent text-gray-700 focus:text-gray-900 focus:border-gray-300 focus:outline-0 w-full resize-none"
 
-export default function ProfileForm({ initialData }: AgentProfileProps) {
-  const [form, setForm] = useState<profileDataType>(initialData ?? DEFAULT_FORM)
-  const [saved, setSaved] = useState<profileDataType>(initialData ?? DEFAULT_FORM)
-  const [error, setError] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
+export default function ProfileForm({ initialData, hasProfile }: AgentProfileProps) {
+  const [personal, setPersonal] = useState<PersonalData>({
+    firstName: initialData?.firstName ?? "",
+    lastName: initialData?.lastName ?? "",
+    email: initialData?.email ?? "",
+    profileImage: initialData?.profileImage ?? null,
+  })
+  const [savedPersonal, setSavedPersonal] = useState<PersonalData>(personal)
+
+  const [profile, setProfile] = useState<profileDataType>({
+    agencyName: initialData?.agencyName ?? "",
+    licenseNumber: initialData?.licenseNumber ?? "",
+    phone: initialData?.phone ?? "",
+    bio: initialData?.bio ?? "",
+    yearsExperience: initialData?.yearsExperience ?? "",
+    specializations: initialData?.specializations ?? [],
+    officeAddress: initialData?.officeAddress ?? "",
+    city: initialData?.city ?? "",
+    country: initialData?.country ?? "",
+  })
+  const [savedProfile, setSavedProfile] = useState<profileDataType>(profile)
+
+  const [personalError, setPersonalError] = useState<string | null>(null)
+  const [profileError, setProfileError] = useState<string | null>(null)
   const [toastVisible, setToastVisible] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
-  const [isPending, startTransition] = useTransition()
+  const [isPersonalPending, startPersonalTransition] = useTransition()
+  const [isProfilePending, startProfileTransition] = useTransition()
 
-  const isDirty =
-    form.firstName !== saved.firstName ||
-    form.lastName !== saved.lastName ||
-    form.profileImage !== saved.profileImage ||
-    form.agencyName !== saved.agencyName ||
-    form.licenseNumber !== saved.licenseNumber ||
-    form.phone !== saved.phone ||
-    form.yearsExperience !== saved.yearsExperience ||
-    form.bio !== saved.bio ||
-    JSON.stringify(form.specializations) !== JSON.stringify(saved.specializations) ||
-    form.officeAddress !== saved.officeAddress ||
-    form.city !== saved.city ||
-    form.country !== saved.country
+  const isPersonalDirty =
+    personal.firstName !== savedPersonal.firstName ||
+    personal.lastName !== savedPersonal.lastName ||
+    personal.profileImage !== savedPersonal.profileImage
+
+  const isProfileDirty =
+    profile.agencyName !== savedProfile.agencyName ||
+    profile.licenseNumber !== savedProfile.licenseNumber ||
+    profile.phone !== savedProfile.phone ||
+    profile.yearsExperience !== savedProfile.yearsExperience ||
+    profile.bio !== savedProfile.bio ||
+    JSON.stringify(profile.specializations) !== JSON.stringify(savedProfile.specializations) ||
+    profile.officeAddress !== savedProfile.officeAddress ||
+    profile.city !== savedProfile.city ||
+    profile.country !== savedProfile.country
 
   const displayName =
-    [form.firstName, form.lastName].filter(Boolean).join(" ") || "Your name"
+    [personal.firstName, personal.lastName].filter(Boolean).join(" ") || "Your name"
   const initials =
-    [form.firstName[0], form.lastName[0]].filter(Boolean).join("").toUpperCase() || "U"
+    [personal.firstName[0], personal.lastName[0]].filter(Boolean).join("").toUpperCase() || "U"
 
   const handleAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     const reader = new FileReader()
     reader.onload = (ev) =>
-      setForm((f) => ({ ...f, profileImage: ev.target?.result as string }))
+      setPersonal((p) => ({ ...p, profileImage: ev.target?.result as string }))
     reader.readAsDataURL(file)
   }
 
   const handleSpecializationToggle = (spec: string) => {
-    setForm((f) => ({
-      ...f,
-      specializations: f.specializations.includes(spec)
-        ? f.specializations.filter((s) => s !== spec)
-        : [...f.specializations, spec],
+    setProfile((p) => ({
+      ...p,
+      specializations: p.specializations.includes(spec)
+        ? p.specializations.filter((s) => s !== spec)
+        : [...p.specializations, spec],
     }))
   }
 
-  const handleSave = async () => {
-    setError(null)
-    
-    const formData = {
-      firstName: form.firstName,
-      lastName:  form.lastName,
-      email: "",
-      role: "agent" as Role,
-      profileImage: form.profileImage,
-      agencyName: form.agencyName,
-      licenseNumber: form.licenseNumber,
-      phone: form.phone,
-      bio: form.bio,
-      yearsExperience: form.yearsExperience,
-      specializations: form.specializations,
-      officeAddress: form.officeAddress,
-      city: form.country,
-      country: form.country
-    }
+  const showToast = () => {
+    setToastVisible(true)
+    setTimeout(() => setToastVisible(false), 2500)
+  }
 
-    startTransition(async () => {
+  const handleSavePersonal = () => {
+    setPersonalError(null)
+
+    const formData = new FormData()
+    formData.append("firstName", personal.firstName)
+    formData.append("lastName", personal.lastName)
+    if (personal.profileImage) formData.append("avatar", personal.profileImage)
+
+    startPersonalTransition(async () => {
       try {
-        await updateProfile(formData)
-        setSaved(form)
-        setToastVisible(true)
-        setTimeout(() => setToastVisible(false), 2500)
+        await updateAccount(formData)
+        setSavedPersonal(personal)
+        showToast()
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong")
+        setPersonalError(err instanceof Error ? err.message : "Something went wrong")
+      }
+    })
+  }
+
+  const handleSaveProfile = () => {
+    setProfileError(null)
+
+    startProfileTransition(async () => {
+      try {
+        await updateProfile(profile, hasProfile)
+        setSavedProfile(profile)
+        showToast()
+      } catch (err) {
+        setProfileError(err instanceof Error ? err.message : "Something went wrong")
       }
     })
   }
@@ -131,11 +167,11 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
             className="relative w-14 h-14 rounded-full bg-amber-700 text-white flex items-center justify-center text-base font-medium shrink-0 overflow-hidden group focus:outline-none"
             aria-label="Change profile photo"
           >
-            {form.profileImage ? (
+            {personal.profileImage ? (
               <Image
                 width={56}
                 height={56}
-                src={form.profileImage}
+                src={personal.profileImage}
                 alt="Avatar"
                 className="w-full h-full object-cover"
               />
@@ -177,50 +213,53 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 
-        {/* First name */}
         <label>
-          <span className="block mb-2 text-gray-700">First name</span>
+          <span className="block mb-2 text-gray-700 text-sm">First name</span>
           <input
             type="text"
-            value={form.firstName}
-            onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
+            value={personal.firstName}
+            onChange={(e) => setPersonal((p) => ({ ...p, firstName: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Last name */}
         <label>
-          <span className="block mb-2 text-gray-700">Last name</span>
+          <span className="block mb-2 text-gray-700 text-sm">Last name</span>
           <input
             type="text"
-            value={form.lastName}
-            onChange={(e) => setForm((f) => ({ ...f, lastName: e.target.value }))}
+            value={personal.lastName}
+            onChange={(e) => setPersonal((p) => ({ ...p, lastName: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Email — disabled, full width */}
         <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Email</span>
+          <span className="block mb-2 text-gray-700 text-sm">Email</span>
           <input
             type="email"
-            value={form.email}
+            value={personal.email}
             disabled
             className="px-2 rounded-md bg-gray-200 border border-transparent h-11 w-full text-gray-400 cursor-not-allowed"
           />
         </label>
 
-        {/* Phone number */}
-        <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Phone number</span>
-          <input
-            type="tel"
-            value={form.phone}
-            onChange={(e) => setForm((f) => ({ ...f, phoneNumber: e.target.value }))}
-            className={inputClass}
-          />
-        </label>
+      </div>
 
+      {personalError && (
+        <p className="mb-4 text-sm text-red-500">{personalError}</p>
+      )}
+      <div className="flex justify-end mb-6">
+        <button
+          onClick={handleSavePersonal}
+          disabled={!isPersonalDirty || isPersonalPending}
+          className={`text-sm font-medium px-5 py-2.5 rounded-md transition-all ${
+            isPersonalDirty && !isPersonalPending
+              ? "bg-primary-1 text-white hover:bg-primary-1/90 cursor-pointer"
+              : "bg-gray-200 text-gray-400 cursor-not-allowed"
+          }`}
+        >
+          {isPersonalPending ? "Saving..." : "Save personal info"}
+        </button>
       </div>
 
       <div className="border-b border-gray-200 mb-6" />
@@ -232,59 +271,54 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 
-        {/* Agency name */}
         <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Agency name</span>
+          <span className="block mb-2 text-gray-700 text-sm">Agency name</span>
           <input
             type="text"
-            value={form.agencyName}
-            onChange={(e) => setForm((f) => ({ ...f, agencyName: e.target.value }))}
+            value={profile.agencyName}
+            onChange={(e) => setProfile((p) => ({ ...p, agencyName: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Licence number */}
         <label>
-          <span className="block mb-2 text-gray-700">Licence number</span>
+          <span className="block mb-2 text-gray-700 text-sm">Licence number</span>
           <input
             type="text"
-            value={form.licenseNumber}
-            onChange={(e) => setForm((f) => ({ ...f, licenceNumber: e.target.value }))}
+            value={profile.licenseNumber}
+            onChange={(e) => setProfile((p) => ({ ...p, licenseNumber: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Years of experience */}
         <label>
-          <span className="block mb-2 text-gray-700">Years of experience</span>
+          <span className="block mb-2 text-gray-700 text-sm">Years of experience</span>
           <input
             type="number"
             min={0}
             max={60}
-            value={form.yearsExperience}
-            onChange={(e) => setForm((f) => ({ ...f, yearsOfExperience: e.target.value }))}
+            value={profile.yearsExperience}
+            onChange={(e) => setProfile((p) => ({ ...p, yearsExperience: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Bio */}
         <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Bio</span>
+          <span className="block mb-2 text-gray-700 text-sm">Bio</span>
           <textarea
             rows={4}
-            value={form.bio}
-            onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
+            value={profile.bio}
+            onChange={(e) => setProfile((p) => ({ ...p, bio: e.target.value }))}
             placeholder="Tell clients a little about yourself…"
             className={textareaClass}
           />
         </label>
 
-        {/* Specializations */}
         <div className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Specializations</span>
+          <span className="block mb-2 text-gray-700 text-sm">Specializations</span>
           <div className="flex flex-wrap gap-2">
             {SPECIALIZATIONS.map((spec) => {
-              const selected = form.specializations.includes(spec)
+              const selected = profile.specializations.includes(spec)
               return (
                 <button
                   key={spec}
@@ -307,69 +341,73 @@ export default function ProfileForm({ initialData }: AgentProfileProps) {
 
       <div className="border-b border-gray-200 mb-6" />
 
-      {/* ── Office Location ── */}
+      {/* ── Contact Details ── */}
       <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">
-        Office Location
+        Contact Details
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-        {/* Office address */}
         <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Office address</span>
+          <span className="block mb-2 text-gray-700 text-sm">Phone number</span>
           <input
-            type="text"
-            value={form.officeAddress}
-            onChange={(e) => setForm((f) => ({ ...f, officeAddress: e.target.value }))}
+            type="tel"
+            value={profile.phone}
+            onChange={(e) => setProfile((p) => ({ ...p, phone: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* City */}
-        <label>
-          <span className="block mb-2 text-gray-700">City</span>
+        <label className="sm:col-span-2">
+          <span className="block mb-2 text-gray-700 text-sm">Office address</span>
           <input
             type="text"
-            value={form.city}
-            onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
+            value={profile.officeAddress}
+            onChange={(e) => setProfile((p) => ({ ...p, officeAddress: e.target.value }))}
             className={inputClass}
           />
         </label>
 
-        {/* Country */}
         <label>
-          <span className="block mb-2 text-gray-700">Country</span>
+          <span className="block mb-2 text-gray-700 text-sm">City</span>
           <input
             type="text"
-            value={form.country}
-            onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
+            value={profile.city}
+            onChange={(e) => setProfile((p) => ({ ...p, city: e.target.value }))}
+            className={inputClass}
+          />
+        </label>
+
+        <label>
+          <span className="block mb-2 text-gray-700 text-sm">Country</span>
+          <input
+            type="text"
+            value={profile.country}
+            onChange={(e) => setProfile((p) => ({ ...p, country: e.target.value }))}
             className={inputClass}
           />
         </label>
 
       </div>
 
-      {/* Error */}
-      {error && (
-        <p className="mt-4 text-sm text-red-500">{error}</p>
+      {profileError && (
+        <p className="mt-4 text-sm text-red-500">{profileError}</p>
       )}
 
-      {/* Save button */}
       <div className="flex justify-end mt-6">
         <button
-          onClick={handleSave}
-          disabled={!isDirty || isPending}
+          onClick={handleSaveProfile}
+          disabled={!isProfileDirty || isProfilePending}
           className={`text-sm font-medium px-5 py-2.5 rounded-md transition-all ${
-            isDirty && !isPending
+            isProfileDirty && !isProfilePending
               ? "bg-primary-1 text-white hover:bg-primary-1/90 cursor-pointer"
               : "bg-gray-200 text-gray-400 cursor-not-allowed"
           }`}
         >
-          {isPending ? "Saving..." : "Save changes"}
+          {isProfilePending ? "Saving..." : "Save changes"}
         </button>
       </div>
 
-      {/* Toast */}
       {toastVisible && (
         <div className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-md shadow whitespace-nowrap">
           Changes saved

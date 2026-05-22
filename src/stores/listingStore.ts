@@ -14,6 +14,26 @@ interface Location {
 
 type Images = [string, string, string, string, string]
 
+export type CreateListingPayload = {
+  title: string;
+  description: string;
+  propertyType: PropertyType;
+  price: number;
+  currency: Currency;
+  city: string;
+  country: string;
+  location: Location;
+  images: Images;
+  amenities: string[];
+  maxCapacity: number;
+  spaceType: SpaceType;
+  power: Power;
+  cleaningFee?: number;
+  minStay: number;
+  maxStay: number;
+  allow: Allow[];
+}
+
 interface ListingState {
   title: string;
   description: string;
@@ -42,6 +62,7 @@ interface ListingActions {
   toggleAmenity: (amenity: string) => void;
   setAmenities: (amenities: string[]) => void;
   toggleAllow: (rule: Allow) => void;
+  getPayload: () => CreateListingPayload;
   reset: () => void;
 }
 
@@ -69,7 +90,7 @@ const initialState: ListingState = {
   allow: [],
 };
 
-export const useListingStore = create<ListingState & ListingActions>((set) => ({
+export const useListingStore = create<ListingState & ListingActions>((set, get) => ({
   ...initialState,
 
   setField: (key, value) => set({ [key]: value } as Pick<ListingState, typeof key>),
@@ -108,6 +129,29 @@ export const useListingStore = create<ListingState & ListingActions>((set) => ({
         ? state.allow.filter((a) => a !== rule)
         : [...state.allow, rule],
     })),
+
+  getPayload: () => {
+    const state = get()
+    return {
+      title: state.title,
+      description: state.description,
+      propertyType: state.propertyType as PropertyType,
+      price: state.price,
+      currency: state.currency,
+      city: state.city,
+      country: state.country,
+      location: state.location,
+      images: state.images,
+      amenities: state.amenities,
+      maxCapacity: state.maxCapacity,
+      spaceType: state.spaceType as SpaceType,
+      power: state.power as Power,
+      cleaningFee: state.cleaningFee,
+      minStay: state.minStay,
+      maxStay: state.maxStay,
+      allow: state.allow,
+    }
+  },
 
   reset: () => set(initialState),
 }));

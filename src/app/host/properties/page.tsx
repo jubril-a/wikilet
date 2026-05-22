@@ -1,8 +1,14 @@
 import PropertyCard from "../components/ui/PropertyCard"
 import IconButton from "../components/ui/IconButton"
 import { PlusIcon } from "@heroicons/react/24/solid"
+import { getAgentProperties } from "@/src/features/property/actions"
+import { PropertyCardType } from "@/src/types/property"
 
-export default function page() {
+export default async function page() {
+
+    const { data } = await getAgentProperties()
+    const properties = data.properties
+
     return (
         <div className="max-w-306 mx-auto">
             <div className="sm:flex sm:justify-between sm:gap-2 sm:items-center mb-8">
@@ -14,12 +20,9 @@ export default function page() {
             </div>
 
             <div className="flex gap-3 flex-wrap">
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
+                {Object.values(properties).map((property) => (
+                    <PropertyCard key={property._id} _id={property._id} title={property.title} base64Image={property.images[0]} />
+                ))}
             </div>
         </div>
     )

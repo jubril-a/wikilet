@@ -46,7 +46,7 @@ export default function PhotoInput({ name, value, onChange }: Props) {
                     height={40}
                     src={base64}
                     alt="preview"
-                    className="rounded-md object-cover shrink-0"
+                    className="w-10 h-10 rounded-md object-cover shrink-0"
                 />
             ) : (
                 <div className="w-10 h-10 rounded-md bg-red-50 border border-red-100 flex items-center justify-center shrink-0">

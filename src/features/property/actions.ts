@@ -22,3 +22,39 @@ export async function createProperty(formData: any) {
 
   return data
 }
+
+export async function getAgentProperties() {
+  const token = (await cookies()).get('accessToken')?.value
+
+  const res = await fetch(`${apiUrl}/agents/properties`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}
+
+export async function deleteProperty(id: string) {
+  const token = (await cookies()).get('accessToken')?.value
+
+  const res = await fetch(`${apiUrl}/agents/properties/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}

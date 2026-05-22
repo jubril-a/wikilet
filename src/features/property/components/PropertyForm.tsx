@@ -8,11 +8,17 @@ import Facilities from "./steps/Facilities"
 import Pricing from "./steps/Pricing"
 import Rules from "./steps/Rules"
 import Terms from "./steps/Terms"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useListingStore } from "@/src/stores/listingStore"
 import { createProperty } from "../actions"
+import { useRouter } from "next/navigation"
+import { cn } from "@/src/lib/utils"
 
 export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: { currentStepIndex: number, setCurrentStepIndex: Dispatch<SetStateAction<number>>}) {
+
+    const getPayload = useListingStore((state) => state.getPayload)
+    const [submitting, setSubmitting] = useState(false)
+    const router = useRouter()
 
     const forms = [
         PropertyDetails,
@@ -36,15 +42,15 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
     }
 
     const handleSubmit = async () => {
-        const formData = useListingStore.getState()
+
+        setSubmitting(true)
+        const formData = getPayload()
 
         try {
             const data = await createProperty(formData)
-            console.log('Success:', data)
+            router.push("/host/properties")
         } catch (err) {
-            if (err instanceof Error) {
-            console.error('Error:', err.message)
-            }
+            setSubmitting(false)
         }
     }
 
@@ -59,7 +65,7 @@ export default function PropertyForm({ currentStepIndex, setCurrentStepIndex }: 
             <div className="flex justify-between items-center gap-4 mt-10 max-w-150">
                 {currentStepIndex !== 0 && <button type="button" onClick={prev} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Prev Step</button>}
                 {currentStepIndex !== forms.length - 1 && <button type="button" onClick={next} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Next Step</button>}
-                {currentStepIndex == forms.length - 1 && <button type="button" onClick={handleSubmit} className="bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full">Submit</button>}
+                {currentStepIndex == forms.length - 1 && <button type="button" onClick={handleSubmit} className={cn("bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 mb-6 py-3 cursor-pointer w-full", submitting && "bg-gray-200 text-gray-400 cursor-not-allowed")}>{submitting ? "Submitting..." : "Submit"}</button>}
             </div>
         </form>
     )

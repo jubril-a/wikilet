@@ -44,16 +44,17 @@ export async function getProfile() {
 
   if (!res.ok) return null
 
-  const data = await res.json()
-  return data
+  const { data } = await res.json()
+  return data.profile
 }
 
-// UPDATE HOST PROFILE
-export async function updateProfile(formData: profileDataType) {
+// CREATE/UPDATE HOST PROFILE
+export async function updateProfile(formData: profileDataType, hasProfile: boolean) {
  const token = (await cookies()).get('accessToken')?.value
+ const apiEndpoint = hasProfile ? '/agents/profile/me' : '/agents/profile'
 
-  const res = await fetch(`${apiUrl}/agents/profile`, {
-    method: 'POST',
+  const res = await fetch(`${apiUrl}${apiEndpoint}`, {
+    method: hasProfile ? 'PUT' : 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
