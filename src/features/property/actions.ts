@@ -58,3 +58,21 @@ export async function deleteProperty(id: string) {
 
   return data
 }
+
+export async function getAllProperties() {
+  const token = (await cookies()).get('accessToken')?.value
+
+  const res = await fetch(`${apiUrl}/properties`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}

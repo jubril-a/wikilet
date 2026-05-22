@@ -12,5 +12,9 @@
 export type PropertyCardType = {
   _id: string,
   title: string,
-  base64Image: string
+  location: string,
+  propertyType: string,
+  base64Image: string,
+  description: string,
+  price: string,
 }
