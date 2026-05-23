@@ -21,7 +21,7 @@ export default function SearchBox() {
             <div className="bg-[#efede8] p-8 relative z-5 rounded-md">
                 <div className="grid gap-2 min-[900px]:grid-cols-4 max-w-900">
                     <SearchInput h2="Where?" label={destination} clickHandler={() => (setSeacrhPopup("location"))} />
-                    <SearchInput h2="When?" label={checkInDate && checkOutDate ? formatDateRange(checkInDate, checkOutDate) : "Add Dates"} clickHandler={() => (setSeacrhPopup("schedule"))} />
+                    <SearchInput h2="When?" label={formatDateRange(checkInDate, checkOutDate)} clickHandler={() => (setSeacrhPopup("schedule"))} />
                     <SearchInput h2="Who?" label={formatGuests(adults, children, rooms, pets)} clickHandler={() => (setSeacrhPopup("guest"))} />
                     <div className="self-end">
                         <button onClick={goToListings} className="text-sm bg-primary-1 rounded-md hover:bg-primary-2 text-white hover:text-primary-1 py-4 h-12 cursor-pointer w-full">Search Properties</button>

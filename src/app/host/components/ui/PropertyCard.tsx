@@ -38,7 +38,7 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
     )
 }
 
-export default function PropertyCard({_id, title, base64Image}: PropertyCardType) {
+export default function PropertyCard({_id, title, image, location}: PropertyCardType) {
 
     const router = useRouter()
 
@@ -68,12 +68,12 @@ export default function PropertyCard({_id, title, base64Image}: PropertyCardType
     return (
         <div className="w-80 max-w-100 grow rounded-2xl overflow-hidden border border-gray-200 bg-white">
             <div className="w-full min-[730px]:aspect-video overflow-hidden max-[730px]:h-60">
-                <Image src={base64Image} width={280} height={280} className="w-full object-cover object-bottom" alt="" />
+                <Image src={image} width={280} height={280} className="w-full object-cover object-bottom" alt="" />
             </div>
             <div className="p-4 grid gap-4">
                 <div>
                     <h2 className="font-semibold text-xl mb-.5">{title}</h2>
-                    <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>Downtown, Manhattan</span></p>
+                    <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>{location}</span></p>
                 </div>
                 <IconButton label="Edit Property Details" url="properties/edit" Icon={PlusIcon} />
                 <div className="grid grid-cols-3 gap-2">

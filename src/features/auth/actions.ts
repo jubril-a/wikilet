@@ -49,7 +49,28 @@ export async function signup(prevState: unknown, formData: FormData) {
     })
   }
 
-  redirect("/confirm-email")
+  redirect("/check-email")
+}
+
+export async function verifyEmail(token: string) {
+  try {
+    const res = await fetch(
+      `${apiUrl}/auth/verify-email/${token}`,
+      {
+        method: 'GET',
+      }
+    );
+ 
+    const data = await res.json();
+ 
+    if (!res.ok) {
+      return { success: false, message: data.message ?? 'Verification failed.' };
+    }
+ 
+    return { success: true, message: data.message ?? 'Email verified successfully.' };
+  } catch {
+    return { success: false, message: 'Something went wrong. Please try again.' };
+  }
 }
 
 export async function login(prevState: unknown, formData: FormData) {

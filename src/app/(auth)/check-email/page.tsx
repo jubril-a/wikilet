@@ -27,10 +27,12 @@ export default function page() {
             <rect x="48" y="50" width="24" height="4" rx="2" fill="#E0E7FF"/>
             <rect x="48" y="60" width="16" height="4" rx="2" fill="#E0E7FF"/>
 
-            {/* Check badge */}
-            <circle cx="106" cy="128" r="20" fill="white" stroke="#E0E7FF" strokeWidth="1.5"/>
-            <circle cx="106" cy="128" r="13" fill="#6366F1"/>
-            <path d="M99 128 L104 133 L113 123" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* Progress badge */}
+            <circle cx="106" cy="128" r="20" fill="white" stroke="#FEF3C7" strokeWidth="1.5"/>
+            <circle cx="106" cy="128" r="13" fill="#F59E0B"/>
+            <circle cx="100" cy="128" r="2" fill="white"/>
+            <circle cx="106" cy="128" r="2" fill="white"/>
+            <circle cx="112" cy="128" r="2" fill="white"/>
 
             {/* Decorative dots */}
             <circle cx="18" cy="132" r="3" fill="#C7D2FE" opacity="0.6"/>

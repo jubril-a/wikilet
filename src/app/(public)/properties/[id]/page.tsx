@@ -18,7 +18,7 @@ export default async function PropertyPage({ params }: { params: { id: string } 
       <Hero title={property.title} city={property.city} country={property.country} bgImage={property.images[0]} />
       <Showcase images={property.images} />
       <PropertyDetails type={property.propertyType} description={property.description} city={property.city} country={property.country} host={property.agentId.agencyName} amenities={property.amenities} />
-      <CheckAvailability />
+      <CheckAvailability propertyId={id} />
       <GuestReviews />
     </>
   );

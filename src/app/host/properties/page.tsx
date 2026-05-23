@@ -20,8 +20,8 @@ export default async function page() {
             </div>
 
             <div className="flex gap-3 flex-wrap">
-                {Object.values(properties).map((property) => (
-                    <PropertyCard key={property._id} _id={property._id} title={property.title} base64Image={property.images[0]} />
+                {Object.values(properties).map((property: any) => (
+                    <PropertyCard key={property._id} _id={property._id} title={property.title} image={property.images[0]} location={`${property.city}, ${property.country}`} />
                 ))}
             </div>
         </div>

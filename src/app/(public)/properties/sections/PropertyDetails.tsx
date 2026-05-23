@@ -80,7 +80,7 @@ export default function PropertyDetails({ type, city, country, description, host
     return (
         <Section>
             <SubsectionWrapper className="pt-0">
-                <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight  mb-2">{type} in {city}, {country}</h2>
+                <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight  mb-2 capitalize">{type} in {city}, {country}</h2>
                 <p className="text-lg">Hosted by <a href="" className="font-semibold hover:text-primary-2">{host}</a></p>
             </SubsectionWrapper>
 
