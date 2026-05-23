@@ -14,7 +14,7 @@ export type PropertyCardType = {
   title: string,
   location: string,
   propertyType: string,
-  base64Image: string,
+  image: string,
   description: string,
   price: string,
 }

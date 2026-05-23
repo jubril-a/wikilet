@@ -17,18 +17,10 @@ export default function ListingBody({properties}: {properties: PropertyCardType[
             <FilterBar state={filterState} />
             <div className="grow">
               <ListingsHead state={filterState} />
-              <main className="grid gap-3 min-[580px]:gap-4 min-[480px]:grid-cols-2">
+              <main className="grid gap-3 min-[580px]:gap-x-4 min-[580px]:gap-y-6 min-[480px]:grid-cols-2">
                 {properties.map((property) => (
-                  <DetailedPropertyCard property={property} />
+                  <DetailedPropertyCard key={property._id} property={property} />
                 ))}
-                {/* <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard />
-                <DetailedPropertyCard /> */}
               </main>
             </div>
         </div>

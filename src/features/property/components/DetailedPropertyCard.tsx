@@ -15,20 +15,20 @@ export default function DetailedPropertyCard({property}: {property: PropertyCard
             <span onClick={() => {SetIsSaved(!isSaved)}} className="absolute z-5 top-2 right-2 p-2 rounded-full cursor-pointer bg-white">
                 {isSaved ? <HeartIcon className="size-6 text-red-600" /> : <HeartIconOutline className="size-6" />}
             </span>
-            <a href="/property" className="group mb-2">
+            <a href={`/properties/${property._id}`} className="group mb-2">
                 <div className="relative aspect-4/3 overflow-hidden rounded-md">
-                    <Image className="w-full object-cover object-center" src="/images/product.jpg" width={280} height={280} alt="" />
+                    <Image className="w-full h-full object-cover object-center" src={property.image} width={280} height={280} alt="" />
                 </div>
                 <div className="p-2">
-                    <p className="text-sm text-gray-700">Vacation Rental</p>
+                    <p className="text-sm text-gray-700 capitalize">{property.propertyType}</p>
 
                     <div className="my-2">
                         <h3 className="font-bold text-primary-1 group-hover:text-blue-600">{property.title}</h3>
-                        <p className="text-sm text-gray-700 mb-2">Amalfi Coast, Italy</p>
-                        <p className="text-sm text-gray-700 line-clamp-2">This property features essential amenities including Wi-Fi, air conditioning, and power backup for uninterrupted comfort. Guests can enjoy on-site parking, 24/7 security, and access to a fully equipped kitchen with a refrigerator.</p>
+                        <p className="text-sm text-gray-700 mb-2">{property.location}</p>
+                        <p className="text-sm text-gray-700 line-clamp-2">{property.description}</p>
                     </div>
 
-                    <p className="text-gray-500 text-sm"><span className="text-gray-800 font-black text-lg">₦45,000</span>/night</p>
+                    <p className="text-gray-500 text-sm"><span className="text-gray-800 font-black text-lg">{property.price}</span>/night</p>
                 </div>
             </a>
         </div>

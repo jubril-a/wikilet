@@ -48,7 +48,7 @@ const Amenities = {
         label: "Swimmming Pool",
         img: "/icons/swimming.png"
     },
-    gym: {
+    'finess-center': {
         label: "Fitness Center",
         img: "/icons/dumbbell.png"
     },
@@ -62,7 +62,7 @@ const Amenities = {
     },
 }
 
-type AmenitiesType = "wifi" | "ac" | "tv" | "power" | "parking" | "kitchen" | "fridge" | "microwave" | "laundry" | "security" | "pool" | "gym" | "lift" | "workspace"
+type AmenitiesType = "wifi" | "ac" | "tv" | "power" | "parking" | "kitchen" | "fridge" | "microwave" | "laundry" | "security" | "pool" | "lift" | "workspace" | "finess-center"
 
 function Amenity({item}: {item: AmenitiesType}) {
     return (
@@ -73,26 +73,26 @@ function Amenity({item}: {item: AmenitiesType}) {
     )
 }
 
+type detailsType = {type: string, city: string, country: string, description: string, host: string, amenities: AmenitiesType[]}
 
-export default function PropertyDetails() {
-    
+export default function PropertyDetails({ type, city, country, description, host, amenities }: detailsType) {
+
     return (
         <Section>
             <SubsectionWrapper className="pt-0">
-                <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight  mb-2">Private Room in Amalfi Coast, Italy</h2>
-                <p className="text-lg">Hosted by <a href="" className="font-semibold hover:text-primary-2">ABC Homes</a></p>
+                <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight  mb-2">{type} in {city}, {country}</h2>
+                <p className="text-lg">Hosted by <a href="" className="font-semibold hover:text-primary-2">{host}</a></p>
             </SubsectionWrapper>
 
             <SubsectionWrapper>
                 <h3 className="text-xl md:text-2xl font-bold text-stone-900 tracking-tight mb-3">About this place</h3>
-                <p className="mb-2 text-stone-600 tracking-tight">Enjoy a stylish and comfortable stay in the heart of Lekki. This fully furnished 2-bedroom apartment offers a perfect blend of modern design and convenience, ideal for short stays, business trips, or weekend getaways.</p>
-                <p className="mb-2 text-stone-600 tracking-tight">The apartment features spacious rooms, a fully equipped kitchen, high-speed Wi-Fi, and 24/7 power supply. Located in a secure estate, you&apos;re just minutes away from top restaurants, malls, and the beach.</p>
+                <p className="mb-2 text-stone-600 tracking-tight">{description}</p>
             </SubsectionWrapper>
 
             <SubsectionWrapper>
                 <h3 className="text-xl md:text-2xl font-bold text-stone-900 tracking-tight mb-4">What this place offers</h3>
                 <div className="grid min-[480px]:grid-cols-2 max-w-180 gap-4 my-6">
-                    {(Object.keys(Amenities) as AmenitiesType[]).map((item) => <Amenity key={item} item={item} />)}
+                    {amenities.map((item) => <Amenity key={item} item={item} />)}
                 </div>
             </SubsectionWrapper>     
         </Section>

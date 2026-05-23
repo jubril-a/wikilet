@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { PropertyCardType } from '@/src/types/property';
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
@@ -75,4 +76,19 @@ export async function getAllProperties() {
   if (!res.ok) throw new Error(data.message || 'Something went wrong')
 
   return data
+}
+
+export async function getProperty(id: string) {
+  try {
+    const res = await fetch(`${apiUrl}/properties/${id}`);
+
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`Failed to fetch property: ${res.statusText}`);
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('[getProperty]', error);
+    return null;
+  }
 }
