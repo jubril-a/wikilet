@@ -17,18 +17,42 @@ type Props = {
 
 export default function OrderBox({title, city, country, imageUrl, price}: Props) {
     const { setSeacrhPopup } = usePopupStore()
-
     const store = useSearchStore();
-    const initial = useRef<typeof store | null>(null);
+    const initial = useRef<typeof store | null>(store);
+    const [hydrated, setHydrated] = useState(false);
     const [hasChanged, setHasChanged] = useState<boolean | null>(null);
+    const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
+
+    //TODO: complete this to check if property is available
+    // useEffect(() => {
+    //     const check = async () => {
+    //         const res = await fetch('/availability');
+    //         const data = await res.json();
+    //         setIsAvailable(data.Availability); 
+    //     };
+
+    //     check();
+    // }, []);
 
     useEffect(() => {
-        // snapshot after hydration on first run
-        if (!initial.current) {
-        initial.current = { ...store };
-        setHasChanged(false);
-        return;
+        const unsub = useSearchStore.persist.onFinishHydration(() => {
+        setHydrated(true);
+        });
+
+        if (useSearchStore.persist.hasHydrated()) {
+            setHydrated(true);
         }
+
+        return () => unsub();
+    }, []);
+
+    useEffect(() => {
+        if (!hydrated) return;
+        initial.current = { ...store };
+    }, [hydrated]);
+
+    useEffect(() => {
+        if (!hydrated || !initial.current) return;
 
         const changed =
         store.checkInDate?.toISOString() !== initial.current.checkInDate?.toISOString() ||
@@ -39,13 +63,11 @@ export default function OrderBox({title, city, country, imageUrl, price}: Props)
         store.pets !== initial.current.pets;
 
         setHasChanged(changed);
-    }, [store.checkInDate, store.checkOutDate, store.adults, store.children, store.rooms, store.pets]);
+    }, [store.checkInDate, store.checkOutDate, store.adults, store.children, store.rooms, store.pets, hydrated]);
 
-    // still hydrating — render nothing to avoid flicker
-    if (hasChanged === null) return null;
+    if (!hydrated) return null;
 
     const { checkInDate, checkOutDate, adults, children, rooms, pets } = store
-
 
     const [breakdown, total] = calculateStayPrice(checkInDate, checkOutDate, rooms, price);
 
@@ -81,14 +103,13 @@ export default function OrderBox({title, city, country, imageUrl, price}: Props)
             <div className="min-[440px]:flex min-[440px]:gap-3 min-[440px]:justify-between min-[440px]:items-center border-b border-b-gray-300 px-4 py-6 mx-auto">
                 <div>
                     <h3 className="tracking-tight font-semibold">Price</h3>
-                    <span className="text-sm text-gray-700">{breakdown}</span>
+                    {!hasChanged && <span className="text-sm text-gray-700">{breakdown}</span>}
                 </div>
-                <span className="block text-gray-800 font-extrabold text-lg max-[440px]:mt-2">₦{total}</span>
+                {!hasChanged && <span className="block text-gray-800 font-extrabold text-lg max-[440px]:mt-2">₦{total}</span>}
             </div>
 
             {!hasChanged && <button className="block mx-auto mt-6 text-sm bg-primary-1 px-8 py-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1">Proceed to Payment</button>}
-             {!hasChanged && <button>Search</button>}
-            {hasChanged && <button>Update Search</button>}
+            {hasChanged && <button onClick={() => window.location.reload()} className="block mx-auto mt-6 text-sm bg-primary-1 px-8 py-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1">Check Price & Availability</button>}
         </>
     )
 }

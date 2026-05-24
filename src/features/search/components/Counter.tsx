@@ -6,12 +6,18 @@ type CounterProps = {
   type: "Adults" | "Children" | "Rooms";
   min?: number;
   max?: number;
-  defaultValue?: number;
 };
 
-export default function Counter({ type, min = 0, max = 10, defaultValue = 0 }: CounterProps) {
+export default function Counter({ type, min = 0, max = 10 }: CounterProps) {
+  const { adults, children, rooms, setAdults, setChildren, setRooms } = useSearchStore();
+
+  let defaultValue = 0
+  if (type === "Adults") {defaultValue = adults}
+  else if (type === "Children") {defaultValue = children}
+  else if (type === "Rooms") {defaultValue = rooms};
+
   const [count, setCount] = useState(defaultValue);
-  const { setAdults, setChildren, setRooms } = useSearchStore();
+
 
   function handleChange(newCount: number) {
     setCount(newCount);
