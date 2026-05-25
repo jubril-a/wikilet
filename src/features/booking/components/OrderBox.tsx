@@ -105,7 +105,7 @@ export default function OrderBox({title, city, country, imageUrl, price}: Props)
                     <h3 className="tracking-tight font-semibold">Price</h3>
                     {!hasChanged && <span className="text-sm text-gray-700">{breakdown}</span>}
                 </div>
-                {!hasChanged && <span className="block text-gray-800 font-extrabold text-lg max-[440px]:mt-2">₦{total}</span>}
+                {!hasChanged && <span className="block text-gray-800 font-extrabold text-lg max-[440px]:mt-2">₦{total.toLocaleString('en-US')}</span>}
             </div>
 
             {!hasChanged && <button className="block mx-auto mt-6 text-sm bg-primary-1 px-8 py-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1">Proceed to Payment</button>}

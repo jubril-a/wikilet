@@ -1,12 +1,15 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { PropertyCardType } from '@/src/types/property';
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
 export async function createProperty(formData: any) {
   const token = (await cookies()).get('accessToken')?.value
+
+  console.log("================================")
+  console.log(JSON.stringify(formData))
+  console.log("================================")
 
   const res = await fetch(`${apiUrl}/agents/properties`, {
     method: 'POST',
@@ -61,16 +64,7 @@ export async function deleteProperty(id: string) {
 }
 
 export async function getAllProperties() {
-  const token = (await cookies()).get('accessToken')?.value
-
-  const res = await fetch(`${apiUrl}/properties`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
-  })
-
+  const res = await fetch(`${apiUrl}/properties`)
   const data = await res.json()
 
   if (!res.ok) throw new Error(data.message || 'Something went wrong')

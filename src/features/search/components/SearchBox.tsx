@@ -13,7 +13,7 @@ export default function SearchBox() {
     const { setSeacrhPopup } = usePopupStore()
 
     function goToListings() {
-        router.push(`/listings?location=${destination}&checkin=${checkInDate?.toISOString().split("T")[0]}&checkout=${checkOutDate?.toISOString().split("T")[0]}&guest=${adults + children}&rooms=${rooms}&source=home`)
+        router.push(`/listings?location=${destination}&checkin=${checkInDate?.toISOString().split("T")[0]}&checkout=${checkOutDate?.toISOString().split("T")[0]}&guest=${adults + children}&rooms=${rooms}`)
     }
 
     return (

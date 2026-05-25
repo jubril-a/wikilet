@@ -4,22 +4,26 @@ import { ArrowUpRightIcon } from "@heroicons/react/20/solid"
 
 const PropertyTypes = [
     {
-        type: "Apartments",
+        type: "apartment",
+        label: "Apartments",
         image: "/images/apartment-1.jpg",
         count: 246
     },
     {
-        type: "Hotels",
+        type: "hotel",
+        label: "Hotels",
         image: "/images/sheraton.jpg",
         count: 246
     },
     {
-        type: "Homes",
+        type: "home",
+        label: "Homes",
         image: "/images/home.jpg",
         count: 246
     },
     {
-        type: "Vacation Rentals",
+        type: "vacation",
+        label: "Vacation Rentals",
         image: "/images/vacation-2.jpg",
         count: 246
     },
@@ -27,19 +31,20 @@ const PropertyTypes = [
 
 type CardProps = {
     type: string,
+    label: string,
     image: string,
-    count: number
+    count: number,
 }
 
-function Card({type, image, count} : CardProps) {
+function Card({type, label, image, count} : CardProps) {
     return (
-        <a href="" className="group">
+        <a href={`/listings?propertyType=${type}`} className="group">
             <div className="relative rounded-md overflow-hidden aspect-5/4 mb-1">
                 <Image className="transition-transform duration-500 group-hover:scale-115 w-full object-cover object-center" src={image} fill alt="" />
             </div>
             <div className="flex items-center justify-between p-2">
                 <div>
-                    <h3 className="font-semibold text-[16px] text-primary-1">{type}</h3>
+                    <h3 className="font-semibold text-[16px] text-primary-1">{label}</h3>
                     <p className="text-gray-600 text-sm">{count} Available</p>
                 </div>
                 <span className="p-2 rounded-full bg-primary-1 group-hover:bg-primary-2">
@@ -58,7 +63,7 @@ export default function BrowseByType() {
                 <p className="text-gray-800 max-w-160">Choose from a variety of property types available near you.</p>
             </div>
             <div className="grid min-[480px]:grid-cols-2 min-[920px]:grid-cols-4 gap-x-3 gap-y-6">
-               {PropertyTypes.map((property) => (<Card key={property.type} type={property.type} image={property.image} count={property.count} />))}
+               {PropertyTypes.map((property) => (<Card key={property.type} type={property.type} label={property.label} image={property.image} count={property.count} />))}
             </div>
         </Section>
     )
