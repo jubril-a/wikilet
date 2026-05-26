@@ -7,7 +7,7 @@ import { usePopupStore } from "@/src/stores/popupsStore"
 export default function LocationPopup() {
 
     const { setDestination } = useSearchStore()
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
 
     function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -15,7 +15,7 @@ export default function LocationPopup() {
 
         if (input.value) {
             setDestination(input.value)
-            setSeacrhPopup("none")
+            setPopup("none")
         }   
     }
 

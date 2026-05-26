@@ -5,10 +5,10 @@ import Link from "next/link"
 import { MapPinIcon, AdjustmentsHorizontalIcon, PauseCircleIcon, TrashIcon, StarIcon, WalletIcon, ArrowPathIcon, ChevronRightIcon, PlusIcon } from "@heroicons/react/24/outline"
 import IconButton from "./IconButton"
 import React from "react"
-import { PropertyCardType } from "@/src/types/property"
 import { deleteProperty } from "@/src/features/property/actions"
 import { useRouter } from "next/navigation"
 import { cn } from "@/src/lib/utils"
+import { usePopupStore } from "@/src/stores/popupsStore"
 
 function ActionButton({label, Icon, style = "text-gray-700", onClick}: {label: string, Icon: React.ElementType, style?: string, onClick?: () => void}) {
     return (
@@ -38,7 +38,9 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
     )
 }
 
-export default function PropertyCard({_id, title, image, location}: PropertyCardType) {
+export default function PropertyCard({_id, title, image, location}: {_id: string, title: string, image: string, location: string}) {
+
+    const { setPopup } = usePopupStore()
 
     const router = useRouter()
 
@@ -55,12 +57,12 @@ export default function PropertyCard({_id, title, image, location}: PropertyCard
     //     return 
     // }
 
-    // function editRooms() {
-    //     return 
-    // }
+    function editRooms() {
+        setPopup("rooms")
+    }
 
     const Actions = [
-        { label: "ROOMS", icon: AdjustmentsHorizontalIcon, style: "hover:text-white hover:bg-blue-600"},
+        { label: "ROOMS", icon: AdjustmentsHorizontalIcon, style: "hover:text-white hover:bg-blue-600", onClick: editRooms},
         { label: "PAUSE",  icon: PauseCircleIcon, style: "hover:text-white hover:bg-blue-600"},
         { label: "DELETE",  icon: TrashIcon, onClick: handleDelete, style: "text-red-600 border-red-600 hover:text-white hover:bg-red-600"},
     ]

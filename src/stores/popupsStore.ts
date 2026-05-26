@@ -2,21 +2,20 @@ import { create } from "zustand";
 import { popupType } from "../app/types";
 
 type PopupState = {
-    seacrhPopup: popupType,
+    popup: popupType,
 
     // actions
-    setSeacrhPopup: (value: popupType) => void;
-   
+    setPopup: (value: popupType) => void;
 };
 
 export const usePopupStore = create<PopupState>((set) => ({
     
-    seacrhPopup: "none",
+    popup: "none",
 
     // actions
-    setSeacrhPopup: (value) => set({ seacrhPopup: value }),
+    setPopup: (value) => set({ popup: value }),
     reset: () =>
     set({
-        seacrhPopup: "none",
+        popup: "none",
     }),
 }));

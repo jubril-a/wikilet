@@ -4,11 +4,11 @@ import { usePopupStore } from "@/src/stores/popupsStore"
 
 export default function GuestPopup() {
 
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
 
     function validateGuests() {
         // TODO: validate selected dates
-        setSeacrhPopup("none")
+        setPopup("none")
     }
 
     return (

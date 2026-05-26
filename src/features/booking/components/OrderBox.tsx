@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function OrderBox({title, city, country, imageUrl, price}: Props) {
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
     const store = useSearchStore();
     const initial = useRef<typeof store | null>(store);
     const [hydrated, setHydrated] = useState(false);
@@ -89,7 +89,7 @@ export default function OrderBox({title, city, country, imageUrl, price}: Props)
                     <h3 className="tracking-tight font-semibold">Dates</h3>
                     <span className="text-sm text-gray-700">{formatDateRange(checkInDate, checkOutDate)}</span>
                 </div>
-                <button onClick={() => {setSeacrhPopup("schedule")}} className="text-sm bg-primary-1 p-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1 max-[440px]:mt-2">Change Dates</button>
+                <button onClick={() => {setPopup("schedule")}} className="text-sm bg-primary-1 p-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1 max-[440px]:mt-2">Change Dates</button>
             </div>
 
             <div className="min-[440px]:flex min-[440px]:gap-3 min-[440px]:justify-between min-[440px]:items-center border-b border-b-gray-300 px-4 py-6 mx-auto">
@@ -97,7 +97,7 @@ export default function OrderBox({title, city, country, imageUrl, price}: Props)
                     <h3 className="tracking-tight font-semibold">Guests</h3>
                     <span className="text-sm text-gray-700">{formatGuests(adults, children, rooms, pets)}</span>
                 </div>
-                <button onClick={() => {setSeacrhPopup("guest")}} className="text-sm bg-primary-1 p-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1 max-[440px]:mt-2">Edit Guest Details</button>
+                <button onClick={() => {setPopup("guest")}} className="text-sm bg-primary-1 p-3 rounded-md text-white cursor-pointer hover:bg-primary-2 hover:text-primary-1 max-[440px]:mt-2">Edit Guest Details</button>
             </div>
 
             <div className="min-[440px]:flex min-[440px]:gap-3 min-[440px]:justify-between min-[440px]:items-center border-b border-b-gray-300 px-4 py-6 mx-auto">

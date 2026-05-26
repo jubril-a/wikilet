@@ -31,7 +31,7 @@ interface BookingCardProps {
 
 export default function BookingCard({ booking, onCancel, onReview, onRebook, onViewReceipt }: BookingCardProps) {
   const { status } = booking
-  const { setSeacrhPopup } = usePopupStore()
+  const { setPopup } = usePopupStore()
 
   return (
     <div className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 transition-colors">
@@ -121,7 +121,7 @@ export default function BookingCard({ booking, onCancel, onReview, onRebook, onV
 
         {status === "completed" && (
           <button
-            onClick={() => {setSeacrhPopup("review"); onReview(booking.id)}}
+            onClick={() => {setPopup("review"); onReview(booking.id)}}
             className="text-[12px] border border-gray-200 rounded-lg px-2.5 py-1.5 text-gray-500 hover:border-gray-300 hover:text-gray-800 transition-colors whitespace-nowrap bg-white"
           >
             Leave a review

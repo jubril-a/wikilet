@@ -8,7 +8,7 @@ import { SubsectionWrapper } from "../components/SubsectionWrapper"
 import Link from "next/link"
 
 export default function CheckAvailability({propertyId}: {propertyId: string}) {
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
     const { checkInDate, checkOutDate, adults, children, rooms, pets } = useSearchStore()
 
     return (   
@@ -19,8 +19,8 @@ export default function CheckAvailability({propertyId}: {propertyId: string}) {
                     <p className="text-base max-w-100 mb-5 text-stone-600 tracking-tight">Pick your dates and guests to see pricing and availability in real time.</p>
                 </div>
                 <div className="bg-black w-full max-w-84 shrink-0 px-8 py-12 text-white grid gap-5 rounded-3xl relative z-5">
-                    <SearchInput h2="When?" label={formatDateRange(checkInDate, checkOutDate)} clickHandler={() => (setSeacrhPopup("schedule"))} />
-                    <SearchInput h2="Who?" label={formatGuests(adults, children, rooms, pets)} clickHandler={() => (setSeacrhPopup("guest"))} />
+                    <SearchInput h2="When?" label={formatDateRange(checkInDate, checkOutDate)} clickHandler={() => (setPopup("schedule"))} />
+                    <SearchInput h2="Who?" label={formatGuests(adults, children, rooms, pets)} clickHandler={() => (setPopup("guest"))} />
                     <Link href={`/book/${propertyId}`} className="bg-primary-2 hover:opacity-90 text-primary-1 rounded-md font-semibold text-sm text-center py-3">Check</Link>
                 </div>
             </div>

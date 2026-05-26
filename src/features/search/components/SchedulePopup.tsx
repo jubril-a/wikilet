@@ -17,11 +17,11 @@ function ScheduleBox({label, description} : {label: "Arrival" | "Departure", des
 export default function SchedulePopup() {
 
     const { checkInDate, checkOutDate } = useSearchStore();
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
 
     function validateSchedule() {
         // TODO: validate selected dates
-        setSeacrhPopup("none")
+        setPopup("none")
         
     }
 

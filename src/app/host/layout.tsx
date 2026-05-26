@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Sidebar from "./components/layout/Sidebar";
 import TopbarWrapper from "./components/layout/TopbarWrapper";
+import PopupScreen from "../../components/layout/PopupScreen";
 import "../globals.css";
 import { SidebarProvider } from "./context/SidebarContext";
 
@@ -28,6 +29,7 @@ export default function HostLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <body>
+        <PopupScreen />
         <SidebarProvider>
           <div className="flex flex-col h-screen">
             <TopbarWrapper />

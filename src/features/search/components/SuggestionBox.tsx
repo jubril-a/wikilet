@@ -9,11 +9,11 @@ type Props = {
 export default function SuggestionBox({label, decription} : Props) {
 
     const { setDestination } = useSearchStore()
-    const { setSeacrhPopup } = usePopupStore()
+    const { setPopup } = usePopupStore()
 
     function handleClick(label: string) {
         setDestination(label)
-        setSeacrhPopup("none")
+        setPopup("none")
     }
 
     return (
