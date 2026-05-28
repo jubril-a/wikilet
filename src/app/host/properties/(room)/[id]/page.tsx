@@ -1,6 +1,6 @@
 import { getProperty } from '@/src/features/property/actions';
 import { notFound } from 'next/navigation';
-import RoomMgmt from '../../components/layout/RoomMgmt';
+import RoomMgmt from '../../../components/layout/RoomMgmt';
 
 export default async function PropertyPage({ params }: { params: { id: string } }) {
   const id = (await params).id

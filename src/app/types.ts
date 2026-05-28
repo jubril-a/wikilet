@@ -1,6 +1,6 @@
 export type popupType = "location" | "schedule" | "guest" | "review" | "none"
 
-export type FilterKey = "Property rating" | "Property type" | "Guest Preferences" | "Facilities";
+export type FilterKey = "Guests ratings" | "Locations" | "Property type" | "Guest Preferences" | "Facilities";
 
 export type propertyType = {
     title: string,

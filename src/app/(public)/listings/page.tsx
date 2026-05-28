@@ -4,8 +4,12 @@ import { getAllProperties } from "@/src/features/property/actions";
 import { searchProperties } from "@/src/features/search/action";
 
 export type queryType = {
-    propertyType: string,
-    location: string,
+  propertyType: string,
+  location: string,
+  city: string,
+  rating: string,
+  preferences: string,
+  facilities: string,
 }
  
 export default async function page({ searchParams }: { searchParams: queryType }) {
@@ -13,7 +17,7 @@ export default async function page({ searchParams }: { searchParams: queryType }
   const parameters = await searchParams
   let response
 
-  const paramKeys: (keyof queryType)[] = ['propertyType', 'location'];
+  const paramKeys: (keyof queryType)[] = ['propertyType', 'location', 'city', 'rating', 'preferences', 'facilities'];
   const hasParams = paramKeys.some(key => parameters[key] !== undefined && parameters[key] !== '');
 
   if (hasParams) {

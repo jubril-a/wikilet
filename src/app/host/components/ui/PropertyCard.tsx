@@ -40,8 +40,6 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
 
 export default function PropertyCard({_id, title, image, location}: {_id: string, title: string, image: string, location: string}) {
 
-    const { setPopup } = usePopupStore()
-
     const router = useRouter()
 
     async function handleDelete() {
@@ -58,7 +56,7 @@ export default function PropertyCard({_id, title, image, location}: {_id: string
     // }
 
     function editRooms() {
-        setPopup("rooms")
+        router.push(`/host/properties/${_id}`)
     }
 
     const Actions = [
