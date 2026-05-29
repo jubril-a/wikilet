@@ -1,15 +1,28 @@
 "use client"
 
 import AddRoomForm from "./AddRoomForm"
+import { deleteRoom } from "@/src/features/property/actions"
+import { useRouter } from "next/navigation"
 
-const rooms = [
-  { id: 1, type: "single", capacity: "5", price: "5000", guests: "3 Guests" },
-  { id: 2, type: "single", capacity: "4", price: "4000", guests: "2 Guests" },
-  { id: 3, type: "single", capacity: "4", price: "30000", guests: "4 Guests" },
-  { id: 4, type: "single", capacity: "2", price: "70000", guests: "1 Guests" },
-]
+type RoomType = {
+  id: string,
+  type: string,
+  capacity: string,
+  price: number
+}
 
-export default function RoomMgmt({ propertyId }: { propertyId: string}) {
+export default function RoomMgmt({ propertyId, rooms }: { propertyId: string, rooms: RoomType[]}) {
+
+  const router = useRouter()
+
+  async function handleDelete(id: string) {
+      try {
+          await deleteRoom(id)
+          router.refresh()
+      } catch (err) {
+          if (err instanceof Error) console.error(err.message)
+      }
+  }
 
   return (
     <div className="bg-gray-50 py-6">
@@ -44,7 +57,7 @@ export default function RoomMgmt({ propertyId }: { propertyId: string}) {
             <span className="text-sm text-gray-700">{b.price}</span>
 
              {/* Delete */}
-            <span className="text-sm text-red-700">Delete</span>
+            <span className="text-sm text-red-700 hover:text-amber-700 cursor-pointer" onClick={() => handleDelete(b.id)}>Delete</span>
           </div>
         ))}
       </div>

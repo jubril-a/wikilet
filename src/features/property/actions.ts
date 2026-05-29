@@ -69,6 +69,26 @@ export async function getAllProperties() {
   return data
 }
 
+export async function getPropertyRooms(id: string) {
+  const res = await fetch(`${apiUrl}/properties/${id}/rooms`)
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}
+
+export async function deleteRoom(id: string) {
+  const res = await fetchWithAuth(`${apiUrl}/rooms/${id}`, {
+     method: 'DELETE',
+  })
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}
+
 export async function getProperty(id: string) {
   try {
     const res = await fetch(`${apiUrl}/properties/${id}`);

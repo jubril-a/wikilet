@@ -1,17 +1,18 @@
 'use client';
 import { createRoom } from '@/src/features/property/actions';
 import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AddRoomForm({ propertyId }: { propertyId: string}) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    console.log(Object.fromEntries(formData))
     startTransition(async () => {
       const result = await createRoom(formData, propertyId);
-      console.log(result.message);
+      router.refresh()
     });
   };
 
@@ -30,7 +31,6 @@ export default function AddRoomForm({ propertyId }: { propertyId: string}) {
               <option value="single">Single</option>
               <option value="double">Double</option>
               <option value="suite">Suite</option>
-              <option value="penthouse">Penthouse</option>
             </select>
           </div>
 

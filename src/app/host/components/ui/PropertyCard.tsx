@@ -8,7 +8,6 @@ import React from "react"
 import { deleteProperty } from "@/src/features/property/actions"
 import { useRouter } from "next/navigation"
 import { cn } from "@/src/lib/utils"
-import { usePopupStore } from "@/src/stores/popupsStore"
 
 function ActionButton({label, Icon, style = "text-gray-700", onClick}: {label: string, Icon: React.ElementType, style?: string, onClick?: () => void}) {
     return (
