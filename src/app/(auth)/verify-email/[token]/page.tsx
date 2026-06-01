@@ -6,7 +6,8 @@ export default async function VerifyEmailPage({
 }: {
   params: { token: string };
 }) {
-  const result = await verifyEmail(params.token);
+  const parameters = await params
+  const result = await verifyEmail(parameters.token);
 
   return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-40">
@@ -65,7 +66,7 @@ export default async function VerifyEmailPage({
 
         {/* Button */}
           <Link
-            href="#"
+            href={result.success ? "/login" : "/"}
             className="text-sm font-medium text-white hover:text-primary-1 bg-primary-1 hover:bg-primary-2 px-6 py-2.5 rounded-md text-center transition-colors"
           >
             {result.success ? "Continue to Login" : "Resend Verification Mail"}

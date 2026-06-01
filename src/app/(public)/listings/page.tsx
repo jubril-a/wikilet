@@ -10,6 +10,8 @@ export type queryType = {
   rating: string,
   preferences: string,
   facilities: string,
+  price_min: string,
+  price_max: string,
 }
  
 export default async function page({ searchParams }: { searchParams: queryType }) {
@@ -17,7 +19,7 @@ export default async function page({ searchParams }: { searchParams: queryType }
   const parameters = await searchParams
   let response
 
-  const paramKeys: (keyof queryType)[] = ['propertyType', 'location', 'city', 'rating', 'preferences', 'facilities'];
+  const paramKeys: (keyof queryType)[] = ['propertyType', 'location', 'city', 'rating', 'preferences', 'facilities', 'price_min', 'price_max'];
   const hasParams = paramKeys.some(key => parameters[key] !== undefined && parameters[key] !== '');
 
   if (hasParams) {

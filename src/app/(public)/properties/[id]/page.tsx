@@ -3,7 +3,7 @@ import Hero from "../sections/Hero"
 import Showcase from "../sections/Showcase"
 import PropertyDetails from "../sections/PropertyDetails"
 import CheckAvailability from "../sections/CheckAvailability"
-import GuestReviews from "../sections/GuestReviews"
+import GuestReviews from "../../../../components/layout/GuestReviews"
 import { notFound } from 'next/navigation';
 
 export default async function PropertyPage({ params }: { params: { id: string } }) {

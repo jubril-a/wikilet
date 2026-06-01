@@ -1,6 +1,6 @@
 import { getPropertyRooms } from '@/src/features/property/actions';
 import { notFound } from 'next/navigation';
-import RoomMgmt from '../../../components/layout/RoomMgmt';
+import RoomMgmt from '../../../../components/layout/RoomMgmt';
 
 type RoomType = {
   id: string,

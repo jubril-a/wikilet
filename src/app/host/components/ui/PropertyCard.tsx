@@ -55,7 +55,7 @@ export default function PropertyCard({_id, title, image, location}: {_id: string
     // }
 
     function editRooms() {
-        router.push(`/host/properties/${_id}`)
+        router.push(`/host/properties/${_id}/rooms`)
     }
 
     const Actions = [
@@ -71,7 +71,7 @@ export default function PropertyCard({_id, title, image, location}: {_id: string
             </div>
             <div className="p-4 grid gap-4">
                 <div>
-                    <h2 className="font-semibold text-xl mb-.5">{title}</h2>
+                    <h2 className="font-semibold text-xl mb-.5 line-clamp-1">{title}</h2>
                     <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>{location}</span></p>
                 </div>
                 <IconButton label="Edit Property Details" url="properties/edit" Icon={PlusIcon} />

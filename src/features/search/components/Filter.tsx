@@ -40,7 +40,6 @@ const filterValueMap: Record<string, string> = {
   "Fitness Center": "fitness_center",
   "Elevator / Lift": "elevator",
   "Work Desk": "work_desk",
-  // simple ones that match as lowercase
   "Parking": "parking",
   "Television": "television",
   "Kitchen": "kitchen",
