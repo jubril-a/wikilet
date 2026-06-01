@@ -18,8 +18,8 @@ export default function Showcase({images}: {images: string[]}) {
             <div className="grid min-[760px]:grid-cols-2 min-h-130 gap-2">
                 <ImageBox imageURL={images[0]} />
                 <div className="grid min-[480px]:grid-cols-2 gap-2">
-                    {images.slice(1, 4).map((url) => (
-                        <ImageBox imageURL={url} />
+                    {images.slice(1, 4).map((url, index) => (
+                        <ImageBox key={index} imageURL={url} />
                     ))}
                     <ImageBox imageURL={images[4]}>
                         <button className="absolute bottom-2 right-2 bg-white text-black text-sm rounded-md p-3 cursor-pointer hover:bg-primary-2">View on Map</button>

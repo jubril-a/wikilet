@@ -40,7 +40,7 @@ export const useSearchStore = create<SearchState>()(
   persist(
     (set) => ({
       destination: "Select Destination",
-      checkInDate: undefined,
+      checkInDate: new Date(),
       checkOutDate: undefined,
       adults: 0,
       children: 0,
