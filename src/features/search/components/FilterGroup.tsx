@@ -7,7 +7,7 @@ export default function FilterGroup({heading, value} : { heading: FilterKey, val
     <div className="w-full rounded-md mb-3 p-3 bg-white">
       <h3 className="text-sm font-medium mb-4">{heading}</h3>
       {value.map((filter) => (
-        <Filter group={heading} filter={filter}/> 
+        <Filter key={filter} group={heading} filter={filter}/> 
       ))}
     </div>
   ) 

@@ -18,11 +18,7 @@ function ActionButton({label, Icon, style = "text-gray-700", onClick}: {label: s
     )
 }
 
-const Views = [
-    {label: "View Revenue", icon: WalletIcon, url:""},
-    {label: "Booking History", icon: ArrowPathIcon, url:""},
-    {label: "Check Reviews", icon: StarIcon, url:"", rating: 4.5},
-]
+
 
 function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: string, label: string, rating?: number}) {
     return (
@@ -34,6 +30,22 @@ function ViewButton({url, label, rating, Icon}: {Icon: React.ElementType, url: s
                 <ChevronRightIcon className="size-4" />
             </span>
         </Link>
+    )
+}
+
+function ViewButtons({ propId }: { propId: string }) {
+    const Views = [
+        {label: "View Revenue", icon: WalletIcon, url: `/host/properties/${propId}/revenue`},
+        {label: "Booking History", icon: ArrowPathIcon, url: ""},
+        {label: "Check Reviews", icon: StarIcon, url: `/host/properties/${propId}/reviews`, rating: 4.5},
+    ]
+
+    return (
+        <div className="grid gap-2">
+            {Views.map(({label, url, icon: Icon, rating}) => (
+                <ViewButton key={label} label={label} url={url} Icon={Icon} rating={rating} />
+            ))}
+        </div>
     )
 }
 
@@ -80,11 +92,7 @@ export default function PropertyCard({_id, title, image, location}: {_id: string
                         <ActionButton key={label} label={label} Icon={Icon} onClick={onClick} style={style} />
                     ))}
                 </div>
-                <div className="grid gap-2">
-                    {Views.map(({label, url, icon: Icon, rating}) => (
-                        <ViewButton key={label} label={label} url={url} Icon={Icon} rating={rating} />
-                    ))}
-                </div>
+                <ViewButtons propId={_id} />
             </div>
         </div>
     )
