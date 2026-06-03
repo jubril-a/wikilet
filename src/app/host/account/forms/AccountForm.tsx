@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useTransition } from "react"
-// import { updatePayoutAccount } from "../../../features/account/actions"
+import { updatePayoutAccount } from "@/src/features/account/actions"
 
 type PayoutSchedule = "weekly" | "monthly" | "after_each_booking"
 
@@ -14,6 +14,7 @@ interface PayoutAccountForm {
 
 interface PayoutAccountProps {
   initialData?: PayoutAccountForm
+  hasAccount: boolean
 }
 
 const DEFAULT_FORM: PayoutAccountForm = {
@@ -44,7 +45,7 @@ const PAYOUT_SCHEDULES: { value: PayoutSchedule; label: string; description: str
 const inputClass =
   "px-2 rounded-md bg-gray-200 hover:bg-gray-100 hover:border-gray-200 focus:bg-transparent border border-transparent focus:border-gray-300 focus:outline-0 h-11 w-full"
 
-export default function AccountForm({ initialData }: PayoutAccountProps) {
+export default function AccountForm({ initialData, hasAccount }: PayoutAccountProps) {
   const [form, setForm] = useState<PayoutAccountForm>(initialData ?? DEFAULT_FORM)
   const [saved, setSaved] = useState<PayoutAccountForm>(initialData ?? DEFAULT_FORM)
   const [error, setError] = useState<string | null>(null)
@@ -57,21 +58,18 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
     form.bankName !== saved.bankName ||
     form.payoutSchedule !== saved.payoutSchedule
 
+  const showToast = () => {
+    setToastVisible(true)
+    setTimeout(() => setToastVisible(false), 2500)
+  }
+
   const handleSave = () => {
     setError(null)
-
-    const formData = new FormData()
-    formData.set("accountName", form.accountName)
-    formData.set("accountNumber", form.accountNumber)
-    formData.set("bankName", form.bankName)
-    formData.set("payoutSchedule", form.payoutSchedule)
-
     startTransition(async () => {
       try {
-        // await updatePayoutAccount(formData)
+        await updatePayoutAccount(form, hasAccount)
         setSaved(form)
-        setToastVisible(true)
-        setTimeout(() => setToastVisible(false), 2500)
+        showToast()
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong")
       }
@@ -87,10 +85,8 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-
-        {/* Account name */}
         <label className="sm:col-span-2">
-          <span className="block mb-2 text-gray-700">Account name</span>
+          <span className="block mb-2 text-gray-700 text-sm">Account name</span>
           <input
             type="text"
             value={form.accountName}
@@ -99,9 +95,8 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
           />
         </label>
 
-        {/* Account number */}
         <label>
-          <span className="block mb-2 text-gray-700">Account number</span>
+          <span className="block mb-2 text-gray-700 text-sm">Account number</span>
           <input
             type="text"
             value={form.accountNumber}
@@ -110,9 +105,8 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
           />
         </label>
 
-        {/* Bank name */}
         <label>
-          <span className="block mb-2 text-gray-700">Bank name</span>
+          <span className="block mb-2 text-gray-700 text-sm">Bank name</span>
           <input
             type="text"
             value={form.bankName}
@@ -120,7 +114,6 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
             className={inputClass}
           />
         </label>
-
       </div>
 
       <div className="border-b border-gray-200 mb-6" />
@@ -144,38 +137,28 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
                   : "border-gray-200 bg-gray-200 hover:bg-gray-100 hover:border-gray-300"
               }`}
             >
-              {/* Radio indicator */}
               <span
                 className={`mt-0.5 w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-all ${
                   selected ? "border-white" : "border-gray-400"
                 }`}
               >
-                {selected && (
-                  <span className="w-2 h-2 rounded-full bg-white block" />
-                )}
+                {selected && <span className="w-2 h-2 rounded-full bg-white block" />}
               </span>
-
               <span>
-                <span
-                  className={`block text-sm font-medium ${
-                    selected ? "text-white" : "text-gray-800"
-                  }`}
-                >
+                <span className={`block text-sm font-medium ${selected ? "text-white" : "text-gray-800"}`}>
                   {label}
                 </span>
-                <span className={`block text-xs text-gray-500 mt-0.5 ${
-                    selected ? "text-white/70" : "text-gray-800"
-                  }`}>{description}</span>
+                <span className={`block text-xs mt-0.5 ${selected ? "text-white/70" : "text-gray-500"}`}>
+                  {description}
+                </span>
               </span>
             </button>
           )
         })}
       </div>
 
-      {/* Error */}
       {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
 
-      {/* Save button */}
       <div className="flex justify-end mt-6">
         <button
           onClick={handleSave}
@@ -190,7 +173,6 @@ export default function AccountForm({ initialData }: PayoutAccountProps) {
         </button>
       </div>
 
-      {/* Toast */}
       {toastVisible && (
         <div className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-md shadow whitespace-nowrap">
           Changes saved

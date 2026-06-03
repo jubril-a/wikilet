@@ -1,6 +1,7 @@
 import { CheckIcon } from "@heroicons/react/20/solid"
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FilterKey } from "@/src/app/types";
+import { useEffect, useState } from "react";
 
 const filters = {
   "Guests ratings": "rating",
@@ -48,13 +49,18 @@ const filterValueMap: Record<string, string> = {
 }
 
 export default function Filter({group, filter}: {group: FilterKey, filter: string}) {
-
     const router = useRouter();
     const searchParams = useSearchParams();
     const urlValue = filterValueMap[filter] ?? filter.toLowerCase();
     const isChecked = searchParams.getAll(filters[group]).includes(urlValue);
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(false)
+    }, [searchParams])
 
     function updateParams(key: string, value: string) {
+        setLoading(true)
         const urlValue = filterValueMap[value] ?? value.toLowerCase();
         const params = new URLSearchParams(searchParams.toString());
         const existing = params.getAll(key);
@@ -70,10 +76,15 @@ export default function Filter({group, filter}: {group: FilterKey, filter: strin
     }
 
     return (
-        <label key={group} className="flex gap-2 items-center mb-2 cursor-pointer" htmlFor={filter}>
-          <input onChange={() => updateParams(filters[group], filter)} checked={isChecked} className="peer hidden" type="checkbox" name={filter} id={filter} />
-          <span className="p-0.5 block border border-gray-600 rounded-sm peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-checked:*:text-white"><CheckIcon className="size-4 text-white font-bold" /></span>
-          <span className="text-sm tracking-tight">{filter}</span>
-        </label>
+        <>
+            {loading && <div className="fixed inset-0 bg-black/15 z-20 grid place-items-center">
+                <span className="w-12 h-12 border-[5px] border-white border-b-primary-2 rounded-full inline-block box-border animate-spin" />
+            </div>}
+            <label key={group} className="flex gap-2 items-center mb-2 cursor-pointer" htmlFor={filter}>
+                <input onChange={() => updateParams(filters[group], filter)} checked={isChecked} className="peer hidden" type="checkbox" name={filter} id={filter} />
+                <span className="p-0.5 block border border-gray-600 rounded-sm peer-checked:bg-blue-600 peer-checked:border-blue-600 peer-checked:*:text-white"><CheckIcon className="size-4 text-white font-bold" /></span>
+                <span className="text-sm tracking-tight">{filter}</span>
+            </label>
+        </>
     )
 }

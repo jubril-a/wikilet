@@ -1,5 +1,5 @@
 import AccountSettings from "./AccountSettings"
-import { getProfile } from "@/src/features/account/actions"
+import { getProfile, getAccountDetails } from "@/src/features/account/actions"
 import { getMe } from "@/src/lib/auth"
 import { profileDataType } from "@/src/types/account"
 
@@ -10,8 +10,16 @@ export interface FullProfileData extends profileDataType {
   profileImage: string | null
 }
 
+export interface FullAccountData {
+  accountName: string
+  accountNumber: string
+  bankName: string
+  payoutSchedule: "weekly" | "monthly" | "after_each_booking"
+}
+
 export default async function AgentSettingsPage() {
   const profile = await getProfile()
+  const account = await getAccountDetails()
   const user = await getMe()
 
   const profileData: FullProfileData = {
@@ -30,7 +38,14 @@ export default async function AgentSettingsPage() {
     country: profile?.country ?? '',
   }
 
+  const accountData: FullAccountData = {
+    accountName: account?.accountName ?? '',
+    accountNumber: account?.accountNumber  ?? '',
+    bankName: account?.bankName  ?? '',
+    payoutSchedule: account?.payoutSchedule  ?? '',
+  }
+
   return (
-    <AccountSettings profileData={profileData} hasProfile={profile !== null} />
+    <AccountSettings profileData={profileData} hasProfile={profile !== null} accountData={accountData} hasAccount={account !== null} />
   )
 }

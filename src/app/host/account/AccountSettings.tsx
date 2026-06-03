@@ -3,7 +3,7 @@
 import { useState } from "react"
 import ProfileForm from "./forms/ProfileForm"
 import AccountForm from "./forms/AccountForm"
-import { FullProfileData } from "./page"
+import { FullProfileData, FullAccountData } from "./page"
 
 type Tab = "profile" | "account"
 
@@ -22,19 +22,19 @@ const TABS: { id: Tab; label: string; title: string; description: string }[] = [
   },
 ]
 
-export default function AccountSettings({ profileData, hasProfile }: { profileData: FullProfileData, hasProfile:boolean }) {
+export default function AccountSettings({ profileData, hasProfile, accountData, hasAccount }: { profileData: FullProfileData, hasProfile:boolean, accountData: FullAccountData, hasAccount: boolean }) {
   const [activeTab, setActiveTab] = useState<Tab>("profile")
 
   const current = TABS.find((t) => t.id === activeTab)!
 
   return (
     <div className="">
-        <div className="pb-8 border-b border-b-gray-200 flex justify-between">
+        <div className="pb-8 border-b border-b-gray-200 p">
             <div>
                 <h1 className="text-2xl font-bold text-primary-1 mb-1">{current.title}</h1>
                 <p className="text-gray-500 text-sm">{current.description}</p>
             </div>
-            <div className="flex border border-gray-200 rounded-md overflow-hidden shrink-0">
+            <div className="flex border border-gray-200 rounded-md overflow-hidden shrink-0 w-fit max-sm:mt-4">
                 {TABS.map((tab) => (
                     <button
                     key={tab.id}
@@ -52,7 +52,7 @@ export default function AccountSettings({ profileData, hasProfile }: { profileDa
         </div>
         <div className="flex min-[440px]:bg-white">
             {activeTab === "profile" && <ProfileForm initialData={profileData} hasProfile={hasProfile} />}
-            {activeTab === "account" && <AccountForm />}
+            {activeTab === "account" && <AccountForm initialData={accountData} hasAccount={hasAccount} />}
         </div>
     </div>
   )

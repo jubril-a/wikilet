@@ -11,3 +11,10 @@ export interface profileDataType {
   city: string,
   country: string
 }
+
+export interface AccountDataType {
+  accountName: string
+  accountNumber: string
+  bankName: string
+  payoutSchedule: "weekly" | "monthly" | "after_each_booking"
+}

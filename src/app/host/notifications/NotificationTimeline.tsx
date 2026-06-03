@@ -9,7 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-type NotificationCategory = "All" | "Unread" | "Bookings" | "Revenue" | "Reviews" | "System";
+type NotificationCategory = "All" | "Bookings" | "Revenue" | "Reviews" | "System";
 
 type NotificationType = "booking" | "review" | "revenue" | "system";
 
@@ -21,7 +21,6 @@ interface Notification {
   timeAgo: string;
   title: string;
   body: string;
-  unread?: boolean;
   day: "today" | "yesterday";
 }
 
@@ -34,7 +33,6 @@ const notifications: Notification[] = [
     timeAgo: "2 hours ago",
     title: "New Booking: Azure Horizon Villa",
     body: "Johnathan Smith just booked #RM-402 and #RM-405 for 4 nights (Oct 24 – Oct 28).",
-    unread: true,
     day: "today",
   },
   {
@@ -71,7 +69,6 @@ const notifications: Notification[] = [
 
 const categoryFilters: NotificationCategory[] = [
   "All",
-  "Unread",
   "Bookings",
   "Revenue",
   "Reviews",
@@ -104,7 +101,6 @@ export default function NotificationsTimeline() {
 
   const filtered = notifications.filter((n) => {
     if (active === "All") return true;
-    if (active === "Unread") return n.unread;
     return n.type === categoryTypeMap[active];
   });
 
@@ -172,15 +168,8 @@ export default function NotificationsTimeline() {
 function NotificationCard({ notification: n }: { notification: Notification }) {
   return (
     <div
-      className={`relative bg-white rounded-2xl p-5 shadow-sm border transition-shadow duration-200 hover:shadow-md ${
-        n.unread ? "border-blue-100" : "border-gray-100"
-      }`}
+      className="bg-white rounded-2xl p-5 shadow-sm border transition-shadow duration-200 hover:shadow-md border-gray-100"
     >
-      {/* Unread dot */}
-      {n.unread && (
-        <span className="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-blue-500" />
-      )}
-
       <div className="flex items-start gap-4">
         {/* Icon */}
         <div

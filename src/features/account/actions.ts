@@ -1,7 +1,7 @@
 "use server"
 
 import { cookies } from "next/headers"
-import { profileDataType } from "@/src/types/account";
+import { profileDataType, AccountDataType } from "@/src/types/account";
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
@@ -55,6 +55,45 @@ export async function updateProfile(formData: profileDataType, hasProfile: boole
 
   const res = await fetch(`${apiUrl}${apiEndpoint}`, {
     method: hasProfile ? 'PUT' : 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(formData),
+  })
+
+  const data = await res.json()
+
+  if (!res.ok) throw new Error(data.message || 'Something went wrong')
+
+  return data
+}
+
+// GET HOST ACCOUNT DETAILS
+export async function getAccountDetails() {
+  const token = (await cookies()).get('accessToken')?.value
+
+  const res = await fetch(`${apiUrl}/agents/profile/me`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+
+  if (!res.ok) return null
+
+  const { data } = await res.json()
+  return data.profile
+}
+
+// CREATE/UPDATE HOST PAYOUT ACCOUNT
+export async function updatePayoutAccount(formData: AccountDataType, hasAccount: boolean) {
+  // Change apiEndpoint and method
+ const token = (await cookies()).get('accessToken')?.value
+ const apiEndpoint = hasAccount ? '/agents/profile/me' : '/agents/profile'
+
+  const res = await fetch(`${apiUrl}${apiEndpoint}`, {
+    method: hasAccount ? 'PUT' : 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
