@@ -86,7 +86,7 @@ export default function PropertyCard({_id, title, image, location}: {_id: string
                     <h2 className="font-semibold text-xl mb-.5 line-clamp-1">{title}</h2>
                     <p className="flex items-center gap-1 text-[14px] text-gray-500"><MapPinIcon className="size-4" /><span>{location}</span></p>
                 </div>
-                <IconButton label="Edit Property Details" url="properties/edit" Icon={PlusIcon} />
+                <IconButton label="Edit Property Details" url={`properties/${_id}/edit`} Icon={PlusIcon} />
                 <div className="grid grid-cols-3 gap-2">
                     {Actions.map(({label, icon: Icon, onClick, style}) => (
                         <ActionButton key={label} label={label} Icon={Icon} onClick={onClick} style={style} />

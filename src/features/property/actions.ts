@@ -1,6 +1,7 @@
 'use server'
 
 import { fetchWithAuth } from "@/src/lib/fetchWithAuth"
+import type { CreateListingPayload } from "@/src/stores/listingStore"
 
 const apiUrl = process.env.NEXT_PUBLIC_EXPRESS_API_URL;
 
@@ -15,6 +16,19 @@ export async function createProperty(formData: any) {
   if (!res.ok) throw new Error(data.message || "Something went wrong")
 
   return data
+}
+
+export async function updateProperty(id: string, formData: Partial<CreateListingPayload>) {
+    const res = await fetchWithAuth(`${apiUrl}/agents/properties/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(formData),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) throw new Error(data.message || "Something went wrong")
+
+    return data
 }
 
 export async function createRoom(formData: FormData, propertyId: string) {
